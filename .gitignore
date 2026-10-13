@@ -1,0 +1,14 @@
+# Ignore heavy video files (over 100MB limit for GitHub)
+/videos/
+*.mp4
+*.mkv
+*.mov
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Scratch / temp
+/scratch/
+*.tmp

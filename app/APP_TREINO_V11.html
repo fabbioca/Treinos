@@ -1,0 +1,1844 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="V10 Treino">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0F1F45">
+<title>Protocolo V10 & Desafio 21 Dias — Fabbio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F1F4F8;
+  --card: #FFFFFF;
+  --navy: #0F1F45;
+  --navy2: #1B3373;
+  --navy-dark: #080F24;
+  --orange: #F05A28;
+  --orange2: #FF8053;
+  --orange-light: #FFF1EB;
+  --purple: #6D28D9;
+  --purple-bg: #F5F3FF;
+  --blue: #1D4ED8;
+  --green: #059669;
+  --green2: #10B981;
+  --green-bg: #ECFDF5;
+  --red: #DC2626;
+  --border: #E2E8F0;
+  --muted: #64748B;
+  --text: #0F172A;
+  --radius: 18px;
+  --radius-sm: 12px;
+  --shadow: 0 2px 16px rgba(15,31,69,0.07);
+  --shadow-lg: 0 8px 40px rgba(15,31,69,0.16);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);font-family:'Nunito Sans',sans-serif;color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* ── HEADER ── */
+.app-header{position:sticky;top:0;z-index:100;background:var(--navy);padding:calc(env(safe-area-inset-top) + 6px) 0 0;box-shadow:0 4px 20px rgba(0,0,0,0.15)}
+.header-inner{padding:10px 16px 0}
+.hrow{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.logo{font-family:'Sora',sans-serif;font-weight:800;font-size:18px;color:#fff;letter-spacing:-0.5px}
+.logo span{color:var(--orange)}
+.logo-sub{font-size:9.5px;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:1.8px;text-transform:uppercase;margin-top:1px}
+.header-actions{display:flex;align-items:center;gap:8px}
+.header-badge{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:5px 10px;border-radius:20px;font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,.75)}
+.backup-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#fff;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all .2s}
+.backup-btn:active{transform:scale(0.92);background:rgba(255,255,255,0.18)}
+
+/* ── MODULE SWITCHER (TOP NAV) ── */
+.module-nav{display:flex;background:rgba(255,255,255,.08);padding:4px;border-radius:14px;gap:4px;margin-bottom:12px;border:1px solid rgba(255,255,255,.06)}
+.mod-tab{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:8px 6px;border-radius:10px;border:none;background:transparent;color:rgba(255,255,255,.6);font-family:'Sora',sans-serif;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s ease;white-space:nowrap}
+.mod-tab.active{background:var(--orange);color:#fff;box-shadow:0 3px 12px rgba(240,90,40,.35)}
+.mod-tab:active{transform:scale(.96)}
+
+/* DAY TABS (FOR V10) */
+.day-tabs{display:flex;gap:5px;overflow-x:auto;padding-bottom:12px;scrollbar-width:none}
+.day-tabs::-webkit-scrollbar{display:none}
+.day-tab{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 13px;border-radius:20px;border:none;background:rgba(255,255,255,.08);cursor:pointer;transition:all .2s ease}
+.day-tab .dt-abbr{font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:rgba(255,255,255,.45);white-space:nowrap}
+.day-tab .dt-dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.2);transition:all .2s}
+.day-tab.active{background:var(--orange)}
+.day-tab.active .dt-abbr{color:#fff}
+.day-tab.active .dt-dot{background:rgba(255,255,255,.6)}
+.day-tab:active{transform:scale(.95)}
+
+/* ── MAIN CONTAINER ── */
+.main{padding:16px 16px 140px;max-width:680px;margin:0 auto}
+
+/* ── HERO CARDS ── */
+.day-hero{border-radius:var(--radius);padding:20px;margin-bottom:16px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.hero-workout{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%)}
+.hero-cardio{background:linear-gradient(135deg,#0C3D6E 0%,#1565A8 100%)}
+.hero-hiit{background:linear-gradient(135deg,#701A20 0%,#B91C1C 100%)}
+.hero-rest{background:linear-gradient(135deg,#064E40 0%,#047857 100%)}
+.hero-d21{background:linear-gradient(135deg,#130A24 0%,#24123E 45%,#B93815 100%)}
+.hero-diet{background:linear-gradient(135deg,#064E3B 0%,#047857 50%,#0F766E 100%)}
+
+.hero-blob{position:absolute;border-radius:50%;background:rgba(255,255,255,.05);pointer-events:none}
+.hero-blob-1{width:160px;height:160px;top:-50px;right:-40px}
+.hero-blob-2{width:90px;height:90px;bottom:-35px;right:45px}
+.hero-emoji{font-size:36px;margin-bottom:6px;display:block}
+.hero-tag{font-size:10px;font-weight:800;color:var(--orange);letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
+.hero-rest .hero-tag,.hero-cardio .hero-tag,.hero-hiit .hero-tag,.hero-diet .hero-tag{color:rgba(255,255,255,.7)}
+.hero-title{font-family:'Sora',sans-serif;font-size:23px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:6px}
+.hero-sub{font-size:12.5px;color:rgba(255,255,255,.68);line-height:1.5;margin-bottom:16px}
+.hero-stats{display:flex;gap:18px;flex-wrap:wrap}
+.hstat{display:flex;flex-direction:column;align-items:flex-start}
+.hstat-val{font-family:'Sora',sans-serif;font-size:21px;font-weight:800;color:var(--orange)}
+.hstat-val.gold{color:#FBBF24}
+.hstat-val.green{color:#34D399}
+.hstat-lbl{font-size:9.5px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:1px;margin-top:-1px}
+
+/* ── PROGRESS WRAP ── */
+.progress-wrap{background:var(--card);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:16px;box-shadow:var(--shadow)}
+.prog-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.prog-label{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:var(--navy)}
+.prog-count{font-family:'Sora',sans-serif;font-size:13px;font-weight:800;color:var(--orange)}
+.prog-track{height:8px;background:var(--border);border-radius:99px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--orange) 0%,var(--orange2) 100%);border-radius:99px;transition:width .5s cubic-bezier(.34,1.56,.64,1);width:0%}
+.prog-fill.green{background:linear-gradient(90deg,#059669 0%,#10B981 100%)}
+
+/* ── SECTION TITLE ── */
+.section-title{font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;padding-left:2px;display:flex;align-items:center;justify-content:space-between}
+
+/* ── EXERCISE CARD (V10) ── */
+.ex-card{background:var(--card);border-radius:var(--radius);border:2px solid transparent;box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden;transition:all .3s ease}
+.ex-card.done{border-color:var(--green);background:var(--green-bg);opacity:.75}
+.ex-card.done .ex-name{text-decoration:line-through;color:var(--muted)}
+.card-top{display:flex;align-items:flex-start;gap:12px;padding:14px 14px 10px}
+.badge{flex-shrink:0;width:30px;height:30px;background:var(--orange);color:#fff;border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:13px;font-weight:800}
+.badge-done{flex-shrink:0;width:30px;height:30px;background:var(--green);color:#fff;border-radius:9px;display:none;align-items:center;justify-content:center;font-size:16px}
+.ex-card.done .badge{display:none}
+.ex-card.done .badge-done{display:flex}
+.card-info{flex:1;min-width:0}
+.ex-name{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:7px}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:7px;font-size:10px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+.tag-m{background:rgba(109,40,217,.1);color:var(--purple)}
+.tag-e{background:rgba(29,78,216,.08);color:var(--blue)}
+.card-bottom{display:flex;align-items:center;justify-content:space-between;padding:4px 14px 12px}
+.sets-chips{display:flex;gap:6px;align-items:center}
+.chip{padding:5px 11px;border-radius:9px;font-family:'Sora',sans-serif;font-size:12px;font-weight:700}
+.chip-sets{background:rgba(15,31,69,.07);color:var(--navy)}
+.chip-reps{background:rgba(240,90,40,.1);color:var(--orange)}
+.done-btn{background:var(--orange);color:#fff;border:none;padding:9px 18px;border-radius:11px;font-family:'Sora',sans-serif;font-size:12px;font-weight:800;cursor:pointer;transition:all .2s;letter-spacing:.3px}
+.done-btn:active{transform:scale(.94)}
+.ex-card.done .done-btn{background:var(--green)}
+
+/* EXPAND */
+.expand-toggle{width:100%;background:none;border:none;border-top:1.5px solid var(--border);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;color:var(--muted);font-family:'Nunito Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.3px}
+.expand-icon{font-size:11px;transition:transform .22s ease;display:inline-block}
+.expand-toggle.open .expand-icon{transform:rotate(180deg)}
+.expand-body{display:none;padding:4px 14px 14px;animation:fadeSlide .2s ease}
+.expand-body.open{display:block}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+.eblock{margin-bottom:11px}
+.eblock:last-child{margin-bottom:0}
+.eblock-label{font-family:'Sora',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-bottom:5px}
+.eblock-text{font-size:13px;line-height:1.65;color:var(--text)}
+.alt-box{background:rgba(29,78,216,.06);border-left:3px solid var(--blue);padding:9px 11px;border-radius:0 10px 10px 0;font-size:13px;color:var(--blue);font-weight:600;line-height:1.5}
+.warn-box{background:#FFFBEB;border-left:3px solid #F59E0B;padding:9px 11px;border-radius:0 10px 10px 0;font-size:12px;color:#92400E;line-height:1.5}
+
+/* ── CARDIO / HIIT ── */
+.proto-card{background:var(--card);border-radius:var(--radius);padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.proto-card-title{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--navy);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.hiit-step{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:12px;margin-bottom:7px;background:var(--bg)}
+.hiit-step:last-child{margin-bottom:0}
+.hiit-step-badge{width:24px;height:24px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:11px;font-weight:800;flex-shrink:0;color:#fff}
+.hiit-step-badge.effort{background:#DC2626}
+.hiit-step-badge.rest{background:#059669}
+.hiit-step-badge.warm{background:#D97706}
+.hiit-step-text{font-size:13px;font-weight:600;color:var(--text);line-height:1.4}
+.hiit-step-time{font-family:'Sora',sans-serif;font-size:13px;font-weight:800;color:var(--muted);margin-left:auto;flex-shrink:0}
+.zone2-meter{background:var(--bg);border-radius:12px;padding:12px 14px;margin-bottom:8px}
+.z2-label{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.z2-bar{height:20px;background:linear-gradient(90deg,#3B82F6 0%,#22C55E 40%,#F59E0B 70%,#EF4444 100%);border-radius:99px;position:relative;margin-bottom:4px}
+.z2-bar-marker{position:absolute;top:-4px;bottom:-4px;width:6px;border-radius:3px;background:var(--navy);border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.z2-range{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);font-weight:600}
+
+/* ── REST / TIPS ── */
+.rest-tips-card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);margin-bottom:12px}
+.rest-tip-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border)}
+.rest-tip-item:last-child{border-bottom:none;padding-bottom:0}
+.rest-tip-icon{font-size:24px;flex-shrink:0;margin-top:1px}
+.rest-tip-content .rtc-title{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:3px}
+.rest-tip-content .rtc-text{font-size:12.5px;color:var(--muted);line-height:1.55}
+
+/* ── DESAFIO 21 DIAS CARDS & CONTROLS ── */
+.video-storage-card{background:var(--card);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;box-shadow:var(--shadow);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.vsc-left{display:flex;align-items:center;gap:12px;min-width:0}
+.vsc-icon{width:42px;height:42px;border-radius:12px;background:rgba(240,90,40,.1);color:var(--orange);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.vsc-title{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px}
+.vsc-status{font-size:11.5px;font-weight:600;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vsc-status.ready{color:var(--green)}
+.vsc-status.warn{color:#D97706}
+.vsc-btn{background:var(--navy);color:#fff;border:none;padding:8px 14px;border-radius:10px;font-family:'Sora',sans-serif;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;flex-shrink:0}
+.vsc-btn:active{transform:scale(.95)}
+
+/* FILTER CHIPS */
+.filter-bar{display:flex;gap:6px;overflow-x:auto;padding-bottom:10px;margin-bottom:12px;scrollbar-width:none}
+.filter-bar::-webkit-scrollbar{display:none}
+.filter-chip{padding:6px 14px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);color:var(--muted);font-family:'Sora',sans-serif;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s}
+.filter-chip.active{background:var(--navy);border-color:var(--navy);color:#fff}
+.filter-chip:active{transform:scale(.95)}
+
+/* D21 CARD */
+.d21-card{background:var(--card);border-radius:var(--radius);border:2px solid transparent;box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden;transition:all .25s ease}
+.d21-card.done{border-color:var(--green);background:#F8FDFB}
+.d21-card-top{display:flex;align-items:flex-start;gap:12px;padding:15px 15px 10px}
+.d21-badge{flex-shrink:0;width:44px;height:44px;border-radius:13px;background:var(--navy);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:all .2s}
+.d21-badge .db-d{font-size:8px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.d21-badge .db-num{font-family:'Sora',sans-serif;font-size:18px;font-weight:800;line-height:1}
+.d21-card.phase-1 .d21-badge{background:linear-gradient(135deg,#3B82F6 0%,#1D4ED8 100%)}
+.d21-card.phase-2 .d21-badge{background:linear-gradient(135deg,#F59E0B 0%,#D97706 100%)}
+.d21-card.phase-3 .d21-badge{background:linear-gradient(135deg,#EF4444 0%,#B91C1C 100%)}
+.d21-card.done .d21-badge{background:var(--green)!important}
+.d21-card.done .d21-badge .db-d{display:none}
+.d21-card.done .d21-badge .db-num{font-size:22px}
+
+.d21-info{flex:1;min-width:0}
+.d21-title{font-family:'Sora',sans-serif;font-size:14.5px;font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:5px}
+.d21-desc{font-size:12px;color:var(--muted);line-height:1.45;margin-bottom:8px}
+.d21-meta-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.d21-meta-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:7px;background:var(--bg);font-family:'Sora',sans-serif;font-size:10px;font-weight:700;color:var(--muted)}
+.d21-meta-chip.dur{color:var(--orange);background:rgba(240,90,40,.09)}
+.d21-meta-chip.phase{color:var(--purple);background:rgba(109,40,217,.08)}
+.d21-meta-chip.done-badge{color:var(--green);background:var(--green-bg);font-weight:800}
+
+.d21-actions{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 15px 14px;border-top:1px solid rgba(226,232,240,.6)}
+.btn-watch{flex:1;background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;border:none;padding:10px 14px;border-radius:12px;font-family:'Sora',sans-serif;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;transition:all .2s}
+.btn-watch:active{transform:scale(.96)}
+.btn-toggle-done{background:var(--bg);border:1.5px solid var(--border);color:var(--muted);padding:10px 16px;border-radius:12px;font-family:'Sora',sans-serif;font-size:12px;font-weight:800;cursor:pointer;transition:all .2s;white-space:nowrap}
+.btn-toggle-done:active{transform:scale(.95)}
+.d21-card.done .btn-toggle-done{background:var(--green);border-color:var(--green);color:#fff}
+.btn-notes{background:none;border:none;color:var(--muted);padding:8px;font-size:16px;cursor:pointer;border-radius:8px}
+
+/* NOTES CONTAINER */
+.d21-notes-wrap{padding:0 15px 14px;display:none;animation:fadeSlide .2s ease}
+.d21-notes-wrap.open{display:block}
+.d21-notes-input{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;font-family:'Nunito Sans',sans-serif;font-size:13px;color:var(--text);background:var(--bg);resize:vertical;min-height:54px;outline:none;transition:border-color .2s}
+.d21-notes-input:focus{border-color:var(--navy);background:#fff}
+
+/* ── VIDEO PLAYER MODAL ── */
+.v-modal{position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(10px);z-index:400;display:none;flex-direction:column;align-items:center;justify-content:center;padding:env(safe-area-inset-top) 12px env(safe-area-inset-bottom)}
+.v-modal.open{display:flex}
+.vm-card{background:#0B132B;border-radius:24px;width:100%;max-width:580px;overflow:hidden;box-shadow:0 12px 50px rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column}
+.vm-header{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.08)}
+.vm-title{font-family:'Sora',sans-serif;font-size:14px;font-weight:800;color:#fff}
+.vm-close{background:rgba(255,255,255,.12);border:none;color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:all .2s}
+.vm-close:active{transform:scale(.9)}
+.vm-video-wrap{position:relative;background:#000;width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center}
+.vm-video{width:100%;height:100%;object-fit:contain;background:#000}
+.vm-error-alert{position:absolute;inset:0;background:rgba(15,23,42,.92);display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;gap:10px}
+.vm-error-alert.show{display:flex}
+.vm-error-text{font-size:13px;color:rgba(255,255,255,.8);line-height:1.5;max-width:320px}
+.vm-file-btn{background:var(--orange);color:#fff;border:none;padding:10px 18px;border-radius:12px;font-family:'Sora',sans-serif;font-size:12px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:6px}
+.vm-controls-bar{padding:12px 16px;background:#0D1736;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.vm-speed-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;padding:6px 10px;border-radius:8px;font-family:'Sora',sans-serif;font-size:11px;font-weight:800;cursor:pointer}
+.vm-skip-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;padding:6px 10px;border-radius:8px;font-size:12px;cursor:pointer}
+.vm-done-btn{background:var(--green);color:#fff;border:none;padding:10px 16px;border-radius:12px;font-family:'Sora',sans-serif;font-size:12px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;margin-left:auto}
+.vm-done-btn:active{transform:scale(.95)}
+
+/* ── FOLDER SETUP MODAL ── */
+.folder-sheet{background:#0F1F45;border-radius:24px 24px 0 0;padding:24px 22px 36px;width:100%;max-width:540px;color:#fff;max-height:85vh;overflow-y:auto;box-shadow:0 -10px 40px rgba(0,0,0,.5)}
+.fs-title{font-family:'Sora',sans-serif;font-size:17px;font-weight:800;margin-bottom:6px}
+.fs-sub{font-size:12.5px;color:rgba(255,255,255,.65);line-height:1.5;margin-bottom:20px}
+.fs-box{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px;margin-bottom:14px}
+.fs-box-title{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:var(--orange);margin-bottom:4px}
+.fs-box-text{font-size:12px;color:rgba(255,255,255,.7);line-height:1.5;margin-bottom:12px}
+.fs-action-btn{width:100%;background:var(--orange);color:#fff;border:none;padding:12px;border-radius:12px;font-family:'Sora',sans-serif;font-size:13px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s}
+.fs-action-btn:active{transform:scale(.96)}
+.fs-action-btn.secondary{background:rgba(255,255,255,.12);color:#fff}
+.fs-input-path{width:100%;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:10px 12px;color:#fff;font-family:monospace;font-size:12px;margin-bottom:10px;outline:none}
+.fs-list{max-height:150px;overflow-y:auto;border-radius:10px;background:rgba(0,0,0,.25);padding:8px 10px;margin-top:10px}
+.fs-item{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:11px}
+.fs-item:last-child{border-bottom:none}
+.fs-item-ok{color:#34D399;font-weight:700}
+.fs-item-miss{color:rgba(255,255,255,.35)}
+
+/* ── DIETA & PROTOCOLOS ── */
+.diet-hero-summary{background:var(--card);border-radius:var(--radius);padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+.dhs-title{font-family:'Sora',sans-serif;font-size:14px;font-weight:800;color:var(--navy);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.dhs-text{font-size:13px;color:var(--text);line-height:1.6}
+.meal-card{background:var(--card);border-radius:var(--radius);padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.meal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.meal-title{font-family:'Sora',sans-serif;font-size:15px;font-weight:800;color:var(--navy);display:flex;align-items:center;gap:8px}
+.meal-badge{padding:3px 8px;border-radius:6px;background:rgba(5,150,105,.1);color:var(--green);font-size:10px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
+.meal-section{margin-bottom:10px}
+.meal-section-title{font-family:'Sora',sans-serif;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:4px}
+.meal-main-box{background:var(--bg);border-radius:12px;padding:10px 12px;font-size:13px;line-height:1.55;color:var(--navy);font-weight:600}
+.sub-toggle{width:100%;background:none;border:none;border-top:1px dashed var(--border);padding:8px 0 0;margin-top:8px;display:flex;align-items:center;justify-content:space-between;font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--orange);cursor:pointer}
+.sub-content{display:none;padding-top:8px;animation:fadeSlide .2s ease}
+.sub-content.open{display:block}
+.sub-item{font-size:12px;color:var(--muted);padding:4px 0;line-height:1.45;border-bottom:1px solid #F1F5F9}
+.sub-item:last-child{border-bottom:none}
+
+/* ── FLOATING TIMER ── */
+.timer-fab{position:fixed;bottom:calc(24px + env(safe-area-inset-bottom));right:20px;width:62px;height:62px;background:var(--navy);border:3px solid var(--orange);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;z-index:200;transition:all .2s;box-shadow:0 4px 24px rgba(15,31,69,.45)}
+.timer-fab:active{transform:scale(.93)}
+.timer-fab .t-icon{font-size:18px;line-height:1}
+.timer-fab .t-lbl{font-family:'Sora',sans-serif;font-size:8px;font-weight:800;color:var(--orange);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.timer-fab.running{border-color:#22C55E;animation:ring-pulse 1.4s infinite}
+.timer-fab.running .t-lbl{color:#22C55E}
+.timer-fab .t-countdown{font-family:'Sora',sans-serif;font-size:16px;font-weight:800;color:#22C55E;line-height:1}
+@keyframes ring-pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.45)}70%{box-shadow:0 0 0 14px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+
+/* ── TIMER OVERLAY ── */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);z-index:300;display:none;align-items:flex-end;justify-content:center;padding:0 0 env(safe-area-inset-bottom)}
+.overlay.open{display:flex}
+.timer-sheet{background:var(--navy);border-radius:28px 28px 0 0;padding:24px 28px 36px;width:100%;max-width:500px;animation:slideUp .3s cubic-bezier(.34,1.56,.64,1)}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.sheet-pill{width:40px;height:4px;border-radius:2px;background:rgba(255,255,255,.15);margin:0 auto 24px}
+.timer-label{font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,.35);text-align:center;text-transform:uppercase;letter-spacing:2.5px;margin-bottom:24px}
+.t-circle{width:180px;height:180px;margin:0 auto 26px;position:relative}
+.t-svg{width:100%;height:100%;transform:rotate(-90deg)}
+.t-track{fill:none;stroke:rgba(255,255,255,.08);stroke-width:9}
+.t-prog{fill:none;stroke:var(--orange);stroke-width:9;stroke-linecap:round;stroke-dasharray:502.65;stroke-dashoffset:0;transition:stroke-dashoffset .9s linear,stroke .4s}
+.t-prog.low{stroke:#EF4444}
+.t-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.t-seconds{font-family:'Sora',sans-serif;font-size:54px;font-weight:800;color:#fff;line-height:1}
+.t-unit{font-size:11px;font-weight:700;color:rgba(255,255,255,.3);letter-spacing:2px;margin-top:2px}
+.t-phrase{font-size:13px;font-weight:700;color:var(--orange);margin-top:6px;text-align:center;min-height:18px;transition:all .3s}
+.t-phrase.go{color:#22C55E;font-size:16px;animation:pulse-text .6s ease-in-out 2}
+@keyframes pulse-text{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.t-btns{display:flex;gap:10px;margin-top:4px}
+.t-btn{flex:1;border:none;padding:13px;border-radius:14px;font-family:'Sora',sans-serif;font-size:14px;font-weight:800;cursor:pointer;transition:all .2s}
+.t-btn:active{transform:scale(.95)}
+.t-btn-start{background:var(--orange);color:#fff}
+.t-btn-reset{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);flex:none;width:52px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.t-btn-close{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);flex:none;width:52px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.t-dur-row{display:flex;gap:8px;justify-content:center;margin-bottom:20px}
+.t-dur-btn{flex:1;max-width:100px;padding:9px 6px;border-radius:12px;border:2px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:rgba(255,255,255,.45);font-family:'Sora',sans-serif;font-size:14px;font-weight:800;cursor:pointer;transition:all .2s;letter-spacing:.3px}
+.t-dur-btn.active{border-color:var(--orange);background:rgba(240,90,40,.18);color:var(--orange)}
+.t-dur-btn:active{transform:scale(.94)}
+
+/* ── BACKUP MODAL ── */
+.backup-modal{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);z-index:350;display:none;align-items:center;justify-content:center;padding:20px}
+.backup-modal.open{display:flex}
+.backup-card{background:var(--navy);border-radius:24px;width:100%;max-width:440px;padding:24px;color:#fff;box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.1)}
+
+/* ── ANIMATIONS ── */
+.fade-in{animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+
+/* ── PWA INSTALL BANNER ── */
+.install-banner{background:linear-gradient(90deg,var(--navy) 0%,var(--navy2) 100%);padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:2px solid rgba(240,90,40,.3)}
+.install-banner-text{font-size:12px;color:rgba(255,255,255,.75);font-weight:600;flex:1}
+.install-banner-btn{background:var(--orange);color:#fff;border:none;padding:6px 14px;border-radius:8px;font-family:'Sora',sans-serif;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap}
+.install-banner-close{color:rgba(255,255,255,.4);background:none;border:none;font-size:18px;cursor:pointer;padding:0 2px}
+</style>
+</head>
+<body>
+
+<!-- ── INSTALL BANNER ── -->
+<div class="install-banner" id="installBanner" style="display:none">
+  <span style="font-size:22px">📲</span>
+  <div class="install-banner-text">Adicione à tela inicial para usar como app nativo</div>
+  <button class="install-banner-btn" id="installBtn">Instalar</button>
+  <button class="install-banner-close" onclick="document.getElementById('installBanner').style.display='none'">×</button>
+</div>
+
+<!-- ── HEADER ── -->
+<header class="app-header">
+  <div class="header-inner">
+    <div class="hrow">
+      <div>
+        <div class="logo">V<span>10</span> Treino</div>
+        <div class="logo-sub">Protocolo Fabbio</div>
+      </div>
+      <div class="header-actions">
+        <button class="backup-btn" onclick="openBackupModal()" title="Backup & Dados">⚙️</button>
+        <div class="header-badge" id="todayLabel">...</div>
+      </div>
+    </div>
+
+    <!-- MODULE SWITCHER -->
+    <div class="module-nav">
+      <button class="mod-tab active" id="tabV10" onclick="switchModule('v10')">
+        <span>🏋️ Treino V10</span>
+      </button>
+      <button class="mod-tab" id="tabD21" onclick="switchModule('d21')">
+        <span>🔥 Desafio 21 Dias</span>
+      </button>
+      <button class="mod-tab" id="tabDiet" onclick="switchModule('diet')">
+        <span>🥗 Dieta & 40+</span>
+      </button>
+    </div>
+
+    <!-- V10 DAY TABS -->
+    <div class="day-tabs" id="dayTabs"></div>
+  </div>
+</header>
+
+<!-- ── MAIN CONTENT ── -->
+<main class="main" id="mainContent"></main>
+
+<!-- ── FLOATING TIMER ── -->
+<div class="timer-fab" id="timerFab" onclick="openTimer()">
+  <div class="t-icon" id="fabIcon">⏱</div>
+  <div class="t-lbl" id="fabLabel">60s</div>
+</div>
+
+<!-- ── TIMER OVERLAY ── -->
+<div class="overlay" id="timerOverlay">
+  <div class="timer-sheet">
+    <div class="sheet-pill"></div>
+    <div class="timer-label">Descanso entre séries</div>
+    <div class="t-dur-row">
+      <button class="t-dur-btn" id="dur45" onclick="setDuration(45)">45s</button>
+      <button class="t-dur-btn active" id="dur60" onclick="setDuration(60)">60s</button>
+    </div>
+    <div class="t-circle">
+      <svg class="t-svg" viewBox="0 0 180 180">
+        <circle class="t-track" cx="90" cy="90" r="80"/>
+        <circle class="t-prog" id="timerCircle" cx="90" cy="90" r="80"/>
+      </svg>
+      <div class="t-inner">
+        <div class="t-seconds" id="timerDisplay">60</div>
+        <div class="t-unit">SEG</div>
+      </div>
+    </div>
+    <div class="t-phrase" id="timerPhrase">Relaxe. Hidrate-se.</div>
+    <div class="t-btns">
+      <button class="t-btn t-btn-reset" id="timerResetBtn" onclick="resetTimer()" title="Reiniciar">↺</button>
+      <button class="t-btn t-btn-start" id="timerStartBtn" onclick="toggleTimer()">▶ Iniciar</button>
+      <button class="t-btn t-btn-close" onclick="closeTimer()" title="Fechar">✕</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── VIDEO PLAYER MODAL ── -->
+<div class="v-modal" id="videoModal">
+  <div class="vm-card">
+    <div class="vm-header">
+      <div class="vm-title" id="vmTitle">Dia 01 — Desafio 21 Dias</div>
+      <button class="vm-close" onclick="closeVideoPlayer()">✕</button>
+    </div>
+    <div class="vm-video-wrap">
+      <video class="vm-video" id="vmVideo" playsinline controls preload="metadata"></video>
+      <div class="vm-error-alert" id="vmErrorAlert">
+        <div style="font-size:32px">📁</div>
+        <div class="vm-error-text" id="vmErrorText">Não foi possível carregar o vídeo automaticamente pelo caminho relativo.</div>
+        <button class="vm-file-btn" onclick="document.getElementById('singleVideoPicker').click()">
+          📂 Escolher Arquivo do Vídeo
+        </button>
+      </div>
+    </div>
+    <div class="vm-controls-bar">
+      <button class="vm-speed-btn" id="vmSpeedBtn" onclick="cycleVideoSpeed()">1.0x ⏩</button>
+      <button class="vm-skip-btn" onclick="skipVideo(-10)">↺ 10s</button>
+      <button class="vm-skip-btn" onclick="skipVideo(10)">10s ↻</button>
+      <button class="vm-done-btn" id="vmDoneBtn" onclick="finishCurrentVideo()">✓ Concluir Aula</button>
+    </div>
+  </div>
+</div>
+
+<!-- HIDDEN INPUTS FOR VIDEO SELECTION -->
+<input type="file" id="folderPickerInput" webkitdirectory directory multiple style="display:none" onchange="handleFolderSelect(this.files)">
+<input type="file" id="multiFilesPickerInput" multiple accept="video/mp4,video/*" style="display:none" onchange="handleMultiFilesSelect(this.files)">
+<input type="file" id="singleVideoPicker" accept="video/mp4,video/*" style="display:none" onchange="handleSingleVideoSelect(this.files)">
+
+<!-- ── FOLDER SETUP MODAL ── -->
+<div class="overlay" id="folderModal" onclick="if(event.target===this) closeFolderModal()">
+  <div class="folder-sheet">
+    <div class="sheet-pill"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+      <div class="fs-title" style="margin-bottom:0">📁 Pasta dos 21 Vídeos Locais</div>
+      <button class="vm-close" onclick="closeFolderModal()">✕</button>
+    </div>
+    <div class="fs-sub">Como os vídeos estão salvos no seu celular, aponte a pasta ou os arquivos para assistir instantaneamente offline.</div>
+    
+    <div class="fs-box">
+      <div class="fs-box-title">OPÇÃO 1: Selecionar Pasta no Celular</div>
+      <div class="fs-box-text">Selecione a pasta onde você colou os 21 vídeos. O app reconhecerá automaticamente todos os arquivos.</div>
+      <button class="fs-action-btn" onclick="triggerFolderSelect()">
+        📂 Selecionar Pasta de Vídeos
+      </button>
+    </div>
+
+    <div class="fs-box">
+      <div class="fs-box-title">OPÇÃO 2: Selecionar Múltiplos Arquivos</div>
+      <div class="fs-box-text">Caso seu navegador mobile restrinja a seleção de pasta, selecione os arquivos de vídeo de uma vez só.</div>
+      <button class="fs-action-btn secondary" onclick="document.getElementById('multiFilesPickerInput').click()">
+        📑 Selecionar os 21 Arquivos MP4
+      </button>
+    </div>
+
+    <div class="fs-box">
+      <div class="fs-box-title">OPÇÃO 3: Caminho Relativo (Offline Puro / Localhost)</div>
+      <div class="fs-box-text">Se você abre o arquivo HTML direto junto da pasta dos vídeos:</div>
+      <input type="text" class="fs-input-path" id="cfgBasePath" value="../videos/" placeholder="../videos/">
+      <button class="fs-action-btn secondary" style="padding:8px" onclick="saveBasePathConfig()">Salvar Caminho Relativo</button>
+    </div>
+
+    <div class="fs-box" style="margin-bottom:0">
+      <div class="fs-box-title" style="display:flex;justify-content:space-between">
+        <span>Status dos 21 Vídeos:</span>
+        <span id="linkedCountLabel">0 / 21</span>
+      </div>
+      <div class="fs-list" id="linkedVideosList"></div>
+    </div>
+
+    <button class="fs-action-btn" style="margin-top:16px;background:rgba(255,255,255,.15)" onclick="closeFolderModal()">
+      Concluir & Fechar
+    </button>
+  </div>
+</div>
+
+<!-- ── BACKUP MODAL ── -->
+<div class="backup-modal" id="backupModal">
+  <div class="backup-card">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:800">⚙️ Dados & Backup</div>
+      <button class="vm-close" onclick="closeBackupModal()">✕</button>
+    </div>
+    <div style="font-size:12.5px;color:rgba(255,255,255,.7);line-height:1.5;margin-bottom:18px">
+      Seus treinos ficam salvos com segurança no seu celular. Você pode exportar um backup para transferir para outro aparelho ou restaurar quando quiser.
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <button class="fs-action-btn" onclick="exportDataJson()">
+        📥 Exportar Backup (Salvar JSON)
+      </button>
+      <button class="fs-action-btn secondary" onclick="document.getElementById('importDataInput').click()">
+        📤 Restaurar Backup (Carregar JSON)
+      </button>
+      <input type="file" id="importDataInput" accept=".json" style="display:none" onchange="importDataJson(this.files)">
+      <button class="fs-action-btn secondary" style="color:#EF4444;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3)" onclick="confirmResetAll()">
+        🗑️ Redefinir Todos os Dados
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════
+//  DATA — V10 WORKOUTS
+// ══════════════════════════════════════════
+const workoutData = {
+  seg: {
+    type: 'workout',
+    day: 'Segunda',
+    label: 'FULLBODY A',
+    title: 'Força & Hipertrofia',
+    sub: '7 grupos musculares · SNC fresco · Cargas máximas',
+    emoji: '💪',
+    exercises: [
+      {
+        id:'s1', num:1, name:'Supino na Máquina Articulada', muscle:'Peito', equip:'Hammer Strength / RealLeader Chest Press',
+        alt:'Supino com halteres no banco reto (apoio total das escápulas no banco)',
+        why:'Inicia o Fullbody A com o maior grupamento anterior do tronco enquanto o SNC está fresco. A máquina articulada elimina carga axial na coluna e respeita a curva de resistência do peitoral.',
+        how:'Ajuste o encosto para alças na altura do esterno. Retrai as escápulas e mantém o dorso levemente arqueado. Empurre de forma explosiva e controle a descida em 2 seg (fase excêntrica). ⚠️ Não deixe as alças cruzar o plano mediano.',
+        sets:'4', reps:'8–10', warn:false
+      },
+      {
+        id:'s2', num:2, name:'Remada Baixa na Polia', muscle:'Costas', equip:'Polia Baixa c/ Triângulo (RealLeader / Cybex)',
+        alt:'Remada haltere unilateral no banco (cotovelo guiado para trás e acima do quadril)',
+        why:'Regra 2:1 Puxar vs Empurrar — ativa o latíssimo do dorso e romboides compensando o supino anterior. O triângulo fecha a pegada e aumenta o recrutamento de espessura.',
+        how:'⚠️ Lombar neutra, tronco estático como estátua. Puxe pelas cotovelas (não pelas mãos). Pause 1 seg na contração máxima. Retorno controlado sem arredondar a coluna.',
+        sets:'4', reps:'10–12', warn:true
+      },
+      {
+        id:'s3', num:3, name:'Leg Press 45°', muscle:'Pernas', equip:'Leg Press 45° (RealLeader / Life Fitness)',
+        alt:'Agachamento Goblet com haltere (segurar o haltere verticalmente no peito, descer até 90°)',
+        why:'Substitui o agachamento livre para zerar a carga axial sobre a coluna. Recruta quadríceps, glúteos e posteriores de coxa com volume alto e segurança máxima.',
+        how:'Posicione os pés na largura dos ombros, altura média na plataforma. Desça até 90° de joelho. ⚠️ Não trave os joelhos no topo. Respire: segura na descida, expira na subida.',
+        sets:'4', reps:'10–12', warn:true
+      },
+      {
+        id:'s4', num:4, name:'Elevação Frontal na Polia Baixa', muscle:'Ombro', equip:'Crossover / Polia Baixa com corda ou barra curva',
+        alt:'Elevação frontal alternada com haltere (leve, amplitude limpa até a linha dos ombros)',
+        why:'Tensão contínua na cabeça anterior do deltóide via cabo — diferente do haltere, não perde resistência no topo. Complementa a cadeia anterior sem sobrecarregar o supraespinhoso.',
+        how:'Braço ligeiramente flexionado (não rígido). Suba até a linha dos ombros (não além). Controle a descida em 2 seg. Se sentir impingement, reduza a amplitude.',
+        sets:'3', reps:'12–15', warn:false
+      },
+      {
+        id:'s5', num:5, name:'Rosca Direta na Polia', muscle:'Bíceps', equip:'Polia Baixa com barra reta ou EZ (RealLeader)',
+        alt:'Rosca haltere alternada sentado (cotovelo fixo no lado do corpo)',
+        why:'Tensão constante via cabo em toda a amplitude — especialmente na fase final de supinação do antebraço onde o bíceps é mais ativo. Ideal para volume após os compostos.',
+        how:'Cotovelos fixos ao lado do corpo. Supine os punhos no topo. Descida lenta (3 seg). ⚠️ Não balanye o tronco — se precisar, reduza a carga.',
+        sets:'3', reps:'12–15', warn:false
+      },
+      {
+        id:'s6', num:6, name:'Tríceps Corda no Pulley', muscle:'Tríceps', equip:'Polia Alta com acessório de corda',
+        alt:'Tríceps testa com halteres (deitado, cotovelos apontando ao teto)',
+        why:'Componente de alta frequência cardíaca: descanso de 60s + corda mantém o débito cardíaco elevado. Ativa as três cabeças do tríceps, especialmente a lateral.',
+        how:'Abra a corda ao final do movimento (pronação externa). Cotovelos fixos, não deixe os braços levantarem. Tronco levemente inclinado para frente.',
+        sets:'3', reps:'12–15', warn:false
+      },
+      {
+        id:'s7', num:7, name:'Prancha Isométrica', muscle:'Core', equip:'Colchonete / Área de Funcional',
+        alt:'Idêntico em qualquer ambiente (sem equipamento)',
+        why:'Fecha o Fullbody A com ativação anti-extensão lombar. Estabilidade do core reduz risco de lesão em toda a cadeia posterior nos próximos treinos.',
+        how:'Cotovelos abaixo dos ombros. Contrai glúteos e abdômen simultaneamente. ⚠️ Não deixe o quadril afundar ou subir. Respire de forma controlada durante toda a série.',
+        sets:'3', reps:'30–45 seg', warn:true
+      }
+    ]
+  },
+  ter: {
+    type: 'cardio', subtype: 'zone2',
+    day: 'Terça', label: 'CARDIO Z2',
+    title: 'Zona 2 — Steady State',
+    sub: '45 min · 60–70% FCM · Talk Test',
+    emoji: '🚶',
+    steps: [
+      {type:'warm', label:'1', text:'Aquecimento progressivo', time:'5 min'},
+      {type:'effort', label:'↗', text:'Zona 2 — ritmo conversacional (respira pelo nariz, consegue falar)', time:'35 min'},
+      {type:'rest', label:'↘', text:'Desaquecimento leve', time:'5 min'}
+    ],
+    science:'A Zona 2 maximiza a biogênese mitocondrial e a oxidação de ácidos graxos. Em 35 minutos de Z2, seu corpo aprende a usar gordura como combustível principal — essencial para a recomposição corporal e a base metabólica do protocolo V10.',
+    tips:[
+      {icon:'👃', title:'Talk Test', text:'Se você consegue falar frases completas, está em Zona 2. Se não consegue, diminua o ritmo.'},
+      {icon:'💓', title:'FC Alvo', text:'Calcule: (220 − sua idade) × 0,65. Este é o centro da sua Zona 2.'},
+      {icon:'🧘', title:'Foco Ativo', text:'Use este tempo para podcasts, música ou mindfulness. Sem ansiedade — este é o treino mais importante para longevidade.'}
+    ]
+  },
+  qua: {
+    type: 'workout',
+    day: 'Quarta', label: 'FULLBODY B',
+    title: 'Variação de Ângulos',
+    sub: '7 grupos musculares · Novos vetores de força · Anti-adaptação',
+    emoji: '🔄',
+    exercises: [
+      {
+        id:'q1', num:1, name:'Crucifixo no Crossover', muscle:'Peito', equip:'Crossover / Polia Alta cruzada (RealLeader)',
+        alt:'Crucifixo com halteres no banco plano (amplitude controlada, cotovelo levemente flexionado)',
+        why:'Variação horizontal do Fullbody A. O crossover aplica tensão máxima no pico de adução — onde a máquina de supino perde resistência. Trabalha o peitoral em seu alongamento máximo.',
+        how:'Ligeira inclinação do tronco para frente. Cotovelos levemente flexionados (constante). Imagine abraçar uma árvore grande. Pause 1 seg no cruzamento das mãos.',
+        sets:'4', reps:'10–12', warn:false
+      },
+      {
+        id:'q2', num:2, name:'Puxada Alta (Pegada Larga)', muscle:'Costas', equip:'Puxador / Lat Pulldown c/ Barra Reta Longa',
+        alt:'Barra fixa (pegada neutra ou pronada) — use elástico assistido se necessário',
+        why:'Ativa a largura do latíssimo vs. a espessura da remada da Segunda. Varia o ângulo de força: vertical em vez de horizontal. Crucial para o desenvolvimento em V do dorso.',
+        how:'Pegada levemente além da largura dos ombros. Incline o tronco ~15° para trás. Puxe as cotovelas em direção aos quadris. ⚠️ Não balanye o tronco — não é um movimento de hip-hinge.',
+        sets:'4', reps:'10–12', warn:true
+      },
+      {
+        id:'q3', num:3, name:'Cadeira Flexora (Leg Curl)', muscle:'Pernas', equip:'Lying ou Seated Leg Curl (Cybex / Panatta)',
+        alt:'Stiff-leg com halteres (pernas levemente flexionadas, descida até sentir alongamento nos posteriores)',
+        why:'Varia o estímulo de pernas do Leg Press (quadríceps/glúteo) para o posterior de coxa. Isola o bíceps femoral e gastrocnêmio sem carga axial na coluna.',
+        how:'Na versão deitada: quadril pressionado no banco durante todo o movimento. Controle a subida (contração) e a descida (excêntrico 3 seg). ⚠️ Não empurre o quadril para cima no esforço.',
+        sets:'4', reps:'12–15', warn:true
+      },
+      {
+        id:'q4', num:4, name:'Desenvolvimento na Máquina', muscle:'Ombro', equip:'Shoulder Press Machine (Hammer Strength / RealLeader)',
+        alt:'Desenvolvimento com halteres sentado (banco 90°, palmas voltadas uma para a outra no topo)',
+        why:'Variação de ângulo do deltóide medial e anterior. A máquina guia o padrão de movimento e protege o manguito rotador — especialmente importante para ombros largos com 105 kg.',
+        how:'Ajuste o banco para que as alças fiquem na altura dos ombros. Empurre sem travar os cotovelos no topo. ⚠️ Evite encolher os ombros no movimento.',
+        sets:'3', reps:'10–12', warn:false
+      },
+      {
+        id:'q5', num:5, name:'Rosca Martelo no Cabo (Corda)', muscle:'Bíceps', equip:'Polia Baixa com corda (neutro)',
+        alt:'Rosca Martelo com halteres alternada (punho em posição neutra — polegar para cima)',
+        why:'O Martelo é o exercício estratégico para o Braquial — o músculo que "empurra" o bíceps braquial, aumentando espessura visual e o pico do braço. Diferencial estético do V10.',
+        how:'Punhos neutros (polegar para cima) durante toda a amplitude. Cotovelos fixos. O bíceps braquial não é o alvo principal aqui — foque no braquiorradial e braquial.',
+        sets:'3', reps:'12–15', warn:false
+      },
+      {
+        id:'q6', num:6, name:'Tríceps Francês (Overhead)', muscle:'Tríceps', equip:'Polia Alta / EZ bar com corda (atrás da cabeça)',
+        alt:'Skull crusher com halteres deitado (cotovelos apontados ao teto, halteres em posição neutra)',
+        why:'Única posição que coloca a cabeça longa do tríceps em pré-estiramento máximo. Fundamental para volume na parte traseira do braço — cabeça mais volumosa do músculo.',
+        how:'Cotovelos apontam para o teto e ficam fixos durante todo o movimento. Descida lenta até sentir o alongamento profundo. ⚠️ Reduza a carga se sentir pressão cervical.',
+        sets:'3', reps:'12–15', warn:false
+      },
+      {
+        id:'q7', num:7, name:'Abdominal Supra (Crunch Machine)', muscle:'Core', equip:'Crunch Machine (Panatta / RealLeader)',
+        alt:'Abdominal tradicional no solo: joelhos dobrados, pés fixos, suba apenas as escápulas do chão',
+        why:'Flexão vertebral contra resistência — varia o estímulo isométrico da Prancha (Segunda). A máquina permite sobrecarga progressiva no reto abdominal.',
+        how:'Posicione os punhos nos apoios e curva o tronco, não apenas o pescoço. Expire no esforço. ⚠️ Não puxe o pescoço com as mãos — a força vem do abdômen.',
+        sets:'3', reps:'15–20', warn:false
+      }
+    ]
+  },
+  qui: {
+    type: 'cardio', subtype: 'zone2',
+    day: 'Quinta', label: 'CARDIO Z2',
+    title: 'Zona 2 — Recuperação Ativa',
+    sub: '45 min · 60–70% FCM · Reconstrução mitocondrial',
+    emoji: '🔁',
+    steps: [
+      {type:'warm', label:'1', text:'Aquecimento progressivo', time:'5 min'},
+      {type:'effort', label:'↗', text:'Zona 2 — ritmo conversacional leve', time:'35 min'},
+      {type:'rest', label:'↘', text:'Desaquecimento', time:'5 min'}
+    ],
+    science:'Este é o treino de recuperação ativa. Não é descanso, mas também não é esforço — é o ponto certo para aumentar o fluxo sanguíneo nos músculos trabalhados Qua/Sex sem gerar mais fadiga ao SNC. A sensibilidade à insulina aumenta por 24h após cada sessão de Z2.',
+    tips:[
+      {icon:'🏃', title:'Esteira ou Bike', text:'Ambos funcionam. A esteira é ligeiramente superior por recrutar mais musculatura — mas use o que for mais confortável hoje.'},
+      {icon:'💧', title:'Hidratação', text:'Beba 500ml antes e durante. O treino de força de amanhã (Fullbody C) depende de você estar bem hidratado.'},
+      {icon:'🎧', title:'Rotina de Sucesso', text:'Use este tempo para ouvir algo que te motiva para amanhã. Visualize o Fullbody C sendo executado com perfeição.'}
+    ]
+  },
+  sex: {
+    type: 'workout',
+    day: 'Sexta', label: 'FULLBODY C',
+    title: 'Alta Densidade Metabólica',
+    sub: '7 grupos musculares · Máximo estresse metabólico · Finalizador da semana',
+    emoji: '🔥',
+    exercises: [
+      {
+        id:'f1', num:1, name:'Supino Inclinado na Máquina', muscle:'Peito', equip:'Incline Chest Press Machine (Hammer Strength / Life Fitness)',
+        alt:'Supino inclinado com halteres (banco 30–45°, apoio das escápulas no banco)',
+        why:'Terceiro ângulo de peitoral na semana — eixo superior e clavicular do músculo. Fecha o ciclo de 3 variações (plano → crossover → inclinado) garantindo estimulação completa do peitoral.',
+        how:'Inclinação do banco entre 30° e 45°. Empurre levemente acima, em direção ao queixo. Fase excêntrica: 2 seg. ⚠️ Não deixe os ombros subirem em direção às orelhas.',
+        sets:'4', reps:'8–10', warn:false
+      },
+      {
+        id:'f2', num:2, name:'Puxada Sentada com Triângulo', muscle:'Costas', equip:'Remada na Polia Baixa c/ Triângulo (foco em espessura)',
+        alt:'Remada curvada com halteres (tronco a 45°, halteres em pegada neutra)',
+        why:'Complementa a largura (puxada alta Quarta) com espessura nesta sexta. O triângulo fecha a pegada neutro, maximizando o recrutamento dos romboides, trapézio médio e latíssimo interno.',
+        how:'⚠️ Tronco absolutamente estático — trave o core. Puxe o triângulo em direção ao umbigo. Pause 1 seg na posição retraída. Retorno com controle total.',
+        sets:'4', reps:'10–12', warn:true
+      },
+      {
+        id:'f3', num:3, name:'Cadeira Extensora', muscle:'Pernas', equip:'Leg Extension Machine (Cybex / Panatta / RealLeader)',
+        alt:'Afundo com halteres (passo longo, joelho traseiro quase toca o chão)',
+        why:'Isolamento do quadríceps em cadeia aberta — varia o estímulo bilateral do Leg Press. Alta densidade metabólica com 60s de descanso: mantém lactato elevado e maximiza gasto calórico.',
+        how:'Ajuste o apoio para canela (não tornozelo). Suba de forma controlada e pause no topo. ⚠️ Se houver dor patelar, reduza a amplitude superior (limite extensão a 90%).',
+        sets:'3', reps:'12–15', warn:true
+      },
+      {
+        id:'f4', num:4, name:'Elevação Lateral na Máquina', muscle:'Ombro', equip:'Lateral Raise Machine (Cybex / Hoist / Panatta)',
+        alt:'Elevação lateral com halteres em pé (cotovelo levemente flexionado, não acima da linha dos ombros)',
+        why:'A máquina de elevação lateral oferece tensão constante ao longo de toda a amplitude — muito superior ao haltere, que perde resistência na fase inicial. Deltóide medial é o maior responsável pela largura do ombro.',
+        how:'Cotovelos na almofada da máquina, não as mãos (se disponível). Suba até a linha dos ombros (90°) — não além, para proteger o supraespinhoso. Excêntrico controlado.',
+        sets:'3', reps:'12–15', warn:false
+      },
+      {
+        id:'f5', num:5, name:'Rosca Barra W (EZ)', muscle:'Bíceps', equip:'Barra EZ (W) no Scott ou livre',
+        alt:'Rosca concentrada com haltere (cotovelo apoiado na face interna da coxa)',
+        why:'A barra W protege o punho e reduz a tensão no ligamento do cotovelo vs. barra reta. No Scott: anula o impulso do tronco completamente — isolamento máximo do bíceps braquial.',
+        how:'No Scott: cotovelos totalmente apoiados no suporte. Na posição em pé: cotovelos fixos ao lado do corpo. Supine os punhos no final do movimento. ⚠️ Não solte rápido — controle o excêntrico.',
+        sets:'3', reps:'10–12', warn:false
+      },
+      {
+        id:'f6', num:6, name:'Pulley Tríceps (Barra Reta)', muscle:'Tríceps', equip:'Polia Alta com barra reta ou V-Bar',
+        alt:'Mergulho entre bancos/cadeiras (mãos no apoio, cotovelos dobram para trás)',
+        why:'Finalizador de alta density para tríceps. A barra reta recruta a cabeça lateral de forma mais intensa que a corda. Sexta-feira: SNC adaptado à carga — tolerância a mais volume.',
+        how:'Cotovelos fixos ao lado do corpo — esse é o único ponto de articulação. Aperte os tríceps no ponto de extensão total. Tronco levemente inclinado para frente para equilíbrio.',
+        sets:'3', reps:'12–15', warn:false
+      },
+      {
+        id:'f7', num:7, name:'Elevação de Pernas (Paralelas)', muscle:'Core', equip:'Captain\'s Chair / Paralelas verticais',
+        alt:'Elevação de pernas deitado: deitar no solo, mãos sob o sacro, subir as pernas retas até 90°',
+        why:'Anti-extensão dinâmica — o mais desafiador dos 3 exercícios de core da semana. Recruta o reto abdominal inferior e iliopsoas. Fecha a semana com o maior desafio de core.',
+        how:'⚠️ Lombar pressionada contra o apoio (ou chão na alternativa). Suba as pernas com controle — não use impulso. Desça devagar até antes de tocar o chão. Respire continuamente.',
+        sets:'3', reps:'12–15', warn:true
+      }
+    ]
+  },
+  sab: {
+    type: 'cardio', subtype: 'hiit',
+    day: 'Sábado', label: 'HIIT 4×4',
+    title: 'Cardio HIIT',
+    sub: 'Protocolo 4×4 · 85–95% FCM · VO₂ Máximo',
+    emoji: '⚡',
+    steps: [
+      {type:'warm', label:'1', text:'Aquecimento — caminhada/trote progressivo', time:'10 min'},
+      {type:'effort', label:'A', text:'Bloco 1 — Esforço MÁXIMO (incapaz de falar)', time:'4 min'},
+      {type:'rest', label:'↘', text:'Recuperação ativa — caminhada leve', time:'3 min'},
+      {type:'effort', label:'B', text:'Bloco 2 — Esforço MÁXIMO', time:'4 min'},
+      {type:'rest', label:'↘', text:'Recuperação ativa', time:'3 min'},
+      {type:'effort', label:'C', text:'Bloco 3 — Esforço MÁXIMO', time:'4 min'},
+      {type:'rest', label:'↘', text:'Recuperação ativa', time:'3 min'},
+      {type:'effort', label:'D', text:'Bloco 4 — Esforço MÁXIMO (último bloco!)', time:'4 min'},
+      {type:'rest', label:'↘', text:'Desaquecimento total', time:'5 min'}
+    ],
+    science:'O VO₂ Máximo é o maior preditor individual de longevidade e mortalidade por todas as causas — superior a qualquer marcador bioquímico. O protocolo 4×4 é a abordagem mais validada clinicamente para elevar o VO₂ Máximo em adultos.',
+    tips:[
+      {icon:'🧪', title:'Talk Test — HIIT', text:'Durante os 4 min de esforço, você NÃO deve conseguir formar frases. Se consegue falar, aumente a intensidade.'},
+      {icon:'💓', title:'FC Alvo Esforço', text:'(220 − sua idade) × 0,90. Este é o centro da janela de trabalho HIIT.'},
+      {icon:'⚠️', title:'Hidratação Crítica', text:'Beba 400ml antes. Não tome café 1h antes. Tenha água gelada disponível entre os blocos.'}
+    ]
+  },
+  dom: {
+    type: 'rest',
+    day: 'Domingo', label: 'DESCANSO',
+    title: 'Recuperação Total',
+    sub: 'SNC em restauração · Síntese proteica ativa · Prepare a próxima semana',
+    emoji: '🧘',
+    tips: [
+      {icon:'😴', title:'Sono de Qualidade', text:'7–9 horas. O GH e a testosterona têm pico de secreção em sono profundo. Esta é a sessão de treino mais importante da semana.'},
+      {icon:'🥩', title:'Aporte Proteico', text:'Mantenha 1,6–2,2g por kg. Proteína de absorção lenta (caseína, ovos, cottage) antes de dormir otimiza a síntese proteica noturna.'},
+      {icon:'🚫', title:'Álcool = Inimigo #1', text:'Qualquer quantidade de álcool inibe a síntese proteica por 24–48h. O protocolo V10 exige restrição rigorosa para máximos resultados.'},
+      {icon:'🍎', title:'Vinagre de Maçã + Glicina', text:'Nos dias de descanso: ACV + glicina pré-sono favorece sinalização AMPK e oxidação lipídica noturna.'},
+      {icon:'📋', title:'Planejamento', text:'Revise seus PRs da semana. Qual exercício vai aumentar a carga na próxima segunda? Sobrecarga progressiva é soberana.'}
+    ]
+  }
+};
+
+// ══════════════════════════════════════════
+//  DATA — DESAFIO 21 DIAS (AULAS & VÍDEOS)
+// ══════════════════════════════════════════
+const desafioData = [
+  { day: 1,  filename: "Desafio DIA 01.mp4", duration: "18:26", durationMin: 18.4, sizeMb: 67.4,  phase: 1, week: 1, title: "Start & Ignição Metabólica", desc: "Ativação de grandes grupos musculares, arranque mitocondrial e postura." },
+  { day: 2,  filename: "Desafio DIA 02.mp4", duration: "19:58", durationMin: 20.0, sizeMb: 234.2, phase: 1, week: 1, title: "Resistência Muscular & Core", desc: "Fortalecimento do complexo lombar e abdômen profundo contra impacto." },
+  { day: 3,  filename: "Desafio DIA 03.mp4", duration: "13:45", durationMin: 13.8, sizeMb: 110.2, phase: 1, week: 1, title: "Potência & Queima Rápida", desc: "Estímulo cardiovascular denso para acelerar a taxa metabólica basal." },
+  { day: 4,  filename: "Desafio DIA 04.mp4", duration: "18:26", durationMin: 18.4, sizeMb: 184.6, phase: 1, week: 1, title: "Força Funcional & Cadeia Posterior", desc: "Ativação de glúteos, posteriores e tronco para sustentação corporal." },
+  { day: 5,  filename: "Desafio DIA 05.mp4", duration: "17:41", durationMin: 17.7, sizeMb: 170.6, phase: 1, week: 1, title: "Ritmo Metabólico & Continuidade", desc: "Fluidez motora, quebra de estagnação e queima contínua de glicogênio." },
+  { day: 6,  filename: "Desafio DIA 06.mp4", duration: "17:28", durationMin: 17.5, sizeMb: 185.0, phase: 1, week: 1, title: "Estabilidade & Abdômen Seca Pochete", desc: "Anti-extensão do core, ativação do transverso abdominal e cintura pélvica." },
+  { day: 7,  filename: "Desafio DIA 07.mp4", duration: "15:39", durationMin: 15.7, sizeMb: 136.3, phase: 1, week: 1, title: "Consolidação da Fase de Ignição", desc: "Fechamento da Semana 1: adaptação neural completa e prontidão metabólica." },
+
+  { day: 8,  filename: "Desafio DIA 08.mp4", duration: "22:20", durationMin: 22.3, sizeMb: 296.3, phase: 2, week: 2, title: "Boom Hormonal: Testosterona & GH", desc: "Início da Fase 2: alta demanda sistêmica para pico de produção hormonal natural." },
+  { day: 9,  filename: "Desafio DIA 09.mp4", duration: "18:23", durationMin: 18.4, sizeMb: 238.1, phase: 2, week: 2, title: "Densidade Metabólica Avançada", desc: "Transições rápidas entre estímulos sem queda de débito cardíaco." },
+  { day: 10, filename: "Desafio DIA 10.mp4", duration: "18:13", durationMin: 18.2, sizeMb: 137.1, phase: 2, week: 2, title: "Seca Pochete: Foco Queima Visceral", desc: "Ataque direcionado às reservas lipídicas abdominais com estímulo multiarticular." },
+  { day: 11, filename: "Desafio DIA 11.mp4", duration: "22:20", durationMin: 22.3, sizeMb: 296.3, phase: 2, week: 2, title: "Força & Potência Máxima", desc: "Recrutamento de fibras tipo IIb de alta contração para hipertrofia metabólica." },
+  { day: 12, filename: "Desafio DIA 12.mp4", duration: "18:10", durationMin: 18.2, sizeMb: 153.3, phase: 2, week: 2, title: "Variação de Vetores & Resistência", desc: "Novos planos de movimento para quebrar a homeostase e adaptação." },
+  { day: 13, filename: "Desafio DIA 13.mp4", duration: "19:00", durationMin: 19.0, sizeMb: 215.4, phase: 2, week: 2, title: "Estresse Metabólico Pós-Treino (EPOC)", desc: "Maximização do consumo de oxigênio pós-exercício por até 24 horas." },
+  { day: 14, filename: "Desafio DIA 14.mp4", duration: "18:35", durationMin: 18.6, sizeMb: 162.3, phase: 2, week: 2, title: "Fechamento da Semana do Boom Hormonal", desc: "Consolidação de 14 dias: sensibilidade à insulina no pico máximo." },
+
+  { day: 15, filename: "Desafio DIA 15.mp4", duration: "18:35", durationMin: 18.6, sizeMb: 194.4, phase: 3, week: 3, title: "Definição Extrema: Sobrecarga Progressiva", desc: "Fase 3: intensidade máxima para acelerar corte muscular e secar a pochete." },
+  { day: 16, filename: "Desafio DIA 16.mp4", duration: "16:44", durationMin: 16.7, sizeMb: 201.3, phase: 3, week: 3, title: "Aceleração Mitocondrial & VO₂", desc: "Ritmo ininterrupto para forçar queima profunda de ácidos graxos." },
+  { day: 17, filename: "Desafio DIA 17.mp4", duration: "21:12", durationMin: 21.2, sizeMb: 167.9, phase: 3, week: 3, title: "Ataque Total à Gordura Teimosa", desc: "Sequências exaustivas para drenar depósitos teimosos do baixo abdômen." },
+  { day: 18, filename: "Desafio DIA 18.mp4", duration: "18:35", durationMin: 18.6, sizeMb: 169.1, phase: 3, week: 3, title: "Resistência Muscular Absoluta", desc: "Controle da fadiga central e foco na perfeição da técnica biomecânica." },
+  { day: 19, filename: "Desafio DIA 19.mp4", duration: "18:03", durationMin: 18.1, sizeMb: 161.5, phase: 3, week: 3, title: "Pico de Densidade & Tônus", desc: "Isolamento e compostos combinados para tônus denso e abdômen firme." },
+  { day: 20, filename: "Desafio DIA 20.mp4", duration: "17:47", durationMin: 17.8, sizeMb: 179.9, phase: 3, week: 3, title: "Penúltimo Dia: A Reta da Vitória", desc: "Superação mental e física preparando para o grande fechamento." },
+  { day: 21, filename: "Desafio DIA 21.mp4", duration: "23:09", durationMin: 23.2, sizeMb: 367.1, phase: 3, week: 3, title: "O Desafio Final 40+: Vitória Completa 🏆", desc: "Aula magna de 23 minutos: comemoração, intensidade suprema e novo físico construído." }
+];
+
+// ══════════════════════════════════════════
+//  APP STATE & INITIALIZATION
+// ══════════════════════════════════════════
+const days = [
+  {key:'seg', abbr:'Seg', short:'A'},
+  {key:'ter', abbr:'Ter', short:'Z2'},
+  {key:'qua', abbr:'Qua', short:'B'},
+  {key:'qui', abbr:'Qui', short:'Z2'},
+  {key:'sex', abbr:'Sex', short:'C'},
+  {key:'sab', abbr:'Sab', short:'HIIT'},
+  {key:'dom', abbr:'Dom', short:'🧘'}
+];
+const jsDay2Key = {0:'dom',1:'seg',2:'ter',3:'qua',4:'qui',5:'sex',6:'sab'};
+const todayKey = jsDay2Key[new Date().getDay()];
+
+let currentModule = localStorage.getItem('v10_active_module') || 'v10';
+let activeDay = todayKey;
+let d21Filter = 'all';
+
+// Persistence
+let doneState = JSON.parse(localStorage.getItem('v10_done') || '{}');
+let d21State = JSON.parse(localStorage.getItem('v10_d21_state') || '{}');
+let d21Config = JSON.parse(localStorage.getItem('v10_d21_config') || '{"basePath":"../videos/"}');
+
+// Video object URLs cache (in-memory)
+let videoBlobUrls = {};
+let currentPlayingDay = 1;
+const playbackSpeeds = [1.0, 1.25, 1.5, 2.0];
+let currentSpeedIndex = 0;
+
+// ══════════════════════════════════════════
+//  MODULE NAVIGATION
+// ══════════════════════════════════════════
+function switchModule(mod){
+  currentModule = mod;
+  localStorage.setItem('v10_active_module', mod);
+  
+  document.getElementById('tabV10').classList.toggle('active', mod === 'v10');
+  document.getElementById('tabD21').classList.toggle('active', mod === 'd21');
+  document.getElementById('tabDiet').classList.toggle('active', mod === 'diet');
+
+  const dayTabsEl = document.getElementById('dayTabs');
+  if(mod === 'v10'){
+    dayTabsEl.style.display = 'flex';
+    document.getElementById('todayLabel').textContent = activeDay === todayKey ? '🟢 Hoje' : workoutData[activeDay].day;
+    renderDay();
+  } else if(mod === 'd21'){
+    dayTabsEl.style.display = 'none';
+    const doneCount = Object.keys(d21State).filter(k => d21State[k] && d21State[k].done).length;
+    document.getElementById('todayLabel').textContent = `${doneCount}/21 Aulas`;
+    renderDesafio();
+  } else if(mod === 'diet'){
+    dayTabsEl.style.display = 'none';
+    document.getElementById('todayLabel').textContent = 'Método 40+';
+    renderDiet();
+  }
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ══════════════════════════════════════════
+//  RENDER V10 (SEMANAL)
+// ══════════════════════════════════════════
+function buildTabs(){
+  const cont = document.getElementById('dayTabs');
+  cont.innerHTML = '';
+  days.forEach(d => {
+    const btn = document.createElement('button');
+    btn.className = 'day-tab' + (d.key === activeDay ? ' active' : '');
+    btn.innerHTML = `<span class="dt-abbr">${d.abbr}</span><span class="dt-dot"></span>`;
+    btn.onclick = () => switchDay(d.key);
+    cont.appendChild(btn);
+  });
+}
+
+function switchDay(key){
+  activeDay = key;
+  buildTabs();
+  renderDay();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function renderDay(){
+  const d = workoutData[activeDay];
+  const cont = document.getElementById('mainContent');
+  cont.innerHTML = '';
+  cont.className = 'main fade-in';
+
+  const isToday = activeDay === todayKey;
+  document.getElementById('todayLabel').textContent = isToday ? '🟢 Hoje' : d.day;
+
+  if(d.type === 'workout') renderWorkout(d, cont);
+  else if(d.type === 'cardio') renderCardio(d, cont);
+  else if(d.type === 'rest') renderRest(d, cont);
+}
+
+function renderWorkout(d, cont){
+  const done = d.exercises.filter(e => doneState[e.id]).length;
+  const total = d.exercises.length;
+  const pct = Math.round((done/total)*100);
+
+  cont.innerHTML += `
+  <div class="day-hero hero-workout">
+    <div class="hero-blob hero-blob-1"></div><div class="hero-blob hero-blob-2"></div>
+    <span class="hero-emoji">${d.emoji}</span>
+    <div class="hero-tag">${d.label}</div>
+    <div class="hero-title">${d.title}</div>
+    <div class="hero-sub">${d.sub}</div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-val">${total}</div><div class="hstat-lbl">Exercícios</div></div>
+      <div class="hstat"><div class="hstat-val">60s</div><div class="hstat-lbl">Descanso</div></div>
+      <div class="hstat"><div class="hstat-val">≥80%</div><div class="hstat-lbl">1RM</div></div>
+    </div>
+  </div>`;
+
+  cont.innerHTML += `
+  <div class="progress-wrap">
+    <div class="prog-row">
+      <div class="prog-label">Progresso do Treino</div>
+      <div class="prog-count" id="progCount">${done}/${total}</div>
+    </div>
+    <div class="prog-track"><div class="prog-fill" id="progFill" style="width:${pct}%"></div></div>
+  </div>`;
+
+  cont.innerHTML += `<div class="section-title">Exercícios</div>`;
+
+  d.exercises.forEach(ex => {
+    const isDone = !!doneState[ex.id];
+    const card = document.createElement('div');
+    card.className = 'ex-card' + (isDone ? ' done' : '');
+    card.id = 'card_' + ex.id;
+    card.innerHTML = `
+      <div class="card-top">
+        <div class="badge">${ex.num}</div>
+        <div class="badge-done">✓</div>
+        <div class="card-info">
+          <div class="ex-name">${ex.name}</div>
+          <div class="tags">
+            <span class="tag tag-m">🎯 ${ex.muscle}</span>
+            <span class="tag tag-e">🏋️ ${ex.equip}</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-bottom">
+        <div class="sets-chips">
+          <span class="chip chip-sets">${ex.sets} séries</span>
+          <span class="chip chip-reps">${ex.reps} reps</span>
+        </div>
+        <button class="done-btn" onclick="toggleDone('${ex.id}','${d.exercises.indexOf(ex)}','${activeDay}')">${isDone ? '✓ Feito' : 'Feito ✓'}</button>
+      </div>
+      <button class="expand-toggle" onclick="toggleExpand(this)">
+        <span>Ver detalhes — técnica & alternativas</span>
+        <span class="expand-icon">▼</span>
+      </button>
+      <div class="expand-body">
+        ${ex.alt ? `
+        <div class="eblock">
+          <div class="eblock-label">🔄 Alternativa Livre (hotel / condomínio)</div>
+          <div class="alt-box">${ex.alt}</div>
+        </div>` : ''}
+        <div class="eblock">
+          <div class="eblock-label">💡 Por que hoje?</div>
+          <div class="eblock-text">${ex.why}</div>
+        </div>
+        <div class="eblock">
+          <div class="eblock-label">📝 Como executar</div>
+          <div class="eblock-text">${ex.how}</div>
+        </div>
+        ${ex.warn ? `<div class="warn-box">⚠️ Atenção Lombar: mantenha core ativado e evite compensações posturais.</div>` : ''}
+      </div>
+    `;
+    cont.appendChild(card);
+  });
+
+  cont.innerHTML += `
+  <div style="background:rgba(240,90,40,.07);border:1.5px solid rgba(240,90,40,.2);border-radius:14px;padding:14px 16px;margin-top:4px">
+    <div style="font-family:'Sora',sans-serif;font-size:12px;font-weight:800;color:var(--orange);letter-spacing:.5px;margin-bottom:4px">📈 SOBRECARGA PROGRESSIVA</div>
+    <div style="font-size:12px;color:var(--muted);line-height:1.6">Antes de sair da academia, anote a carga e reps de hoje. Na próxima semana: aumente 1 rep OU +1,25kg. Não troque o exercício — evolua nele.</div>
+  </div>`;
+}
+
+function toggleDone(id, idx, dayKey){
+  doneState[id] = !doneState[id];
+  localStorage.setItem('v10_done', JSON.stringify(doneState));
+  const card = document.getElementById('card_' + id);
+  if(doneState[id]){
+    card.classList.add('done');
+    card.querySelector('.done-btn').textContent = '✓ Feito';
+    if(navigator.vibrate) navigator.vibrate([80, 50, 80]);
+    startTimerAuto();
+  } else {
+    card.classList.remove('done');
+    card.querySelector('.done-btn').textContent = 'Feito ✓';
+  }
+  const d = workoutData[dayKey];
+  const done = d.exercises.filter(e => doneState[e.id]).length;
+  const total = d.exercises.length;
+  const pct = Math.round((done/total)*100);
+  const pf = document.getElementById('progFill');
+  const pc = document.getElementById('progCount');
+  if(pf) pf.style.width = pct + '%';
+  if(pc) pc.textContent = done + '/' + total;
+}
+
+function toggleExpand(btn){
+  btn.classList.toggle('open');
+  const body = btn.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+function renderCardio(d, cont){
+  const isHIIT = d.subtype === 'hiit';
+  const heroClass = isHIIT ? 'hero-hiit' : 'hero-cardio';
+
+  cont.innerHTML = `
+  <div class="day-hero ${heroClass}">
+    <div class="hero-blob hero-blob-1"></div><div class="hero-blob hero-blob-2"></div>
+    <span class="hero-emoji">${d.emoji}</span>
+    <div class="hero-tag">${d.label}</div>
+    <div class="hero-title">${d.title}</div>
+    <div class="hero-sub">${d.sub}</div>
+  </div>`;
+
+  let stepsHtml = '';
+  d.steps.forEach((s) => {
+    stepsHtml += `
+    <div class="hiit-step">
+      <div class="hiit-step-badge ${s.type}">${s.label}</div>
+      <div class="hiit-step-text">${s.text}</div>
+      <div class="hiit-step-time">${s.time}</div>
+    </div>`;
+  });
+  cont.innerHTML += `
+  <div class="proto-card">
+    <div class="proto-card-title">📋 Protocolo do Dia</div>
+    <div class="hiit-steps">${stepsHtml}</div>
+  </div>`;
+
+  if(!isHIIT){
+    cont.innerHTML += `
+    <div class="proto-card">
+      <div class="proto-card-title">💓 Zona Alvo de FC</div>
+      <div class="zone2-meter">
+        <div class="z2-label">60–70% FC Máxima</div>
+        <div class="z2-bar">
+          <div class="z2-bar-marker" style="left:60%"></div>
+          <div class="z2-bar-marker" style="left:70%"></div>
+        </div>
+        <div class="z2-range"><span>50%</span><span>60%</span><span>70%</span><span>80%</span><span>90%</span><span>100%</span></div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-top:8px;line-height:1.6">${d.science}</div>
+    </div>`;
+  } else {
+    cont.innerHTML += `
+    <div class="proto-card">
+      <div class="proto-card-title">⚡ A Ciência do HIIT</div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.65">${d.science}</div>
+    </div>`;
+  }
+
+  let tipsHtml = '';
+  d.tips.forEach(t => {
+    tipsHtml += `
+    <div class="rest-tip-item">
+      <div class="rest-tip-icon">${t.icon}</div>
+      <div class="rest-tip-content">
+        <div class="rtc-title">${t.title}</div>
+        <div class="rtc-text">${t.text}</div>
+      </div>
+    </div>`;
+  });
+  cont.innerHTML += `<div class="rest-tips-card">${tipsHtml}</div>`;
+}
+
+function renderRest(d, cont){
+  cont.innerHTML = `
+  <div class="day-hero hero-rest">
+    <div class="hero-blob hero-blob-1"></div>
+    <span class="hero-emoji">${d.emoji}</span>
+    <div class="hero-tag">${d.label}</div>
+    <div class="hero-title">${d.title}</div>
+    <div class="hero-sub">${d.sub}</div>
+  </div>`;
+
+  let tipsHtml = '';
+  d.tips.forEach(t => {
+    tipsHtml += `
+    <div class="rest-tip-item">
+      <div class="rest-tip-icon">${t.icon}</div>
+      <div class="rest-tip-content">
+        <div class="rtc-title">${t.title}</div>
+        <div class="rtc-text">${t.text}</div>
+      </div>
+    </div>`;
+  });
+  cont.innerHTML += `
+  <div class="section-title">Protocolo de Recuperação</div>
+  <div class="rest-tips-card">${tipsHtml}</div>`;
+}
+
+// ══════════════════════════════════════════
+//  RENDER DESAFIO 21 DIAS
+// ══════════════════════════════════════════
+function renderDesafio(){
+  const cont = document.getElementById('mainContent');
+  cont.innerHTML = '';
+  cont.className = 'main fade-in';
+
+  // Stats calculation
+  const totalClasses = 21;
+  const completedDays = Object.keys(d21State).filter(k => d21State[k] && d21State[k].done).length;
+  const pct = Math.round((completedDays / totalClasses) * 100);
+
+  // Minutes trained
+  let totalMinDone = 0;
+  desafioData.forEach(item => {
+    if(d21State[item.day] && d21State[item.day].done){
+      totalMinDone += item.durationMin;
+    }
+  });
+  const hoursDone = Math.floor(totalMinDone / 60);
+  const remMinDone = Math.round(totalMinDone % 60);
+  const timeFormatted = hoursDone > 0 ? `${hoursDone}h ${remMinDone}m` : `${remMinDone} min`;
+
+  // Hero
+  cont.innerHTML += `
+  <div class="day-hero hero-d21">
+    <div class="hero-blob hero-blob-1"></div><div class="hero-blob hero-blob-2"></div>
+    <span class="hero-emoji">🔥</span>
+    <div class="hero-tag">MÉTODO 40+ · SECA POCHETE</div>
+    <div class="hero-title">Desafio 21 Dias</div>
+    <div class="hero-sub">Ignição mitocondrial, boom hormonal (GH & Testosterona) e queima de gordura visceral teimosa.</div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-val gold">${completedDays} / 21</div><div class="hstat-lbl">Aulas Feitas</div></div>
+      <div class="hstat"><div class="hstat-val green">${pct}%</div><div class="hstat-lbl">Conclusão</div></div>
+      <div class="hstat"><div class="hstat-val">${timeFormatted}</div><div class="hstat-lbl">Tempo Treinado</div></div>
+    </div>
+  </div>`;
+
+  // Storage Banner
+  const linkedCount = Object.keys(videoBlobUrls).length;
+  const isAllLinked = linkedCount >= 21;
+  const storageStatusText = isAllLinked 
+    ? '✅ 21 vídeos vinculados localmente'
+    : (linkedCount > 0 ? `📁 ${linkedCount}/21 vídeos carregados` : `📁 Pasta padrão: ${d21Config.basePath || '../videos/'}`);
+
+  cont.innerHTML += `
+  <div class="video-storage-card">
+    <div class="vsc-left">
+      <div class="vsc-icon">🎬</div>
+      <div style="min-width:0">
+        <div class="vsc-title">Vídeos no Celular</div>
+        <div class="vsc-status ${isAllLinked ? 'ready' : ''}" id="vscStatus">${storageStatusText}</div>
+      </div>
+    </div>
+    <button class="vsc-btn" onclick="openFolderModal()">Configurar Pasta</button>
+  </div>`;
+
+  // Progress Bar
+  cont.innerHTML += `
+  <div class="progress-wrap">
+    <div class="prog-row">
+      <div class="prog-label">Progresso do Desafio</div>
+      <div class="prog-count" style="color:var(--orange)">${completedDays}/21 Concluídos</div>
+    </div>
+    <div class="prog-track"><div class="prog-fill ${pct === 100 ? 'green' : ''}" style="width:${pct}%"></div></div>
+  </div>`;
+
+  // Filters
+  cont.innerHTML += `
+  <div class="filter-bar">
+    <button class="filter-chip ${d21Filter==='all'?'active':''}" onclick="setD21Filter('all')">Todas (21)</button>
+    <button class="filter-chip ${d21Filter==='sem1'?'active':''}" onclick="setD21Filter('sem1')">Semana 1 (Dias 1–7)</button>
+    <button class="filter-chip ${d21Filter==='sem2'?'active':''}" onclick="setD21Filter('sem2')">Semana 2 (Dias 8–14)</button>
+    <button class="filter-chip ${d21Filter==='sem3'?'active':''}" onclick="setD21Filter('sem3')">Semana 3 (Dias 15–21)</button>
+    <button class="filter-chip ${d21Filter==='pending'?'active':''}" onclick="setD21Filter('pending')">Pendentes</button>
+    <button class="filter-chip ${d21Filter==='done'?'active':''}" onclick="setD21Filter('done')">Concluídas</button>
+  </div>`;
+
+  // List of Classes
+  let filteredList = desafioData.filter(item => {
+    const isDone = d21State[item.day] && d21State[item.day].done;
+    if(d21Filter === 'pending') return !isDone;
+    if(d21Filter === 'done') return isDone;
+    if(d21Filter === 'sem1') return item.week === 1;
+    if(d21Filter === 'sem2') return item.week === 2;
+    if(d21Filter === 'sem3') return item.week === 3;
+    return true;
+  });
+
+  if(filteredList.length === 0){
+    cont.innerHTML += `
+    <div style="text-align:center;padding:40px 20px;background:var(--card);border-radius:var(--radius);color:var(--muted)">
+      <div style="font-size:32px;margin-bottom:8px">🎉</div>
+      <div style="font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--navy)">Nenhuma aula nesta categoria!</div>
+    </div>`;
+    return;
+  }
+
+  filteredList.forEach(item => {
+    const isDone = !!(d21State[item.day] && d21State[item.day].done);
+    const notes = (d21State[item.day] && d21State[item.day].notes) || '';
+    const doneDate = (d21State[item.day] && d21State[item.day].doneDate) || '';
+    const phaseNames = {1:'Fase 1: Ignição', 2:'Fase 2: Boom Hormonal', 3:'Fase 3: Seca Pochete'};
+
+    const card = document.createElement('div');
+    card.className = `d21-card phase-${item.phase}` + (isDone ? ' done' : '');
+    card.id = `d21_card_${item.day}`;
+    card.innerHTML = `
+      <div class="d21-card-top">
+        <div class="d21-badge">
+          <span class="db-d">DIA</span>
+          <span class="db-num">${item.day < 10 ? '0'+item.day : item.day}</span>
+        </div>
+        <div class="d21-info">
+          <div class="d21-title">${item.title}</div>
+          <div class="d21-desc">${item.desc}</div>
+          <div class="d21-meta-row">
+            <span class="d21-meta-chip dur">⏱ ${item.duration}</span>
+            <span class="d21-meta-chip">📦 ${item.sizeMb} MB</span>
+            <span class="d21-meta-chip phase">🎯 ${phaseNames[item.phase]}</span>
+            ${isDone ? `<span class="d21-meta-chip done-badge">✓ Concluído ${doneDate ? '· '+doneDate : ''}</span>` : ''}
+          </div>
+        </div>
+      </div>
+      <div class="d21-actions">
+        <button class="btn-watch" onclick="openVideoPlayer(${item.day})">
+          <span>▶ Assistir Aula</span>
+        </button>
+        <button class="btn-toggle-done" onclick="toggleD21Done(${item.day})">
+          ${isDone ? '✓ Concluído' : 'Concluir ✓'}
+        </button>
+        <button class="btn-notes" onclick="toggleNotes(${item.day})" title="Anotações pessoais">
+          ${notes ? '📝' : '✏️'}
+        </button>
+      </div>
+      <div class="d21-notes-wrap ${notes ? 'open' : ''}" id="notes_wrap_${item.day}">
+        <textarea class="d21-notes-input" placeholder="Anotações desta aula (cargas, sensações, observações)..." onchange="saveNotes(${item.day}, this.value)">${notes}</textarea>
+      </div>
+    `;
+    cont.appendChild(card);
+  });
+}
+
+function setD21Filter(f){
+  d21Filter = f;
+  renderDesafio();
+}
+
+function toggleD21Done(day){
+  if(!d21State[day]) d21State[day] = {};
+  const current = !!d21State[day].done;
+  d21State[day].done = !current;
+  
+  if(!current){
+    const now = new Date();
+    const dayStr = String(now.getDate()).padStart(2,'0') + '/' + String(now.getMonth()+1).padStart(2,'0');
+    const timeStr = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
+    d21State[day].doneDate = `${dayStr} às ${timeStr}`;
+    if(navigator.vibrate) navigator.vibrate([100, 60, 100]);
+  } else {
+    d21State[day].doneDate = '';
+  }
+
+  localStorage.setItem('v10_d21_state', JSON.stringify(d21State));
+  renderDesafio();
+}
+
+function toggleNotes(day){
+  const wrap = document.getElementById(`notes_wrap_${day}`);
+  if(wrap) wrap.classList.toggle('open');
+}
+
+function saveNotes(day, text){
+  if(!d21State[day]) d21State[day] = {};
+  d21State[day].notes = text.trim();
+  localStorage.setItem('v10_d21_state', JSON.stringify(d21State));
+}
+
+// ══════════════════════════════════════════
+//  VIDEO PLAYER LOGIC & CONTROLS
+// ══════════════════════════════════════════
+function openVideoPlayer(day){
+  currentPlayingDay = day;
+  const item = desafioData.find(d => d.day === day);
+  if(!item) return;
+
+  const modal = document.getElementById('videoModal');
+  const title = document.getElementById('vmTitle');
+  const video = document.getElementById('vmVideo');
+  const errAlert = document.getElementById('vmErrorAlert');
+  const doneBtn = document.getElementById('vmDoneBtn');
+
+  title.textContent = `Dia ${item.day < 10 ? '0'+item.day : item.day} — ${item.title}`;
+  errAlert.classList.remove('show');
+
+  const isDone = d21State[day] && d21State[day].done;
+  doneBtn.textContent = isDone ? '✓ Já Concluída' : '✓ Concluir Aula';
+  doneBtn.style.background = isDone ? 'var(--navy)' : 'var(--green)';
+
+  // Resolve video source
+  let videoSrc = '';
+  if(videoBlobUrls[day]){
+    // In-memory linked File/Blob
+    videoSrc = videoBlobUrls[day];
+  } else {
+    // Relative path default fallback
+    const basePath = d21Config.basePath || '../videos/';
+    videoSrc = `${basePath}${item.filename}`;
+  }
+
+  video.src = videoSrc;
+  video.playbackRate = playbackSpeeds[currentSpeedIndex];
+  document.getElementById('vmSpeedBtn').textContent = `${playbackSpeeds[currentSpeedIndex].toFixed(1)}x ⏩`;
+
+  video.onerror = () => {
+    errAlert.classList.add('show');
+    document.getElementById('vmErrorText').textContent = `Vídeo "${item.filename}" não encontrado no caminho atual. Clique abaixo para selecionar o arquivo direto do seu celular.`;
+  };
+
+  video.onloadedmetadata = () => {
+    errAlert.classList.remove('show');
+  };
+
+  modal.classList.add('open');
+  video.play().catch(() => {});
+}
+
+function closeVideoPlayer(){
+  const modal = document.getElementById('videoModal');
+  const video = document.getElementById('vmVideo');
+  video.pause();
+  video.src = '';
+  modal.classList.remove('open');
+}
+
+function cycleVideoSpeed(){
+  currentSpeedIndex = (currentSpeedIndex + 1) % playbackSpeeds.length;
+  const speed = playbackSpeeds[currentSpeedIndex];
+  const video = document.getElementById('vmVideo');
+  video.playbackRate = speed;
+  document.getElementById('vmSpeedBtn').textContent = `${speed.toFixed(1)}x ⏩`;
+}
+
+function skipVideo(delta){
+  const video = document.getElementById('vmVideo');
+  video.currentTime = Math.max(0, video.currentTime + delta);
+}
+
+function finishCurrentVideo(){
+  if(!d21State[currentPlayingDay]) d21State[currentPlayingDay] = {};
+  d21State[currentPlayingDay].done = true;
+  const now = new Date();
+  const dayStr = String(now.getDate()).padStart(2,'0') + '/' + String(now.getMonth()+1).padStart(2,'0');
+  const timeStr = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
+  d21State[currentPlayingDay].doneDate = `${dayStr} às ${timeStr}`;
+  localStorage.setItem('v10_d21_state', JSON.stringify(d21State));
+
+  if(navigator.vibrate) navigator.vibrate([100, 60, 100]);
+  closeVideoPlayer();
+  renderDesafio();
+}
+
+// ══════════════════════════════════════════
+//  LOCAL FOLDER & FILE PICKERS
+// ══════════════════════════════════════════
+function openFolderModal(){
+  document.getElementById('folderModal').classList.add('open');
+  document.getElementById('cfgBasePath').value = d21Config.basePath || '../videos/';
+  updateLinkedVideosList();
+}
+
+function closeFolderModal(){
+  document.getElementById('folderModal').classList.remove('open');
+  renderDesafio();
+}
+
+function saveBasePathConfig(){
+  const p = document.getElementById('cfgBasePath').value.trim();
+  d21Config.basePath = p.endsWith('/') ? p : p + '/';
+  localStorage.setItem('v10_d21_config', JSON.stringify(d21Config));
+  alert(`Caminho base atualizado para: ${d21Config.basePath}`);
+  updateLinkedVideosList();
+}
+
+async function triggerFolderSelect(){
+  if(window.showDirectoryPicker){
+    try {
+      const dirHandle = await window.showDirectoryPicker();
+      let matched = 0;
+      for await (const entry of dirHandle.values()){
+        if(entry.kind === 'file' && entry.name.toLowerCase().endsWith('.mp4')){
+          const numMatch = entry.name.match(/(\d+)/);
+          if(numMatch){
+            const dayNum = parseInt(numMatch[1], 10);
+            if(dayNum >= 1 && dayNum <= 21){
+              const file = await entry.getFile();
+              videoBlobUrls[dayNum] = URL.createObjectURL(file);
+              matched++;
+            }
+          }
+        }
+      }
+      alert(`Sucesso! ${matched} vídeos vinculados da pasta.`);
+      updateLinkedVideosList();
+      return;
+    } catch(err){
+      if(err.name !== 'AbortError'){
+        document.getElementById('folderPickerInput').click();
+      }
+      return;
+    }
+  }
+  document.getElementById('folderPickerInput').click();
+}
+
+function handleFolderSelect(files){
+  indexFileList(files);
+}
+
+function handleMultiFilesSelect(files){
+  indexFileList(files);
+}
+
+function indexFileList(files){
+  let matched = 0;
+  for(let i=0; i<files.length; i++){
+    const f = files[i];
+    if(f.name.toLowerCase().endsWith('.mp4')){
+      const numMatch = f.name.match(/(\d+)/);
+      if(numMatch){
+        const dayNum = parseInt(numMatch[1], 10);
+        if(dayNum >= 1 && dayNum <= 21){
+          videoBlobUrls[dayNum] = URL.createObjectURL(f);
+          matched++;
+        }
+      }
+    }
+  }
+  alert(`Concluído! ${matched} vídeos vinculados.`);
+  updateLinkedVideosList();
+}
+
+function handleSingleVideoSelect(files){
+  if(files.length > 0){
+    const f = files[0];
+    videoBlobUrls[currentPlayingDay] = URL.createObjectURL(f);
+    const video = document.getElementById('vmVideo');
+    video.src = videoBlobUrls[currentPlayingDay];
+    document.getElementById('vmErrorAlert').classList.remove('show');
+    video.play().catch(()=>{});
+    updateLinkedVideosList();
+  }
+}
+
+function updateLinkedVideosList(){
+  const listEl = document.getElementById('linkedVideosList');
+  const countLbl = document.getElementById('linkedCountLabel');
+  if(!listEl) return;
+
+  listEl.innerHTML = '';
+  let readyCount = 0;
+
+  desafioData.forEach(item => {
+    const isLinked = !!videoBlobUrls[item.day];
+    if(isLinked) readyCount++;
+
+    const div = document.createElement('div');
+    div.className = 'fs-item';
+    div.innerHTML = `
+      <span>Dia ${item.day < 10 ? '0'+item.day : item.day}: ${item.filename}</span>
+      <span class="${isLinked ? 'fs-item-ok' : 'fs-item-miss'}">${isLinked ? '✅ Pronto' : 'Caminho Relativo'}</span>
+    `;
+    listEl.appendChild(div);
+  });
+
+  countLbl.textContent = `${readyCount} / 21 Vinculados`;
+}
+
+// ══════════════════════════════════════════
+//  RENDER PROTOCOLOS & DIETA (PDFS)
+// ══════════════════════════════════════════
+function renderDiet(){
+  const cont = document.getElementById('mainContent');
+  cont.innerHTML = '';
+  cont.className = 'main fade-in';
+
+  cont.innerHTML += `
+  <div class="day-hero hero-diet">
+    <div class="hero-blob hero-blob-1"></div><div class="hero-blob hero-blob-2"></div>
+    <span class="hero-emoji">🥗</span>
+    <div class="hero-tag">PLANO ALIMENTAR & MÉTODO 40+</div>
+    <div class="hero-title">Dieta Seca Pochete</div>
+    <div class="hero-sub">Estratégia nutricional anti-inflamatória e sustentável para acelerar a queima lipídica abdominal sem perder massa muscular.</div>
+  </div>`;
+
+  // Diet Summary Card
+  cont.innerHTML += `
+  <div class="diet-hero-summary">
+    <div class="dhs-title">🎯 Regras de Ouro do Método 40+</div>
+    <div class="dhs-text">
+      • <strong>Boom Hormonal:</strong> Treinos curtos e intensos ativam secreção de GH e Testosterona.<br>
+      • <strong>Proteína Estratégica:</strong> 1,6g a 2,2g/kg de peso corporal para proteger a massa magra.<br>
+      • <strong>Cortisol Baixo:</strong> Durma 7 a 9 horas por noite. Cortisol elevado retém gordura na pochete.<br>
+      • <strong>Hidratação:</strong> 35 a 40ml de água por quilo de peso corporal ao dia.
+    </div>
+  </div>`;
+
+  cont.innerHTML += `<div class="section-title">Estrutura das Refeições Diárias</div>`;
+
+  // Meals
+  const meals = [
+    {
+      title: '🍳 Café da Manhã',
+      badge: 'Start Metabólico',
+      main: '• 3 Ovos fritos ou mexidos (150g)<br>• 1 Xícara de Café (80ml) com 1 colher de chá de Cacau em pó<br>• Água com 1/2 limão espremido (240ml) ou Chá de Erva-doce / Mate',
+      subs: [
+        'Ovo cozido: 3 unidades grandes (165g)',
+        'Peito de frango desfiado: 3 colheres de sopa cheias (75g)',
+        'Atum sólido em água: 3 colheres de sopa cheias (80g)',
+        'Queijo cottage: 4 colheres de sopa cheias (100g)'
+      ]
+    },
+    {
+      title: '🍗 Almoço',
+      badge: 'Nutrição & Força',
+      main: '• 150g de Legumes variados + Folhosos verdes à vontade<br>• Sobrecoxa sem pele assada (2 und pequenas - 100g) OU Filé de Frango (100g)<br>• Arroz branco ou integral cozido: 5 colheres de sopa (125g)',
+      subs: [
+        'Alcatra sem gordura grelhada: 1 bife médio (100g)',
+        'Filé de tilápia grelhado/cozido: 2 filés médios (120g)',
+        'Batata doce cozida: 1 fatia média (80g)',
+        'Batata inglesa cozida: 2 colheres de sopa cheias (100g)',
+        'Mandioca/Mandioquinha: 1 colher de arroz rasa (70g)'
+      ]
+    },
+    {
+      title: '🍎 Lanche da Tarde',
+      badge: 'Energia & Fibras',
+      main: '• 1 Mamão papaia pequeno (157g) OU 1 Maçã Fuji (90g) OU 2 fatias de Melão (230g)<br>• Aveia em flocos: 3 colheres de sopa (21g) OU Granola (22g)<br>• 1 Copo de Leite semidesnatado (240ml) ou Iogurte natural',
+      subs: [
+        'Banana prata: 1 unidade média (65g)',
+        'Manga Palmer: 1/2 unidade média (70g)',
+        'Cacau em pó com leite ou bebida vegetal',
+        'Sementes de chia ou linhaça: 1 colher de sopa'
+      ]
+    },
+    {
+      title: '🥩 Jantar',
+      badge: 'Síntese Noturna',
+      main: '• 150g de Legumes variados + Folhosos à vontade<br>• Acém moído cozido: 4 colheres de sopa (110g) OU Alcatra (100g)<br>• Arroz branco cozido: 4 colheres de sopa (100g)',
+      subs: [
+        'Pernil de porco grelhado: 2 bifes pequenos (100g)',
+        'Filé de frango grelhado: 2 bifes pequenos (100g)',
+        'Bacalhau ou Peixe magro refogado: 120g',
+        'Batata doce cozida: 1 fatia pequena (60g)'
+      ]
+    }
+  ];
+
+  meals.forEach((m, idx) => {
+    cont.innerHTML += `
+    <div class="meal-card">
+      <div class="meal-header">
+        <div class="meal-title">${m.title}</div>
+        <div class="meal-badge">${m.badge}</div>
+      </div>
+      <div class="meal-section">
+        <div class="meal-section-title">Opção Principal</div>
+        <div class="meal-main-box">${m.main}</div>
+      </div>
+      <button class="sub-toggle" onclick="toggleSub(${idx})">
+        <span>🔄 Ver Lista de Substituições Rápidas</span>
+        <span id="sub_arrow_${idx}">▼</span>
+      </button>
+      <div class="sub-content" id="sub_content_${idx}">
+        ${m.subs.map(s => `<div class="sub-item">• ${s}</div>`).join('')}
+      </div>
+    </div>`;
+  });
+
+  // Hormones & Sleep
+  cont.innerHTML += `
+  <div class="proto-card" style="margin-top:16px">
+    <div class="proto-card-title">🧪 A Ciência do Método 40+</div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.65">
+      O grande diferencial para homens com 40+ anos não é passar horas na esteira, e sim gerar o <strong>boom hormonal</strong> através de exercícios aceleradores de múltiplos grupamentos musculares. A combinação de treino de alta densidade com alimentação limpa reeduca o metabolismo a oxidar gordura visceral como fonte primordial de energia.
+    </div>
+  </div>`;
+}
+
+function toggleSub(idx){
+  const el = document.getElementById(`sub_content_${idx}`);
+  const arrow = document.getElementById(`sub_arrow_${idx}`);
+  if(el){
+    el.classList.toggle('open');
+    if(arrow) arrow.textContent = el.classList.contains('open') ? '▲' : '▼';
+  }
+}
+
+// ══════════════════════════════════════════
+//  BACKUP & DATA MANAGEMENT (JSON)
+// ══════════════════════════════════════════
+function openBackupModal(){
+  document.getElementById('backupModal').classList.add('open');
+}
+function closeBackupModal(){
+  document.getElementById('backupModal').classList.remove('open');
+}
+
+function exportDataJson(){
+  const payload = {
+    v10_done: doneState,
+    v10_d21_state: d21State,
+    v10_d21_config: d21Config,
+    exportedAt: new Date().toISOString()
+  };
+  const str = JSON.stringify(payload, null, 2);
+  const blob = new Blob([str], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `treinos_fabbio_backup_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importDataJson(files){
+  if(!files.length) return;
+  const file = files[0];
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if(data.v10_done) {
+        doneState = data.v10_done;
+        localStorage.setItem('v10_done', JSON.stringify(doneState));
+      }
+      if(data.v10_d21_state){
+        d21State = data.v10_d21_state;
+        localStorage.setItem('v10_d21_state', JSON.stringify(d21State));
+      }
+      if(data.v10_d21_config){
+        d21Config = data.v10_d21_config;
+        localStorage.setItem('v10_d21_config', JSON.stringify(d21Config));
+      }
+      alert('Backup restaurado com sucesso!');
+      closeBackupModal();
+      if(currentModule === 'v10') renderDay();
+      else if(currentModule === 'd21') renderDesafio();
+      else renderDiet();
+    } catch(err){
+      alert('Erro ao ler arquivo de backup: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+function confirmResetAll(){
+  if(confirm('Tem certeza que deseja apagar o histórico de treinos e redefinir o app?')){
+    localStorage.removeItem('v10_done');
+    localStorage.removeItem('v10_d21_state');
+    doneState = {};
+    d21State = {};
+    alert('Dados redefinidos!');
+    closeBackupModal();
+    if(currentModule === 'v10') renderDay();
+    else if(currentModule === 'd21') renderDesafio();
+    else renderDiet();
+  }
+}
+
+// ══════════════════════════════════════════
+//  FLOATING TIMER (REST INTERVALS)
+// ══════════════════════════════════════════
+let timerInterval = null;
+let timerSeconds = 60;
+let timerRunning = false;
+let TOTAL = 60;
+const CIRCUMFERENCE = 2 * Math.PI * 80;
+
+function setDuration(secs){
+  if(timerRunning) return;
+  TOTAL = secs;
+  timerSeconds = secs;
+  document.querySelectorAll('.t-dur-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('dur' + secs);
+  if(btn) btn.classList.add('active');
+  const fabEl = document.getElementById('timerFab');
+  fabEl.innerHTML = `<div class="t-icon" id="fabIcon">⏱</div><div class="t-lbl" id="fabLabel">${secs}s</div>`;
+  updateTimerDisplay();
+}
+
+const phrases = {
+  running: ['Respira fundo.','Hidrate-se agora.','Mantém o foco.','Quase lá...','Prepara para a próxima.'],
+  done: ['FORÇA! Próxima série!','VAI! Não perde o ritmo!','AGORA! SEM PAUSA!']
+};
+
+function openTimer(){
+  document.getElementById('timerOverlay').classList.add('open');
+  updateTimerDisplay();
+}
+
+function closeTimer(){
+  document.getElementById('timerOverlay').classList.remove('open');
+}
+
+function startTimerAuto(){
+  if(!timerRunning){
+    resetTimer(false);
+    startTimer();
+    openTimer();
+    setTimeout(() => {
+      if(timerRunning) closeTimer();
+    }, 2500);
+  }
+}
+
+function toggleTimer(){
+  if(timerRunning) pauseTimer();
+  else startTimer();
+}
+
+function startTimer(){
+  if(timerSeconds <= 0) resetTimer(false);
+  timerRunning = true;
+  document.getElementById('timerStartBtn').textContent = '⏸ Pausar';
+  document.getElementById('timerFab').classList.add('running');
+  const phraseEl = document.getElementById('timerPhrase');
+  phraseEl.textContent = phrases.running[Math.floor(Math.random()*phrases.running.length)];
+  phraseEl.className = 't-phrase';
+
+  timerInterval = setInterval(() => {
+    timerSeconds--;
+    updateTimerDisplay();
+    if(timerSeconds <= 0) timerDone();
+  }, 1000);
+}
+
+function pauseTimer(){
+  clearInterval(timerInterval);
+  timerRunning = false;
+  document.getElementById('timerStartBtn').textContent = '▶ Continuar';
+  document.getElementById('timerFab').classList.remove('running');
+}
+
+function resetTimer(updateDisplay = true){
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerSeconds = TOTAL;
+  document.getElementById('timerStartBtn').textContent = '▶ Iniciar';
+  document.getElementById('timerFab').classList.remove('running');
+  const fabEl = document.getElementById('timerFab');
+  fabEl.innerHTML = `<div class="t-icon" id="fabIcon">⏱</div><div class="t-lbl" id="fabLabel">${TOTAL}s</div>`;
+  if(updateDisplay){
+    updateTimerDisplay();
+    const phraseEl = document.getElementById('timerPhrase');
+    if(phraseEl){ phraseEl.textContent = 'Relaxe. Hidrate-se.'; phraseEl.className='t-phrase'; }
+  }
+}
+
+function timerDone(){
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerSeconds = 0;
+  updateTimerDisplay();
+  document.getElementById('timerStartBtn').textContent = '▶ Iniciar';
+  document.getElementById('timerFab').classList.remove('running');
+
+  if(navigator.vibrate){
+    navigator.vibrate([600,150,600,150,600,150,600,150,600,150,600,150,600,150]);
+  }
+
+  const fab = document.getElementById('timerFab');
+  fab.style.borderColor = '#22C55E';
+  fab.innerHTML = '<div class="t-icon">✅</div><div style="font-family:Sora,sans-serif;font-size:8px;font-weight:800;color:#22C55E;text-transform:uppercase;letter-spacing:.5px;margin-top:2px">GO!</div>';
+  setTimeout(() => {
+    fab.style.borderColor = '';
+    fab.innerHTML = `<div class="t-icon" id="fabIcon">⏱</div><div class="t-lbl" id="fabLabel">${TOTAL}s</div>`;
+    timerSeconds = TOTAL;
+    updateTimerDisplay();
+  }, 4000);
+
+  const phraseEl = document.getElementById('timerPhrase');
+  if(phraseEl){
+    phraseEl.textContent = phrases.done[Math.floor(Math.random()*phrases.done.length)];
+    phraseEl.className = 't-phrase go';
+  }
+}
+
+function updateTimerDisplay(){
+  const disp = document.getElementById('timerDisplay');
+  const circle = document.getElementById('timerCircle');
+  if(disp) disp.textContent = timerSeconds;
+  if(circle){
+    const offset = CIRCUMFERENCE * (1 - timerSeconds/TOTAL);
+    circle.style.strokeDashoffset = offset;
+    circle.className = timerSeconds <= 10 ? 't-prog low' : 't-prog';
+  }
+  if(timerRunning){
+    const fabEl = document.getElementById('timerFab');
+    fabEl.innerHTML = `<div class="t-countdown">${timerSeconds}</div><div class="t-lbl" style="color:#22C55E;font-family:Sora,sans-serif;font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.5px">seg</div>`;
+  }
+}
+
+// ══════════════════════════════════════════
+//  PWA INSTALL
+// ══════════════════════════════════════════
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('installBanner').style.display = 'flex';
+});
+
+document.getElementById('installBtn').onclick = async () => {
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt = null;
+  }
+  document.getElementById('installBanner').style.display = 'none';
+};
+
+// ══════════════════════════════════════════
+//  STARTUP
+// ══════════════════════════════════════════
+buildTabs();
+switchModule(currentModule);
+
+setTimeout(() => {
+  const tabs = document.getElementById('dayTabs');
+  if(tabs){
+    const activeTab = tabs.querySelector('.active');
+    if(activeTab) activeTab.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+  }
+}, 100);
+</script>
+</body>
+</html>
