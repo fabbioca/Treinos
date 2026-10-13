@@ -79,7 +79,12 @@ Para ter os 21 vídeos disponíveis na academia sem depender de sinal de interne
 
 ## 5. Recursos e Funcionalidades do App
 
-### 5.1. Gestão do Desafio 21 Dias
+### 5.1. Treino V10 e Sobrecarga Progressiva (Última Carga Salva)
+- **Salvamento Automático de Peso/Carga:** Cada exercício possui um campo integrado `⚖️ Última Carga` (ex: `65 kg`, `12 placas`, `halteres de 24kg`).
+- **Persistência Total:** O valor é gravado no `localStorage` no exato momento em que você digita. Mesmo fechando o navegador, desligando o celular ou limpando a aba, o último peso utilizado continuará registrado na próxima semana.
+- **Incluso no Backup:** Os pesos salvos são incluídos no arquivo JSON de exportação/restauração.
+
+### 5.2. Gestão do Desafio 21 Dias
 - **Dashboard em Tempo Real:** Mostra total de aulas concluídas (`X / 21`), porcentagem de evolução e tempo total treinado acumulado.
 - **Divisão em 3 Fases:**
   - *Fase 1 (Dias 1 a 7):* Ativação Metabólica e Ignição.

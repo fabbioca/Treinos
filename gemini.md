@@ -18,6 +18,7 @@ Aplicativo web móvel (PWA / Single Page Application offline-first) para gestão
 - **Armazenamento de Dados**:
   - `localStorage`:
     - `v10_done`: Exercícios semanais concluídos.
+    - `v10_weights`: Última carga/peso registrado por exercício (persistência contínua).
     - `v10_d21_state`: Status de conclusão, datas e anotações dos 21 dias.
     - `v10_d21_config`: Caminho relativo base dos vídeos (`../videos/` ou configurável).
     - `v10_active_module`: Última aba selecionada.
