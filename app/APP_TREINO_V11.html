@@ -131,6 +131,13 @@ html,body{height:100%;background:var(--bg);font-family:'Nunito Sans',sans-serif;
 .done-btn{background:var(--orange);color:#fff;border:none;padding:9px 18px;border-radius:11px;font-family:'Sora',sans-serif;font-size:12px;font-weight:800;cursor:pointer;transition:all .2s;letter-spacing:.3px}
 .done-btn:active{transform:scale(.94)}
 .ex-card.done .done-btn{background:var(--green)}
+/* ── WEIGHT TRACKING (ÚLTIMA CARGA) ── */
+.card-weight-row{display:flex;align-items:center;gap:8px;padding:0 14px 10px}
+.weight-pill{display:flex;align-items:center;gap:8px;background:rgba(15,31,69,.04);border:1.5px solid var(--border);border-radius:11px;padding:6px 12px;width:100%;transition:all .2s ease}
+.weight-pill:focus-within{border-color:var(--orange);background:#fff;box-shadow:0 0 0 3px rgba(240,90,40,.12)}
+.weight-lbl{font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--navy);white-space:nowrap;display:flex;align-items:center;gap:4px}
+.weight-input{flex:1;border:none;background:transparent;font-family:'Sora',sans-serif;font-size:12.5px;font-weight:800;color:var(--orange);outline:none;width:100%}
+.weight-input::placeholder{color:var(--muted);font-weight:500;font-size:11.5px}
 
 /* EXPAND */
 .expand-toggle{width:100%;background:none;border:none;border-top:1.5px solid var(--border);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;color:var(--muted);font-family:'Nunito Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.3px}
@@ -825,8 +832,14 @@ let d21Filter = 'all';
 
 // Persistence
 let doneState = JSON.parse(localStorage.getItem('v10_done') || '{}');
+let weightState = JSON.parse(localStorage.getItem('v10_weights') || '{}');
 let d21State = JSON.parse(localStorage.getItem('v10_d21_state') || '{}');
 let d21Config = JSON.parse(localStorage.getItem('v10_d21_config') || '{"basePath":"../videos/"}');
+
+function saveWeight(exId, val){
+  weightState[exId] = val.trim();
+  localStorage.setItem('v10_weights', JSON.stringify(weightState));
+}
 
 // Video object URLs cache (in-memory)
 let videoBlobUrls = {};
@@ -944,6 +957,12 @@ function renderWorkout(d, cont){
             <span class="tag tag-m">🎯 ${ex.muscle}</span>
             <span class="tag tag-e">🏋️ ${ex.equip}</span>
           </div>
+        </div>
+      </div>
+      <div class="card-weight-row">
+        <div class="weight-pill">
+          <span class="weight-lbl">⚖️ Última Carga:</span>
+          <input type="text" class="weight-input" id="weight_${ex.id}" placeholder="Ex: 65 kg / 12 placas" value="${weightState[ex.id] || ''}" oninput="saveWeight('${ex.id}', this.value)" onchange="saveWeight('${ex.id}', this.value)">
         </div>
       </div>
       <div class="card-bottom">
@@ -1615,6 +1634,7 @@ function closeBackupModal(){
 function exportDataJson(){
   const payload = {
     v10_done: doneState,
+    v10_weights: weightState,
     v10_d21_state: d21State,
     v10_d21_config: d21Config,
     exportedAt: new Date().toISOString()
@@ -1640,6 +1660,10 @@ function importDataJson(files){
         doneState = data.v10_done;
         localStorage.setItem('v10_done', JSON.stringify(doneState));
       }
+      if(data.v10_weights){
+        weightState = data.v10_weights;
+        localStorage.setItem('v10_weights', JSON.stringify(weightState));
+      }
       if(data.v10_d21_state){
         d21State = data.v10_d21_state;
         localStorage.setItem('v10_d21_state', JSON.stringify(d21State));
@@ -1663,8 +1687,10 @@ function importDataJson(files){
 function confirmResetAll(){
   if(confirm('Tem certeza que deseja apagar o histórico de treinos e redefinir o app?')){
     localStorage.removeItem('v10_done');
+    localStorage.removeItem('v10_weights');
     localStorage.removeItem('v10_d21_state');
     doneState = {};
+    weightState = {};
     d21State = {};
     alert('Dados redefinidos!');
     closeBackupModal();
