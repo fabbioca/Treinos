@@ -480,8 +480,13 @@ html,body{height:100%;background:var(--bg);font-family:'Nunito Sans',sans-serif;
     </div>
 
     <div class="fs-box">
-      <div class="fs-box-title">OPÇÃO 3: Caminho Relativo (Offline Puro / Localhost)</div>
-      <div class="fs-box-text">Se você abre o arquivo HTML direto junto da pasta dos vídeos:</div>
+      <div class="fs-box-title">OPÇÃO 3: Caminho Relativo (Offline / Arquivo Local)</div>
+      <div class="fs-box-text">Se você usa o HTML e os vídeos juntos na mesma pasta (ex: <code>\Treinos</code>):</div>
+      <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap">
+        <button type="button" class="fs-action-btn secondary" style="padding:6px 10px;font-size:11px;flex:1" onclick="setBasePathPreset('./')">./ (Mesma pasta)</button>
+        <button type="button" class="fs-action-btn secondary" style="padding:6px 10px;font-size:11px;flex:1" onclick="setBasePathPreset('./videos/')">./videos/</button>
+        <button type="button" class="fs-action-btn secondary" style="padding:6px 10px;font-size:11px;flex:1" onclick="setBasePathPreset('../videos/')">../videos/</button>
+      </div>
       <input type="text" class="fs-input-path" id="cfgBasePath" value="../videos/" placeholder="../videos/">
       <button class="fs-action-btn secondary" style="padding:8px" onclick="saveBasePathConfig()">Salvar Caminho Relativo</button>
     </div>
@@ -519,7 +524,20 @@ html,body{height:100%;background:var(--bg);font-family:'Nunito Sans',sans-serif;
         📤 Restaurar Backup (Carregar JSON)
       </button>
       <input type="file" id="importDataInput" accept=".json" style="display:none" onchange="importDataJson(this.files)">
-      <button class="fs-action-btn secondary" style="color:#EF4444;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3)" onclick="confirmResetAll()">
+      
+      <div style="border-top:1px solid rgba(255,255,255,.12);padding-top:10px;margin-top:4px">
+        <div style="font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:var(--orange);margin-bottom:4px">
+          🔄 Atualizar Arquivo Local
+        </div>
+        <div style="font-size:11px;color:rgba(255,255,255,.6);line-height:1.4;margin-bottom:8px">
+          Baixe a versão mais recente direto do GitHub para atualizar seu arquivo local em 1 toque:
+        </div>
+        <button class="fs-action-btn secondary" onclick="downloadUpdatedAppHtml()">
+          ⬇️ Baixar APP_TREINO_V11.html do GitHub
+        </button>
+      </div>
+
+      <button class="fs-action-btn secondary" style="color:#EF4444;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);margin-top:6px" onclick="confirmResetAll()">
         🗑️ Redefinir Todos os Dados
       </button>
     </div>
@@ -835,6 +853,9 @@ let doneState = JSON.parse(localStorage.getItem('v10_done') || '{}');
 let weightState = JSON.parse(localStorage.getItem('v10_weights') || '{}');
 let d21State = JSON.parse(localStorage.getItem('v10_d21_state') || '{}');
 let d21Config = JSON.parse(localStorage.getItem('v10_d21_config') || '{"basePath":"../videos/"}');
+if(!localStorage.getItem('v10_d21_config') && location.protocol === 'file:'){
+  d21Config.basePath = './';
+}
 
 function saveWeight(exId, val){
   weightState[exId] = val.trim();
@@ -1164,9 +1185,27 @@ function renderDesafio(){
   // Storage Banner
   const linkedCount = Object.keys(videoBlobUrls).length;
   const isAllLinked = linkedCount >= 21;
-  const storageStatusText = isAllLinked 
-    ? '✅ 21 vídeos vinculados localmente'
-    : (linkedCount > 0 ? `📁 ${linkedCount}/21 vídeos carregados` : `📁 Pasta padrão: ${d21Config.basePath || '../videos/'}`);
+  const savedFolderName = localStorage.getItem('v10_folder_name');
+
+  let storageStatusText = '';
+  let storageBtnHtml = '';
+
+  if(isAllLinked){
+    storageStatusText = '✅ 21 vídeos prontos para reprodução';
+    storageBtnHtml = `<button class="vsc-btn" onclick="openFolderModal()">Configurar</button>`;
+  } else if(savedFolderName && savedDirHandle){
+    storageStatusText = `📁 Pasta salva: <strong>${savedFolderName}</strong>`;
+    storageBtnHtml = `
+      <div style="display:flex;gap:6px">
+        <button class="vsc-btn" style="background:var(--orange)" onclick="reconnectSavedFolder()">▶ Ativar Vídeos</button>
+        <button class="vsc-btn" style="background:rgba(255,255,255,.15)" onclick="openFolderModal()">⚙️</button>
+      </div>`;
+  } else {
+    storageStatusText = linkedCount > 0 
+      ? `📁 ${linkedCount}/21 vídeos carregados` 
+      : (savedFolderName ? `📁 Pasta salva: ${savedFolderName}` : `📁 Caminho: ${d21Config.basePath || './'}`);
+    storageBtnHtml = `<button class="vsc-btn" onclick="openFolderModal()">Configurar Pasta</button>`;
+  }
 
   cont.innerHTML += `
   <div class="video-storage-card">
@@ -1177,7 +1216,7 @@ function renderDesafio(){
         <div class="vsc-status ${isAllLinked ? 'ready' : ''}" id="vscStatus">${storageStatusText}</div>
       </div>
     </div>
-    <button class="vsc-btn" onclick="openFolderModal()">Configurar Pasta</button>
+    ${storageBtnHtml}
   </div>`;
 
   // Progress Bar
@@ -1302,12 +1341,137 @@ function saveNotes(day, text){
 }
 
 // ══════════════════════════════════════════
+//  INDEXEDDB PERSISTENCE (DIRECTORY HANDLE)
+// ══════════════════════════════════════════
+let savedDirHandle = null;
+
+function openDB(){
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open('TreinosAppDB', 1);
+    req.onupgradeneeded = () => {
+      const db = req.result;
+      if(!db.objectStoreNames.contains('handles')){
+        db.createObjectStore('handles');
+      }
+    };
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function saveDirHandle(handle){
+  try {
+    const db = await openDB();
+    const tx = db.transaction('handles', 'readwrite');
+    tx.objectStore('handles').put(handle, 'videosFolder');
+    savedDirHandle = handle;
+    localStorage.setItem('v10_folder_name', handle.name || 'Treinos');
+    return new Promise(r => tx.oncomplete = r);
+  } catch(e){
+    console.warn('IDB save error', e);
+  }
+}
+
+async function getSavedDirHandle(){
+  try {
+    const db = await openDB();
+    const tx = db.transaction('handles', 'readonly');
+    const req = tx.objectStore('handles').get('videosFolder');
+    return new Promise(resolve => {
+      req.onsuccess = () => resolve(req.result || null);
+      req.onerror = () => resolve(null);
+    });
+  } catch(e){
+    return null;
+  }
+}
+
+async function loadVideosFromHandle(handle){
+  let matched = 0;
+  for await (const entry of handle.values()){
+    if(entry.kind === 'file' && entry.name.toLowerCase().endsWith('.mp4')){
+      const numMatch = entry.name.match(/(\d+)/);
+      if(numMatch){
+        const dayNum = parseInt(numMatch[1], 10);
+        if(dayNum >= 1 && dayNum <= 21){
+          const file = await entry.getFile();
+          videoBlobUrls[dayNum] = URL.createObjectURL(file);
+          matched++;
+        }
+      }
+    }
+  }
+  return matched;
+}
+
+async function checkSavedDirectoryHandle(promptUser = false){
+  try {
+    savedDirHandle = await getSavedDirHandle();
+    if(!savedDirHandle) return false;
+
+    let perm = await savedDirHandle.queryPermission({ mode: 'read' });
+    if(perm !== 'granted' && promptUser){
+      perm = await savedDirHandle.requestPermission({ mode: 'read' });
+    }
+
+    if(perm === 'granted'){
+      await loadVideosFromHandle(savedDirHandle);
+      if(currentModule === 'd21') renderDesafio();
+      return true;
+    } else {
+      if(currentModule === 'd21') renderDesafio();
+    }
+  } catch(e){
+    console.warn('checkSavedDirectoryHandle error', e);
+  }
+  return false;
+}
+
+async function reconnectSavedFolder(){
+  if(!savedDirHandle){
+    savedDirHandle = await getSavedDirHandle();
+  }
+  if(savedDirHandle){
+    try {
+      let perm = await savedDirHandle.requestPermission({ mode: 'read' });
+      if(perm === 'granted'){
+        const count = await loadVideosFromHandle(savedDirHandle);
+        alert(`Sucesso! ${count} vídeos reconectados da pasta "${savedDirHandle.name}".`);
+        renderDesafio();
+      } else {
+        alert('Permissão de leitura não foi concedida pelo navegador.');
+      }
+    } catch(e){
+      alert('Erro ao reativar pasta: ' + e.message);
+    }
+  } else {
+    triggerFolderSelect();
+  }
+}
+
+// ══════════════════════════════════════════
 //  VIDEO PLAYER LOGIC & CONTROLS
 // ══════════════════════════════════════════
-function openVideoPlayer(day){
+async function openVideoPlayer(day){
   currentPlayingDay = day;
   const item = desafioData.find(d => d.day === day);
   if(!item) return;
+
+  // Auto-reconnect if saved handle exists and day's video is not loaded yet
+  if(savedDirHandle && !videoBlobUrls[day]){
+    try {
+      let perm = await savedDirHandle.queryPermission({ mode: 'read' });
+      if(perm !== 'granted'){
+        perm = await savedDirHandle.requestPermission({ mode: 'read' });
+      }
+      if(perm === 'granted'){
+        await loadVideosFromHandle(savedDirHandle);
+        renderDesafio();
+      }
+    } catch(e){
+      console.warn('Auto reconnect error', e);
+    }
+  }
 
   const modal = document.getElementById('videoModal');
   const title = document.getElementById('vmTitle');
@@ -1329,7 +1493,7 @@ function openVideoPlayer(day){
     videoSrc = videoBlobUrls[day];
   } else {
     // Relative path default fallback
-    const basePath = d21Config.basePath || '../videos/';
+    const basePath = d21Config.basePath || './';
     videoSrc = `${basePath}${item.filename}`;
   }
 
@@ -1390,7 +1554,7 @@ function finishCurrentVideo(){
 // ══════════════════════════════════════════
 function openFolderModal(){
   document.getElementById('folderModal').classList.add('open');
-  document.getElementById('cfgBasePath').value = d21Config.basePath || '../videos/';
+  document.getElementById('cfgBasePath').value = d21Config.basePath || './';
   updateLinkedVideosList();
 }
 
@@ -1399,34 +1563,30 @@ function closeFolderModal(){
   renderDesafio();
 }
 
+function setBasePathPreset(path){
+  document.getElementById('cfgBasePath').value = path;
+  saveBasePathConfig();
+}
+
 function saveBasePathConfig(){
-  const p = document.getElementById('cfgBasePath').value.trim();
-  d21Config.basePath = p.endsWith('/') ? p : p + '/';
+  let p = document.getElementById('cfgBasePath').value.trim();
+  if(!p.endsWith('/') && !p.endsWith('\\')) p += '/';
+  d21Config.basePath = p;
   localStorage.setItem('v10_d21_config', JSON.stringify(d21Config));
   alert(`Caminho base atualizado para: ${d21Config.basePath}`);
   updateLinkedVideosList();
+  renderDesafio();
 }
 
 async function triggerFolderSelect(){
   if(window.showDirectoryPicker){
     try {
       const dirHandle = await window.showDirectoryPicker();
-      let matched = 0;
-      for await (const entry of dirHandle.values()){
-        if(entry.kind === 'file' && entry.name.toLowerCase().endsWith('.mp4')){
-          const numMatch = entry.name.match(/(\d+)/);
-          if(numMatch){
-            const dayNum = parseInt(numMatch[1], 10);
-            if(dayNum >= 1 && dayNum <= 21){
-              const file = await entry.getFile();
-              videoBlobUrls[dayNum] = URL.createObjectURL(file);
-              matched++;
-            }
-          }
-        }
-      }
-      alert(`Sucesso! ${matched} vídeos vinculados da pasta.`);
+      await saveDirHandle(dirHandle);
+      const matched = await loadVideosFromHandle(dirHandle);
+      alert(`Sucesso! ${matched} vídeos vinculados da pasta "${dirHandle.name}". O acesso foi gravado no navegador.`);
       updateLinkedVideosList();
+      renderDesafio();
       return;
     } catch(err){
       if(err.name !== 'AbortError'){
@@ -1463,6 +1623,7 @@ function indexFileList(files){
   }
   alert(`Concluído! ${matched} vídeos vinculados.`);
   updateLinkedVideosList();
+  renderDesafio();
 }
 
 function handleSingleVideoSelect(files){
@@ -1474,6 +1635,25 @@ function handleSingleVideoSelect(files){
     document.getElementById('vmErrorAlert').classList.remove('show');
     video.play().catch(()=>{});
     updateLinkedVideosList();
+    renderDesafio();
+  }
+}
+
+async function downloadUpdatedAppHtml(){
+  try {
+    const res = await fetch('https://fabbioca.github.io/Treinos/app/APP_TREINO_V11.html?t=' + Date.now());
+    if(!res.ok) throw new Error('Falha ao conectar com o GitHub');
+    const text = await res.text();
+    const blob = new Blob([text], {type: 'text/html'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'APP_TREINO_V11.html';
+    a.click();
+    URL.revokeObjectURL(url);
+    alert('Download concluído! Mova o arquivo baixado para a pasta /Treinos do seu celular.');
+  } catch(err){
+    alert('Erro ao atualizar: ' + err.message);
   }
 }
 
@@ -1857,6 +2037,7 @@ document.getElementById('installBtn').onclick = async () => {
 // ══════════════════════════════════════════
 buildTabs();
 switchModule(currentModule);
+checkSavedDirectoryHandle();
 
 setTimeout(() => {
   const tabs = document.getElementById('dayTabs');

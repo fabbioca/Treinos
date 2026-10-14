@@ -58,22 +58,33 @@ Pronto! Sempre que você fizer uma alteração e der `git push`, o GitHub Pages 
 
 ---
 
-## 4. Guia de Cópia e Vinculação dos Vídeos no Celular
+## 4. Guia de Armazenamento e Vinculação dos Vídeos no Celular
 
-Para ter os 21 vídeos disponíveis na academia sem depender de sinal de internet ou gastar dados 4G:
+### 4.1. Entendendo a Segurança Web (Por que caminhos de pasta não abrem sozinhos no GitHub Pages)
+Um site acessado pela internet em HTTPS (`https://fabbioca.github.io/`) é proibido por regras internacionais de segurança do Android e iOS de acessar silenciosamente pastas do seu disco interno apenas digitando o caminho textual (ex: `\Treinos`). Se isso fosse permitido, qualquer site malicioso poderia ler fotos ou documentos do seu aparelho.
 
-### 4.1. Como copiar os vídeos para o celular:
-1. Conecte seu celular ao computador via cabo USB (ou envie via pendrive OTG / AirDrop / compartilhamento de rede).
-2. Crie uma pasta chamada `videos` no seu celular (por exemplo, na pasta `Downloads/videos` ou `Documentos/videos`).
-3. Copie os 21 arquivos `Desafio DIA 01.mp4` até `Desafio DIA 21.mp4` para essa pasta no celular.
+Por isso, você tem **duas formas oficiais e práticas de usar**:
 
-### 4.2. Como vincular no aplicativo:
-1. Abra o app no seu navegador do celular (ou instale o ícone na tela inicial).
-2. Na aba **🔥 Desafio 21 Dias**, clique no botão **Configurar Pasta** no topo.
-3. Escolha uma das opções:
-   - **Opção 1 (Selecionar Pasta):** Toque em *Selecionar Pasta de Vídeos* e aponte para a pasta `videos` criada. O app vinculará todas as 21 aulas de uma só vez.
-   - **Opção 2 (Selecionar Múltiplos Arquivos):** Caso seu navegador no celular restrinja a seleção de pasta inteira, toque em *Selecionar os 21 Arquivos MP4*, selecione todos os vídeos e confirme.
-   - **Opção 3 (Arquivo Individual):** Se preferir, ao clicar em *Assistir Aula* em qualquer dia, caso o vídeo não seja encontrado de imediato, o próprio player exibirá o botão *Escolher Arquivo do Vídeo* para você tocar no arquivo daquele dia específico.
+---
+
+### Opção A: Usando pelo GitHub Pages (Online com Cache da Pasta)
+1. Coloque seus vídeos na pasta `\Treinos` da memória interna do celular.
+2. Abra o app pelo link: `https://fabbioca.github.io/Treinos/`.
+3. Na primeira vez, toque em **Configurar Pasta > Selecionar Pasta de Vídeos** e escolha a pasta `\Treinos`.
+4. **O que mudou agora:** O app salva a chave de acesso da pasta no banco de dados interno do navegador (**IndexedDB**).
+5. **Ao reabrir o app nos próximos dias:** O app lembrará da pasta `Treinos` salva. Basta dar **1 toque no botão `▶ Ativar Vídeos`** (ou simplesmente tocar em qualquer aula para assistir) e o navegador reativa a reprodução instantaneamente, sem precisar navegar por pastas novamente!
+
+---
+
+### Opção B: Usando 100% Local (Mesma Pasta dos Vídeos — Zero Prompts)
+Se você não quer precisar dar nem 1 toque para ativar a pasta dos vídeos:
+1. Copie o arquivo `APP_TREINO_V11.html` para **dentro da mesma pasta `\Treinos`** onde estão os 21 vídeos no seu celular.
+2. Abra o arquivo `APP_TREINO_V11.html` diretamente no seu celular (via Chrome, Samsung Internet ou gerenciador de arquivos).
+3. Como o HTML está na mesma pasta dos vídeos, ele carrega os vídeos **diretamente via `./` sem nenhuma restrição de navegador e sem nunca pedir permissão**.
+4. **Como atualizar o app no futuro sem conectar no PC:**
+   - Sempre que você fizer alterações no código pelo computador e subir no GitHub:
+   - Abra o app, toque no ícone de engrenagem ⚙️ (topo) e clique em **⬇️ Baixar APP_TREINO_V11.html do GitHub**.
+   - O app baixa a nova versão atualizada em 1 segundo direto para o seu celular. Substitua o arquivo na pasta `\Treinos` e pronto!
 
 ---
 
