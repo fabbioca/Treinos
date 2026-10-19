@@ -91,9 +91,12 @@ Se você não quer precisar dar nem 1 toque para ativar a pasta dos vídeos:
 ## 5. Recursos e Funcionalidades do App
 
 ### 5.1. Treino V10 e Sobrecarga Progressiva (Última Carga Salva)
-- **Salvamento Automático de Peso/Carga:** Cada exercício possui um campo integrado `⚖️ Última Carga` (ex: `65 kg`, `12 placas`, `halteres de 24kg`).
-- **Persistência Total:** O valor é gravado no `localStorage` no exato momento em que você digita. Mesmo fechando o navegador, desligando o celular ou limpando a aba, o último peso utilizado continuará registrado na próxima semana.
-- **Incluso no Backup:** Os pesos salvos são incluídos no arquivo JSON de exportação/restauração.
+- **Código da Máquina:** cada exercício exibe o código RealLeader (`#01`–`#30`, conforme [equipamentos_academia.md](file:///d:/Treinos/docs/equipamentos_academia.md)) com modelo, nome e tipo de carga, para localizar o equipamento na academia. Equipamentos clássicos (polia, crossover, Crunch Machine, Captain's Chair) aparecem com código `—`.
+- **Titular × Reserva:** seletor por exercício para alternar para a máquina reserva (fila no horário de pico). A escolha é salva em `v10_machine`.
+- **Última Carga por Máquina:** campo `⚖️ Última Carga` + unidade (`kg`, `lbs`, `kg/lado`, `placas`) + data do registro. Cada máquina lembra a própria carga (chave `exercício:máquina` em `v10_weights`); o placeholder mostra a carga de referência quando conhecida (ex.: `#01` 160 lbs, `#02` 40 kg/lado).
+- **Retrocompatibilidade:** valores antigos (texto livre por exercício) são lidos como carga da máquina titular.
+- **Persistência Total:** gravado no `localStorage` no exato momento da digitação e incluído no backup JSON (`v10_weights`, `v10_machine`).
+
 
 ### 5.2. Gestão do Desafio 21 Dias
 - **Dashboard em Tempo Real:** Mostra total de aulas concluídas (`X / 21`), porcentagem de evolução e tempo total treinado acumulado.

@@ -138,6 +138,22 @@ html,body{height:100%;background:var(--bg);font-family:'Nunito Sans',sans-serif;
 .weight-lbl{font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--navy);white-space:nowrap;display:flex;align-items:center;gap:4px}
 .weight-input{flex:1;border:none;background:transparent;font-family:'Sora',sans-serif;font-size:12.5px;font-weight:800;color:var(--orange);outline:none;width:100%}
 .weight-input::placeholder{color:var(--muted);font-weight:500;font-size:11.5px}
+.weight-unit{border:1.5px solid var(--border);background:#fff;border-radius:8px;font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--navy);padding:4px 4px;outline:none;flex-shrink:0}
+.weight-unit:focus{border-color:var(--orange)}
+.weight-date{padding:0 16px 10px;font-size:10.5px;font-weight:600;color:var(--muted)}
+/* ── MÁQUINA (CÓDIGO PARA LOCALIZAR NA ACADEMIA) ── */
+.mach-block{padding:0 0 2px}
+.mach-head{display:flex;align-items:center;gap:10px;margin:0 14px 10px;padding:9px 12px;background:rgba(15,31,69,.04);border:1.5px solid var(--border);border-radius:12px}
+.mach-code{flex-shrink:0;min-width:46px;text-align:center;background:var(--navy);color:#fff;font-family:'Sora',sans-serif;font-size:14px;font-weight:800;padding:6px 8px;border-radius:9px;letter-spacing:.3px}
+.mach-code.classic{background:var(--muted);font-size:12px}
+.mach-info{min-width:0;flex:1}
+.mach-name{font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:var(--navy);line-height:1.3}
+.mach-type{font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-top:2px}
+.mach-toggle{display:flex;gap:6px;margin:0 14px 10px}
+.mach-opt{flex:1;min-width:0;border:1.5px solid var(--border);background:var(--card);color:var(--muted);border-radius:10px;padding:7px 8px;font-family:'Sora',sans-serif;font-size:10.5px;font-weight:700;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:all .2s}
+.mach-opt.active{background:var(--orange);border-color:var(--orange);color:#fff}
+.mach-opt:focus-visible{outline:3px solid rgba(240,90,40,.35);outline-offset:1px}
+.mach-opt:active{transform:scale(.96)}
 
 /* EXPAND */
 .expand-toggle{width:100%;background:none;border:none;border-top:1.5px solid var(--border);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;color:var(--muted);font-family:'Nunito Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.3px}
@@ -558,52 +574,52 @@ const workoutData = {
     emoji: '💪',
     exercises: [
       {
-        id:'s1', num:1, name:'Supino na Máquina Articulada', muscle:'Peito', equip:'Hammer Strength / RealLeader Chest Press',
+        id:'s1', num:1, name:'Supino Reto na Máquina', muscle:'Peito', machine:'#08', backup:'#11',
         alt:'Supino com halteres no banco reto (apoio total das escápulas no banco)',
-        why:'Inicia o Fullbody A com o maior grupamento anterior do tronco enquanto o SNC está fresco. A máquina articulada elimina carga axial na coluna e respeita a curva de resistência do peitoral.',
-        how:'Ajuste o encosto para alças na altura do esterno. Retrai as escápulas e mantém o dorso levemente arqueado. Empurre de forma explosiva e controle a descida em 2 seg (fase excêntrica). ⚠️ Não deixe as alças cruzar o plano mediano.',
+        why:'Inicia o Fullbody A com o maior grupamento anterior do tronco enquanto o SNC está fresco. A máquina selectorizada elimina carga axial na coluna, permite ajuste rápido de carga e segurança total perto da falha.',
+        how:'Ajuste o encosto para alças na altura do esterno. Retraia as escápulas e mantenha o dorso levemente arqueado. Empurre de forma explosiva e controle a descida em 2 seg (fase excêntrica). ⚠️ Não deixe as alças cruzarem o plano mediano.',
         sets:'4', reps:'8–10', warn:false
       },
       {
-        id:'s2', num:2, name:'Remada Baixa na Polia', muscle:'Costas', equip:'Polia Baixa c/ Triângulo (RealLeader / Cybex)',
+        id:'s2', num:2, name:'Remada/Puxada Articulada (Manoplas Rotatórias)', muscle:'Costas', machine:'#01', backup:'#28',
         alt:'Remada haltere unilateral no banco (cotovelo guiado para trás e acima do quadril)',
-        why:'Regra 2:1 Puxar vs Empurrar — ativa o latíssimo do dorso e romboides compensando o supino anterior. O triângulo fecha a pegada e aumenta o recrutamento de espessura.',
-        how:'⚠️ Lombar neutra, tronco estático como estátua. Puxe pelas cotovelas (não pelas mãos). Pause 1 seg na contração máxima. Retorno controlado sem arredondar a coluna.',
-        sets:'4', reps:'10–12', warn:true
+        why:'Regra 2:1 Puxar vs Empurrar. Com apoio peitoral, zera a isometria lombar da polia baixa e permite cargas maiores (referência: 160 lbs). As manoplas giratórias iniciam em alongamento máximo e fecham em pegada neutra.',
+        how:'Peito firme no apoio. Inicie com os braços alongados e rotacione as manoplas durante a puxada. Puxe pelos cotovelos (não pelas mãos) e pause 1 seg na contração. Retorno controlado, sem soltar o peso.',
+        sets:'4', reps:'10–12', warn:false
       },
       {
-        id:'s3', num:3, name:'Leg Press 45°', muscle:'Pernas', equip:'Leg Press 45° (RealLeader / Life Fitness)',
+        id:'s3', num:3, name:'Leg Press Sentado (Horizontal)', muscle:'Pernas', machine:'#13', backup:'#09',
         alt:'Agachamento Goblet com haltere (segurar o haltere verticalmente no peito, descer até 90°)',
         why:'Substitui o agachamento livre para zerar a carga axial sobre a coluna. Recruta quadríceps, glúteos e posteriores de coxa com volume alto e segurança máxima.',
-        how:'Posicione os pés na largura dos ombros, altura média na plataforma. Desça até 90° de joelho. ⚠️ Não trave os joelhos no topo. Respire: segura na descida, expira na subida.',
+        how:'Pés na largura dos ombros (mais baixos = quadríceps; mais altos = glúteos/posteriores). Desça até 90° de joelho. ⚠️ Não trave os joelhos no topo. Segure o ar na descida e expire na subida. Reserva: agachamento guiado no Dual Smith.',
         sets:'4', reps:'10–12', warn:true
       },
       {
-        id:'s4', num:4, name:'Elevação Frontal na Polia Baixa', muscle:'Ombro', equip:'Crossover / Polia Baixa com corda ou barra curva',
-        alt:'Elevação frontal alternada com haltere (leve, amplitude limpa até a linha dos ombros)',
-        why:'Tensão contínua na cabeça anterior do deltóide via cabo — diferente do haltere, não perde resistência no topo. Complementa a cadeia anterior sem sobrecarregar o supraespinhoso.',
-        how:'Braço ligeiramente flexionado (não rígido). Suba até a linha dos ombros (não além). Controle a descida em 2 seg. Se sentir impingement, reduza a amplitude.',
+        id:'s4', num:4, name:'Crucifixo Inverso Sentado', muscle:'Ombro', machine:'#18', backup:'#12',
+        alt:'Crucifixo inverso com halteres sentado (tronco inclinado à frente, cotovelos levemente flexionados)',
+        why:'O protocolo já tem 3 treinos de peito + desenvolvimento, então o deltoide anterior está saturado. O deltoide posterior equilibra a relação empurrar/puxar, protege o manguito rotador e engrossa romboides e trapézio médio.',
+        how:'Peito apoiado no encosto. Abra os braços na linha dos ombros, cotovelos levemente flexionados. Pause 1 seg com as escápulas unidas. Excêntrico de 2 seg. Reserva: LD-1004 na posição inclinada (posterior).',
         sets:'3', reps:'12–15', warn:false
       },
       {
-        id:'s5', num:5, name:'Rosca Direta na Polia', muscle:'Bíceps', equip:'Polia Baixa com barra reta ou EZ (RealLeader)',
-        alt:'Rosca haltere alternada sentado (cotovelo fixo no lado do corpo)',
-        why:'Tensão constante via cabo em toda a amplitude — especialmente na fase final de supinação do antebraço onde o bíceps é mais ativo. Ideal para volume após os compostos.',
-        how:'Cotovelos fixos ao lado do corpo. Supine os punhos no topo. Descida lenta (3 seg). ⚠️ Não balanye o tronco — se precisar, reduza a carga.',
-        sets:'3', reps:'12–15', warn:false
+        id:'s5', num:5, name:'Rosca Scott Articulada (Anilhas)', muscle:'Bíceps', machine:'#23', backup:'#22',
+        alt:'Rosca alternada sentado com halteres (cotovelo fixo no lado do corpo)',
+        why:'Cotovelos à frente do tronco isolam o bíceps (ênfase na porção distal e braquial) e permitem progressão de carga pesada sem balanço. Fecha o estímulo de força da Segunda no bíceps.',
+        how:'Cotovelos totalmente apoiados na almofada. Suba com controle, supine os punhos no topo e desça em 3 seg sem estender o cotovelo de forma brusca. ⚠️ Não levante o tronco — se precisar, reduza a carga.',
+        sets:'3', reps:'10–12', warn:false
       },
       {
-        id:'s6', num:6, name:'Tríceps Corda no Pulley', muscle:'Tríceps', equip:'Polia Alta com acessório de corda',
+        id:'s6', num:6, name:'Tríceps Mergulho Sentado (Seated Dip)', muscle:'Tríceps', machine:'#27', backup:'Polia Alta c/ corda',
         alt:'Tríceps testa com halteres (deitado, cotovelos apontando ao teto)',
-        why:'Componente de alta frequência cardíaca: descanso de 60s + corda mantém o débito cardíaco elevado. Ativa as três cabeças do tríceps, especialmente a lateral.',
-        how:'Abra a corda ao final do movimento (pronação externa). Cotovelos fixos, não deixe os braços levantarem. Tronco levemente inclinado para frente.',
-        sets:'3', reps:'12–15', warn:false
+        why:'Movimento multiarticular que permite cargas altas com segurança articular. Recruta tríceps global, peitoral inferior e deltoide anterior — ideal para o dia de força.',
+        how:'Costas coladas no encosto. Empurre as alças para baixo até estender os cotovelos, sem encolher os ombros. Retorno em 2–3 seg, sem deixar o peso bater. Reserva: tríceps corda na polia alta.',
+        sets:'3', reps:'10–12', warn:false
       },
       {
-        id:'s7', num:7, name:'Prancha Isométrica', muscle:'Core', equip:'Colchonete / Área de Funcional',
+        id:'s7', num:7, name:'Prancha Isométrica', muscle:'Core', machine:'Colchonete / Área de Funcional', backup:'#21',
         alt:'Idêntico em qualquer ambiente (sem equipamento)',
-        why:'Fecha o Fullbody A com ativação anti-extensão lombar. Estabilidade do core reduz risco de lesão em toda a cadeia posterior nos próximos treinos.',
-        how:'Cotovelos abaixo dos ombros. Contrai glúteos e abdômen simultaneamente. ⚠️ Não deixe o quadril afundar ou subir. Respire de forma controlada durante toda a série.',
+        why:'Fecha o Fullbody A com ativação anti-extensão lombar. Estabilidade do core reduz risco de lesão em toda a cadeia posterior nos próximos treinos. Alternativa: Banco Romano 45° (glúteo/lombar).',
+        how:'Cotovelos abaixo dos ombros. Contraia glúteos e abdômen simultaneamente. ⚠️ Não deixe o quadril afundar ou subir. Respire de forma controlada durante toda a série.',
         sets:'3', reps:'30–45 seg', warn:true
       }
     ]
@@ -634,52 +650,52 @@ const workoutData = {
     emoji: '🔄',
     exercises: [
       {
-        id:'q1', num:1, name:'Crucifixo no Crossover', muscle:'Peito', equip:'Crossover / Polia Alta cruzada (RealLeader)',
+        id:'q1', num:1, name:'Voador / Peck Deck', muscle:'Peito', machine:'#30', backup:'Crossover (Polia Alta cruzada)',
         alt:'Crucifixo com halteres no banco plano (amplitude controlada, cotovelo levemente flexionado)',
-        why:'Variação horizontal do Fullbody A. O crossover aplica tensão máxima no pico de adução — onde a máquina de supino perde resistência. Trabalha o peitoral em seu alongamento máximo.',
-        how:'Ligeira inclinação do tronco para frente. Cotovelos levemente flexionados (constante). Imagine abraçar uma árvore grande. Pause 1 seg no cruzamento das mãos.',
+        why:'Variação monoarticular do Fullbody A: isola o peitoral sem fadigar o tríceps e mantém tensão no pico de contração. Trabalha o peitoral próximo do alongamento máximo.',
+        how:'Costas coladas no encosto, cotovelos levemente flexionados e constantes. Imagine abraçar uma árvore grande. Pause 1 seg com os braços fechados. Excêntrico de 2–3 seg. Reserva: crossover com polia alta.',
         sets:'4', reps:'10–12', warn:false
       },
       {
-        id:'q2', num:2, name:'Puxada Alta (Pegada Larga)', muscle:'Costas', equip:'Puxador / Lat Pulldown c/ Barra Reta Longa',
+        id:'q2', num:2, name:'Puxada Circular (Lat Pulldown)', muscle:'Costas', machine:'#02', backup:'#05',
         alt:'Barra fixa (pegada neutra ou pronada) — use elástico assistido se necessário',
-        why:'Ativa a largura do latíssimo vs. a espessura da remada da Segunda. Varia o ângulo de força: vertical em vez de horizontal. Crucial para o desenvolvimento em V do dorso.',
-        how:'Pegada levemente além da largura dos ombros. Incline o tronco ~15° para trás. Puxe as cotovelas em direção aos quadris. ⚠️ Não balanye o tronco — não é um movimento de hip-hinge.',
-        sets:'4', reps:'10–12', warn:true
+        why:'Ativa a largura do latíssimo vs. a espessura da remada da Segunda. O arco divergente acompanha o ritmo escapular e protege o ombro. Referência aprovada: 40 kg por lado.',
+        how:'Alinhe o peito ao apoio e puxe os cotovelos em direção aos quadris, abrindo em arco. Pausa de 1 seg embaixo. ⚠️ Não balance o tronco. Reserva: Front Lat Pulldown (#05) ou Wide Pull Down (#04).',
+        sets:'4', reps:'10–12', warn:false
       },
       {
-        id:'q3', num:3, name:'Cadeira Flexora (Leg Curl)', muscle:'Pernas', equip:'Lying ou Seated Leg Curl (Cybex / Panatta)',
+        id:'q3', num:3, name:'Cadeira Flexora Sentada', muscle:'Pernas', machine:'#15', backup:'#16',
         alt:'Stiff-leg com halteres (pernas levemente flexionadas, descida até sentir alongamento nos posteriores)',
-        why:'Varia o estímulo de pernas do Leg Press (quadríceps/glúteo) para o posterior de coxa. Isola o bíceps femoral e gastrocnêmio sem carga axial na coluna.',
-        how:'Na versão deitada: quadril pressionado no banco durante todo o movimento. Controle a subida (contração) e a descida (excêntrico 3 seg). ⚠️ Não empurre o quadril para cima no esforço.',
+        why:'Varia o estímulo de pernas do Leg Press (quadríceps/glúteo) para o posterior de coxa. Com o quadril fletido a 90° os isquiotibiais são pré-estirados, gerando maior estímulo hipertrófico que a versão deitada.',
+        how:'Joelho alinhado ao eixo da máquina e coxa firme no apoio. Controle a contração e a descida (excêntrico 3 seg). Reserva: Mesa Flexora Deitada (#16) — quadril pressionado no banco durante todo o movimento.',
         sets:'4', reps:'12–15', warn:true
       },
       {
-        id:'q4', num:4, name:'Desenvolvimento na Máquina', muscle:'Ombro', equip:'Shoulder Press Machine (Hammer Strength / RealLeader)',
+        id:'q4', num:4, name:'Desenvolvimento Vertical Articulado', muscle:'Ombro', machine:'#20', backup:'#10',
         alt:'Desenvolvimento com halteres sentado (banco 90°, palmas voltadas uma para a outra no topo)',
-        why:'Variação de ângulo do deltóide medial e anterior. A máquina guia o padrão de movimento e protege o manguito rotador — especialmente importante para ombros largos com 105 kg.',
-        how:'Ajuste o banco para que as alças fiquem na altura dos ombros. Empurre sem travar os cotovelos no topo. ⚠️ Evite encolher os ombros no movimento.',
+        why:'Variação de ângulo do deltoide anterior e lateral. O pivô atrás do encosto simula o desenvolvimento livre com halteres, mas estabilizado, protegendo o manguito rotador.',
+        how:'Ajuste o banco para que as alças fiquem na altura dos ombros. Empurre sem travar os cotovelos no topo. ⚠️ Evite encolher os ombros. Reserva: Shoulder Press Inclinado (#10) ou selectorizado (#19).',
         sets:'3', reps:'10–12', warn:false
       },
       {
-        id:'q5', num:5, name:'Rosca Martelo no Cabo (Corda)', muscle:'Bíceps', equip:'Polia Baixa com corda (neutro)',
+        id:'q5', num:5, name:'Rosca Martelo na Corda (Polia Baixa)', muscle:'Bíceps', machine:'Polia Baixa c/ corda', backup:'#24',
         alt:'Rosca Martelo com halteres alternada (punho em posição neutra — polegar para cima)',
-        why:'O Martelo é o exercício estratégico para o Braquial — o músculo que "empurra" o bíceps braquial, aumentando espessura visual e o pico do braço. Diferencial estético do V10.',
-        how:'Punhos neutros (polegar para cima) durante toda a amplitude. Cotovelos fixos. O bíceps braquial não é o alvo principal aqui — foque no braquiorradial e braquial.',
+        why:'O Martelo trabalha o braquial — o músculo que \"empurra\" o bíceps, aumentando espessura visual e o pico do braço. Reserva: Rosca c/ Apoio Lateral (#24), que muda a relação comprimento-tensão.',
+        how:'Punhos neutros (polegar para cima) durante toda a amplitude. Cotovelos fixos ao lado do corpo. Foque no braquial e braquiorradial, sem balançar o tronco.',
         sets:'3', reps:'12–15', warn:false
       },
       {
-        id:'q6', num:6, name:'Tríceps Francês (Overhead)', muscle:'Tríceps', equip:'Polia Alta / EZ bar com corda (atrás da cabeça)',
+        id:'q6', num:6, name:'Tríceps Francês Articulado (Overhead)', muscle:'Tríceps', machine:'#25', backup:'Polia Alta c/ corda (atrás da cabeça)',
         alt:'Skull crusher com halteres deitado (cotovelos apontados ao teto, halteres em posição neutra)',
-        why:'Única posição que coloca a cabeça longa do tríceps em pré-estiramento máximo. Fundamental para volume na parte traseira do braço — cabeça mais volumosa do músculo.',
-        how:'Cotovelos apontam para o teto e ficam fixos durante todo o movimento. Descida lenta até sentir o alongamento profundo. ⚠️ Reduza a carga se sentir pressão cervical.',
+        why:'Única posição que coloca a cabeça longa do tríceps (maior porção do músculo) em estiramento máximo, sem forçar a cervical graças ao apoio nas costas.',
+        how:'Costas apoiadas e cotovelos fixos apontando para cima. Descida lenta até sentir o alongamento profundo. ⚠️ Reduza a carga se sentir pressão cervical.',
         sets:'3', reps:'12–15', warn:false
       },
       {
-        id:'q7', num:7, name:'Abdominal Supra (Crunch Machine)', muscle:'Core', equip:'Crunch Machine (Panatta / RealLeader)',
+        id:'q7', num:7, name:'Abdominal Supra (Crunch Machine)', muscle:'Core', machine:'Crunch Machine', backup:'Polia Alta (ajoelhado)',
         alt:'Abdominal tradicional no solo: joelhos dobrados, pés fixos, suba apenas as escápulas do chão',
         why:'Flexão vertebral contra resistência — varia o estímulo isométrico da Prancha (Segunda). A máquina permite sobrecarga progressiva no reto abdominal.',
-        how:'Posicione os punhos nos apoios e curva o tronco, não apenas o pescoço. Expire no esforço. ⚠️ Não puxe o pescoço com as mãos — a força vem do abdômen.',
+        how:'Posicione os apoios e curve o tronco, não apenas o pescoço. Expire no esforço. ⚠️ Não puxe o pescoço com as mãos — a força vem do abdômen.',
         sets:'3', reps:'15–20', warn:false
       }
     ]
@@ -710,52 +726,52 @@ const workoutData = {
     emoji: '🔥',
     exercises: [
       {
-        id:'f1', num:1, name:'Supino Inclinado na Máquina', muscle:'Peito', equip:'Incline Chest Press Machine (Hammer Strength / Life Fitness)',
+        id:'f1', num:1, name:'Supino Inclinado Articulado', muscle:'Peito', machine:'#29', backup:'#09',
         alt:'Supino inclinado com halteres (banco 30–45°, apoio das escápulas no banco)',
-        why:'Terceiro ângulo de peitoral na semana — eixo superior e clavicular do músculo. Fecha o ciclo de 3 variações (plano → crossover → inclinado) garantindo estimulação completa do peitoral.',
-        how:'Inclinação do banco entre 30° e 45°. Empurre levemente acima, em direção ao queixo. Fase excêntrica: 2 seg. ⚠️ Não deixe os ombros subirem em direção às orelhas.',
+        why:'Terceiro ângulo de peitoral na semana — porção clavicular (superior). Fecha o ciclo de 3 variações (reto → voador → inclinado), garantindo estimulação completa do peitoral.',
+        how:'Costas coladas no encosto. Empurre levemente acima, em direção ao queixo. Fase excêntrica de 2 seg. ⚠️ Não deixe os ombros subirem em direção às orelhas. Reserva: Dual Smith inclinado (#09).',
         sets:'4', reps:'8–10', warn:false
       },
       {
-        id:'f2', num:2, name:'Puxada Sentada com Triângulo', muscle:'Costas', equip:'Remada na Polia Baixa c/ Triângulo (foco em espessura)',
+        id:'f2', num:2, name:'Remada Alta Articulada (High Row)', muscle:'Costas', machine:'#06', backup:'#03',
         alt:'Remada curvada com halteres (tronco a 45°, halteres em pegada neutra)',
-        why:'Complementa a largura (puxada alta Quarta) com espessura nesta sexta. O triângulo fecha a pegada neutro, maximizando o recrutamento dos romboides, trapézio médio e latíssimo interno.',
-        how:'⚠️ Tronco absolutamente estático — trave o core. Puxe o triângulo em direção ao umbigo. Pause 1 seg na posição retraída. Retorno com controle total.',
-        sets:'4', reps:'10–12', warn:true
+        why:'Meio-termo entre puxada e remada, com apoio peitoral: espessura da cintura escapular (trapézio médio/inferior, romboides e dorsal alta) sem carga lombar. Complementa a largura da Quarta.',
+        how:'Peito firme no apoio. Puxe os cotovelos para trás e para baixo, pause 1 seg com as escápulas unidas e retorne com controle total. Reserva: Level Row (#03), remada horizontal.',
+        sets:'4', reps:'10–12', warn:false
       },
       {
-        id:'f3', num:3, name:'Cadeira Extensora', muscle:'Pernas', equip:'Leg Extension Machine (Cybex / Panatta / RealLeader)',
+        id:'f3', num:3, name:'Cadeira Extensora', muscle:'Pernas', machine:'#14', backup:'#13',
         alt:'Afundo com halteres (passo longo, joelho traseiro quase toca o chão)',
-        why:'Isolamento do quadríceps em cadeia aberta — varia o estímulo bilateral do Leg Press. Alta densidade metabólica com 60s de descanso: mantém lactato elevado e maximiza gasto calórico.',
-        how:'Ajuste o apoio para canela (não tornozelo). Suba de forma controlada e pause no topo. ⚠️ Se houver dor patelar, reduza a amplitude superior (limite extensão a 90%).',
+        why:'Isolamento do quadríceps em cadeia aberta — varia o estímulo bilateral do Leg Press. Alta densidade metabólica com 60s de descanso. Opcional: bi-set com a Abdutora/Adutora (#17).',
+        how:'Ajuste o apoio para a canela (não o tornozelo). Suba de forma controlada e pause no topo. ⚠️ Se houver dor patelar, limite a extensão a 90%. Reserva: Leg Press Sentado (#13) com pés baixos.',
         sets:'3', reps:'12–15', warn:true
       },
       {
-        id:'f4', num:4, name:'Elevação Lateral na Máquina', muscle:'Ombro', equip:'Lateral Raise Machine (Cybex / Hoist / Panatta)',
+        id:'f4', num:4, name:'Elevação Lateral em Pé na Máquina', muscle:'Ombro', machine:'#12', backup:'Polia Baixa (cabo)',
         alt:'Elevação lateral com halteres em pé (cotovelo levemente flexionado, não acima da linha dos ombros)',
-        why:'A máquina de elevação lateral oferece tensão constante ao longo de toda a amplitude — muito superior ao haltere, que perde resistência na fase inicial. Deltóide medial é o maior responsável pela largura do ombro.',
-        how:'Cotovelos na almofada da máquina, não as mãos (se disponível). Suba até a linha dos ombros (90°) — não além, para proteger o supraespinhoso. Excêntrico controlado.',
+        why:'Alavancas da LD-1004 oferecem tensão constante em toda a amplitude — superior ao haltere, que perde resistência na fase inicial. O deltoide lateral é o maior responsável pela largura do ombro.',
+        how:'Cotovelos nas almofadas. Suba até a linha dos ombros (90°), sem ir além para proteger o supraespinhoso. Excêntrico controlado. Reserva: elevação lateral no cabo.',
         sets:'3', reps:'12–15', warn:false
       },
       {
-        id:'f5', num:5, name:'Rosca Barra W (EZ)', muscle:'Bíceps', equip:'Barra EZ (W) no Scott ou livre',
+        id:'f5', num:5, name:'Rosca Scott Selectorizada', muscle:'Bíceps', machine:'#22', backup:'Barra W (EZ) no Banco Scott',
         alt:'Rosca concentrada com haltere (cotovelo apoiado na face interna da coxa)',
-        why:'A barra W protege o punho e reduz a tensão no ligamento do cotovelo vs. barra reta. No Scott: anula o impulso do tronco completamente — isolamento máximo do bíceps braquial.',
-        how:'No Scott: cotovelos totalmente apoiados no suporte. Na posição em pé: cotovelos fixos ao lado do corpo. Supine os punhos no final do movimento. ⚠️ Não solte rápido — controle o excêntrico.',
-        sets:'3', reps:'10–12', warn:false
-      },
-      {
-        id:'f6', num:6, name:'Pulley Tríceps (Barra Reta)', muscle:'Tríceps', equip:'Polia Alta com barra reta ou V-Bar',
-        alt:'Mergulho entre bancos/cadeiras (mãos no apoio, cotovelos dobram para trás)',
-        why:'Finalizador de alta density para tríceps. A barra reta recruta a cabeça lateral de forma mais intensa que a corda. Sexta-feira: SNC adaptado à carga — tolerância a mais volume.',
-        how:'Cotovelos fixos ao lado do corpo — esse é o único ponto de articulação. Aperte os tríceps no ponto de extensão total. Tronco levemente inclinado para frente para equilíbrio.',
+        why:'Densidade metabólica: troca rápida de placas permite drop-sets. O Scott anula o impulso do tronco e isola o bíceps com pico de tensão no alongamento inicial.',
+        how:'Cotovelos totalmente apoiados. Supine os punhos no final do movimento. ⚠️ Não solte rápido — controle o excêntrico. Reserva: barra W no banco Scott.',
         sets:'3', reps:'12–15', warn:false
       },
       {
-        id:'f7', num:7, name:'Elevação de Pernas (Paralelas)', muscle:'Core', equip:'Captain\'s Chair / Paralelas verticais',
+        id:'f6', num:6, name:'Tríceps Extensão na Máquina (Apoio Frontal)', muscle:'Tríceps', machine:'#26', backup:'Polia Alta c/ barra reta ou V-Bar',
+        alt:'Mergulho entre bancos/cadeiras (mãos no apoio, cotovelos dobram para trás)',
+        why:'Isolamento puro de extensão de cotovelo (cabeças lateral e medial), impedindo uso do peso corporal ou dos ombros. Finalizador metabólico do tríceps na sexta.',
+        how:'Cotovelos fixos sob a almofada — o único ponto de articulação. Aperte o tríceps na extensão total e retorne com controle. Reserva: pulley com barra reta ou V-Bar.',
+        sets:'3', reps:'12–15', warn:false
+      },
+      {
+        id:'f7', num:7, name:'Elevação de Pernas (Captain\'s Chair)', muscle:'Core', machine:'Captain\'s Chair / Paralelas', backup:'Banco Declinado (abdominal infra)',
         alt:'Elevação de pernas deitado: deitar no solo, mãos sob o sacro, subir as pernas retas até 90°',
         why:'Anti-extensão dinâmica — o mais desafiador dos 3 exercícios de core da semana. Recruta o reto abdominal inferior e iliopsoas. Fecha a semana com o maior desafio de core.',
-        how:'⚠️ Lombar pressionada contra o apoio (ou chão na alternativa). Suba as pernas com controle — não use impulso. Desça devagar até antes de tocar o chão. Respire continuamente.',
+        how:'⚠️ Lombar pressionada contra o apoio (ou chão na alternativa). Suba as pernas com controle — sem impulso. Desça devagar até antes de tocar o chão. Respire continuamente.',
         sets:'3', reps:'12–15', warn:true
       }
     ]
@@ -851,15 +867,152 @@ let d21Filter = 'all';
 // Persistence
 let doneState = JSON.parse(localStorage.getItem('v10_done') || '{}');
 let weightState = JSON.parse(localStorage.getItem('v10_weights') || '{}');
+let machineChoice = JSON.parse(localStorage.getItem('v10_machine') || '{}');
 let d21State = JSON.parse(localStorage.getItem('v10_d21_state') || '{}');
 let d21Config = JSON.parse(localStorage.getItem('v10_d21_config') || '{"basePath":"../videos/"}');
 if(!localStorage.getItem('v10_d21_config') && location.protocol === 'file:'){
   d21Config.basePath = './';
 }
 
-function saveWeight(exId, val){
-  weightState[exId] = val.trim();
-  localStorage.setItem('v10_weights', JSON.stringify(weightState));
+// ══════════════════════════════════════════
+//  CATÁLOGO DE MÁQUINAS (docs/equipamentos_academia.md)
+// ══════════════════════════════════════════
+const MACHINES = {
+  '#01': {model:'Vertical Traction', name:'Puxada-Remada Articulada', type:'Selectorizada', ref:'160 lbs (3x12)'},
+  '#02': {model:'LD-1018', name:'Lat Pulldown Circular', type:'Anilhas', ref:'40 kg/lado'},
+  '#03': {model:'LD-1011', name:'Level Row', type:'Anilhas'},
+  '#04': {model:'', name:'Wide Pull Down', type:'Anilhas'},
+  '#05': {model:'LD-1012', name:'Front Lat Pulldown', type:'Anilhas'},
+  '#06': {model:'LD-1006', name:'High Row', type:'Anilhas'},
+  '#07': {model:'LD-1014', name:'Low Row', type:'Anilhas'},
+  '#08': {model:'', name:'Chest Press (Supino Sentado)', type:'Selectorizada'},
+  '#09': {model:'LD-1008', name:'Dual Tower Smith Machine', type:'Anilhas'},
+  '#10': {model:'', name:'Shoulder Press Inclinado', type:'Anilhas'},
+  '#11': {model:'', name:'Decline Chest Press', type:'Anilhas'},
+  '#12': {model:'LD-1004', name:'Lateral Raise / Rear Deltoid', type:'Anilhas'},
+  '#13': {model:'', name:'Seated Leg Press (Horizontal)', type:'Selectorizada'},
+  '#14': {model:'', name:'Seated Leg Extension', type:'Selectorizada'},
+  '#15': {model:'', name:'Seated Leg Curl', type:'Selectorizada'},
+  '#16': {model:'', name:'Prone Leg Curl (Mesa Flexora)', type:'Selectorizada'},
+  '#17': {model:'', name:'Hip Abductor / Adductor', type:'Selectorizada'},
+  '#18': {model:'', name:'Rear Delt Sentado (Crucifixo Inverso)', type:'Selectorizada'},
+  '#19': {model:'', name:'Shoulder Press', type:'Selectorizada'},
+  '#20': {model:'LD-1003', name:'Shoulder Press Vertical', type:'Anilhas'},
+  '#21': {model:'', name:'Banco Romano 45°', type:'Peso corporal / Anilha'},
+  '#22': {model:'', name:'Biceps Curl (Scott)', type:'Selectorizada'},
+  '#23': {model:'LD-1005', name:'Seated Biceps Curl', type:'Anilhas'},
+  '#24': {model:'', name:'Biceps Curl c/ Apoio Lateral', type:'Selectorizada'},
+  '#25': {model:'LD-1019', name:'Triceps Overhead Extension', type:'Anilhas'},
+  '#26': {model:'', name:'Triceps Extension (Apoio Frontal)', type:'Selectorizada'},
+  '#27': {model:'', name:'Triceps Extension / Seated Dip', type:'Selectorizada'},
+  '#28': {model:'LD-1009', name:'Rowing', type:'Anilhas'},
+  '#29': {model:'LD-1015', name:'Incline Chest Press', type:'Anilhas'},
+  '#30': {model:'', name:'Pectoral Machine (Voador)', type:'Selectorizada'}
+};
+const WEIGHT_UNITS = ['kg','lbs','kg/lado','placas',''];
+const WEIGHT_UNIT_LABEL = {'':'—'};
+
+// Referência (string do catálogo, ex.: '#07') ou texto livre para equipamento clássico sem código
+function resolveMachine(ref){
+  const m = MACHINES[ref];
+  if(m) return {code:ref, model:m.model, name:m.name, type:m.type, ref:m.ref || '', classic:false};
+  return {code:'—', model:'', name:ref, type:'Equipamento clássico (sem código)', ref:'', classic:true};
+}
+function activeWhich(ex){
+  return (ex.backup && machineChoice[ex.id] === 'backup') ? 'backup' : 'main';
+}
+function activeMachine(ex){
+  return resolveMachine(activeWhich(ex) === 'backup' ? ex.backup : ex.machine);
+}
+function weightKey(ex, m){
+  return ex.id + ':' + (m.classic ? m.name : m.code);
+}
+function getWeightEntry(ex){
+  const m = activeMachine(ex);
+  let e = weightState[weightKey(ex, m)];
+  // Retrocompatibilidade: valor legado (texto livre por exercício) pertence à máquina titular
+  if(!e && activeWhich(ex) === 'main' && typeof weightState[ex.id] === 'string' && weightState[ex.id]){
+    e = {v: weightState[ex.id], u: '', d: ''};
+  }
+  return e || {v:'', u:'kg', d:''};
+}
+function findExercise(exId){
+  for(const k of Object.keys(workoutData)){
+    const list = workoutData[k].exercises;
+    if(list){ const f = list.find(e => e.id === exId); if(f) return f; }
+  }
+  return null;
+}
+function fmtWeightDate(iso){
+  if(!iso) return 'Sem registro nesta máquina';
+  const [y,m,d] = iso.split('-');
+  return `Último registro: ${d}/${m}/${y}`;
+}
+function machineBlockHTML(ex){
+  const which = activeWhich(ex);
+  const m = activeMachine(ex);
+  const e = getWeightEntry(ex);
+  const mainM = resolveMachine(ex.machine);
+  const label = x => x.classic ? x.name : x.code;
+  const title = (m.model ? m.model + ' · ' : '') + m.name;
+  const toggle = ex.backup ? `
+    <div class="mach-toggle" role="group" aria-label="Escolher máquina do exercício">
+      <button type="button" class="mach-opt${which === 'main' ? ' active' : ''}" aria-pressed="${which === 'main'}" onclick="setMachine('${ex.id}','main')">Titular · ${label(mainM)}</button>
+      <button type="button" class="mach-opt${which === 'backup' ? ' active' : ''}" aria-pressed="${which === 'backup'}" onclick="setMachine('${ex.id}','backup')">Reserva · ${label(resolveMachine(ex.backup))}</button>
+    </div>` : '';
+  const unitOpts = WEIGHT_UNITS.map(u => `<option value="${u}"${u === e.u ? ' selected' : ''}>${WEIGHT_UNIT_LABEL[u] || u}</option>`).join('');
+  return `
+    <div class="mach-block" id="mach_${ex.id}">
+      <div class="mach-head">
+        <span class="mach-code${m.classic ? ' classic' : ''}" aria-label="Código da máquina">${m.code}</span>
+        <div class="mach-info">
+          <div class="mach-name">${title}</div>
+          <div class="mach-type">${m.type}</div>
+        </div>
+      </div>
+      ${toggle}
+      <div class="card-weight-row">
+        <div class="weight-pill">
+          <span class="weight-lbl">⚖️ Última Carga:</span>
+          <input type="text" inputmode="decimal" class="weight-input" id="weight_${ex.id}" aria-label="Última carga utilizada em ${ex.name}" placeholder="${m.ref ? 'Ref.: ' + m.ref : 'Ex: 65'}" value="${e.v}" oninput="saveWeight('${ex.id}')" onchange="saveWeight('${ex.id}')">
+          <select class="weight-unit" id="unit_${ex.id}" aria-label="Unidade da carga" onchange="saveWeight('${ex.id}')">${unitOpts}</select>
+        </div>
+      </div>
+      <div class="weight-date" id="wdate_${ex.id}">${fmtWeightDate(e.d)}</div>
+    </div>`;
+}
+function setMachine(exId, which){
+  machineChoice[exId] = which;
+  localStorage.setItem('v10_machine', JSON.stringify(machineChoice));
+  const ex = findExercise(exId);
+  const block = document.getElementById('mach_' + exId);
+  if(!ex || !block) return;
+  block.outerHTML = machineBlockHTML(ex);
+  const tag = document.getElementById('mtag_' + exId);
+  if(tag) tag.textContent = machineTagText(ex);
+}
+function machineTagText(ex){
+  const m = activeMachine(ex);
+  return m.classic ? m.name : `${m.code} · ${m.name}`;
+}
+function saveWeight(exId){
+  const ex = findExercise(exId);
+  const input = document.getElementById('weight_' + exId);
+  const unit = document.getElementById('unit_' + exId);
+  if(!ex || !input || !unit) return;
+  const m = activeMachine(ex);
+  const d = new Date();
+  const iso = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  weightState[weightKey(ex, m)] = {v: input.value.trim(), u: unit.value, d: iso};
+  try {
+    localStorage.setItem('v10_weights', JSON.stringify(weightState));
+  } catch(err){
+    console.error('Falha ao salvar carga:', err);
+    alert('Não foi possível salvar a carga. Verifique o espaço de armazenamento do navegador.');
+    return;
+  }
+  const lbl = document.getElementById('wdate_' + exId);
+  if(lbl) lbl.textContent = fmtWeightDate(iso);
 }
 
 // Video object URLs cache (in-memory)
@@ -976,16 +1129,11 @@ function renderWorkout(d, cont){
           <div class="ex-name">${ex.name}</div>
           <div class="tags">
             <span class="tag tag-m">🎯 ${ex.muscle}</span>
-            <span class="tag tag-e">🏋️ ${ex.equip}</span>
+            <span class="tag tag-e">📍 <span id="mtag_${ex.id}">${machineTagText(ex)}</span></span>
           </div>
         </div>
       </div>
-      <div class="card-weight-row">
-        <div class="weight-pill">
-          <span class="weight-lbl">⚖️ Última Carga:</span>
-          <input type="text" class="weight-input" id="weight_${ex.id}" placeholder="Ex: 65 kg / 12 placas" value="${weightState[ex.id] || ''}" oninput="saveWeight('${ex.id}', this.value)" onchange="saveWeight('${ex.id}', this.value)">
-        </div>
-      </div>
+      ${machineBlockHTML(ex)}
       <div class="card-bottom">
         <div class="sets-chips">
           <span class="chip chip-sets">${ex.sets} séries</span>
@@ -1815,6 +1963,7 @@ function exportDataJson(){
   const payload = {
     v10_done: doneState,
     v10_weights: weightState,
+    v10_machine: machineChoice,
     v10_d21_state: d21State,
     v10_d21_config: d21Config,
     exportedAt: new Date().toISOString()
@@ -1844,6 +1993,10 @@ function importDataJson(files){
         weightState = data.v10_weights;
         localStorage.setItem('v10_weights', JSON.stringify(weightState));
       }
+      if(data.v10_machine){
+        machineChoice = data.v10_machine;
+        localStorage.setItem('v10_machine', JSON.stringify(machineChoice));
+      }
       if(data.v10_d21_state){
         d21State = data.v10_d21_state;
         localStorage.setItem('v10_d21_state', JSON.stringify(d21State));
@@ -1868,6 +2021,8 @@ function confirmResetAll(){
   if(confirm('Tem certeza que deseja apagar o histórico de treinos e redefinir o app?')){
     localStorage.removeItem('v10_done');
     localStorage.removeItem('v10_weights');
+    localStorage.removeItem('v10_machine');
+    machineChoice = {};
     localStorage.removeItem('v10_d21_state');
     doneState = {};
     weightState = {};
