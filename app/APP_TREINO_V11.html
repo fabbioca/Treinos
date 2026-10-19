@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="V10 Treino">
@@ -30,7 +30,10 @@
   --green-bg: #ECFDF5;
   --red: #DC2626;
   --border: #E2E8F0;
-  --muted: #64748B;
+  --muted: #566578;
+  --orange-ink: #C2410C;
+  --font-display: 'Sora', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Nunito Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --text: #0F172A;
   --radius: 18px;
   --radius-sm: 12px;
@@ -38,35 +41,36 @@
   --shadow-lg: 0 8px 40px rgba(15,31,69,0.16);
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;background:var(--bg);font-family:'Nunito Sans',sans-serif;color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html,body{height:100%;background:var(--bg);font-family:var(--font-body);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
 /* ── HEADER ── */
 .app-header{position:sticky;top:0;z-index:100;background:var(--navy);padding:calc(env(safe-area-inset-top) + 6px) 0 0;box-shadow:0 4px 20px rgba(0,0,0,0.15)}
 .header-inner{padding:10px 16px 0}
 .hrow{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.logo{font-family:'Sora',sans-serif;font-weight:800;font-size:18px;color:#fff;letter-spacing:-0.5px}
+.logo{font-family:var(--font-display);font-weight:800;font-size:18px;color:#fff;letter-spacing:-0.5px}
 .logo span{color:var(--orange)}
-.logo-sub{font-size:9.5px;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:1.8px;text-transform:uppercase;margin-top:1px}
+.logo-sub{font-size:12px;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:1.8px;text-transform:uppercase;margin-top:1px}
 .header-actions{display:flex;align-items:center;gap:8px}
-.header-badge{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:5px 10px;border-radius:20px;font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,.75)}
-.backup-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#fff;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all .2s}
+.header-badge{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:5px 10px;border-radius:20px;font-family:var(--font-display);font-size:12px;font-weight:700;color:rgba(255,255,255,.75)}
+.backup-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#fff;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all .2s}
 .backup-btn:active{transform:scale(0.92);background:rgba(255,255,255,0.18)}
 
 /* ── MODULE SWITCHER (TOP NAV) ── */
 .module-nav{display:flex;background:rgba(255,255,255,.08);padding:4px;border-radius:14px;gap:4px;margin-bottom:12px;border:1px solid rgba(255,255,255,.06)}
-.mod-tab{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:8px 6px;border-radius:10px;border:none;background:transparent;color:rgba(255,255,255,.6);font-family:'Sora',sans-serif;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s ease;white-space:nowrap}
-.mod-tab.active{background:var(--orange);color:#fff;box-shadow:0 3px 12px rgba(240,90,40,.35)}
+.mod-tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 4px;border-radius:10px;border:none;background:transparent;color:rgba(255,255,255,.82);font-family:var(--font-display);font-size:12px;font-weight:700;line-height:1.15;cursor:pointer;transition:all .2s ease;white-space:nowrap}
+.mt-ico{font-size:16px;line-height:1}
+.mod-tab.active{background:var(--orange-ink);color:#fff;box-shadow:0 3px 12px rgba(240,90,40,.35)}
 .mod-tab:active{transform:scale(.96)}
 
 /* DAY TABS (FOR V10) */
 .day-tabs{display:flex;gap:5px;overflow-x:auto;padding-bottom:12px;scrollbar-width:none}
 .day-tabs::-webkit-scrollbar{display:none}
 .day-tab{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 13px;border-radius:20px;border:none;background:rgba(255,255,255,.08);cursor:pointer;transition:all .2s ease}
-.day-tab .dt-abbr{font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:rgba(255,255,255,.45);white-space:nowrap}
+.day-tab .dt-abbr{font-family:var(--font-display);font-size:12px;font-weight:700;color:rgba(255,255,255,.78);white-space:nowrap}
 .day-tab .dt-dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.2);transition:all .2s}
-.day-tab.active{background:var(--orange)}
+.day-tab.active{background:var(--orange-ink)}
 .day-tab.active .dt-abbr{color:#fff}
-.day-tab.active .dt-dot{background:rgba(255,255,255,.6)}
+.day-tab.active .dt-dot{background:rgba(255,255,255,.82)}
 .day-tab:active{transform:scale(.95)}
 
 /* ── MAIN CONTAINER ── */
@@ -85,130 +89,130 @@ html,body{height:100%;background:var(--bg);font-family:'Nunito Sans',sans-serif;
 .hero-blob-1{width:160px;height:160px;top:-50px;right:-40px}
 .hero-blob-2{width:90px;height:90px;bottom:-35px;right:45px}
 .hero-emoji{font-size:36px;margin-bottom:6px;display:block}
-.hero-tag{font-size:10px;font-weight:800;color:var(--orange);letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
+.hero-tag{font-size:12px;font-weight:800;color:var(--orange);letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
 .hero-rest .hero-tag,.hero-cardio .hero-tag,.hero-hiit .hero-tag,.hero-diet .hero-tag{color:rgba(255,255,255,.7)}
-.hero-title{font-family:'Sora',sans-serif;font-size:23px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:6px}
+.hero-title{font-family:var(--font-display);font-size:23px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:6px}
 .hero-sub{font-size:12.5px;color:rgba(255,255,255,.68);line-height:1.5;margin-bottom:16px}
 .hero-stats{display:flex;gap:18px;flex-wrap:wrap}
 .hstat{display:flex;flex-direction:column;align-items:flex-start}
-.hstat-val{font-family:'Sora',sans-serif;font-size:21px;font-weight:800;color:var(--orange)}
+.hstat-val{font-family:var(--font-display);font-size:21px;font-weight:800;color:var(--orange)}
 .hstat-val.gold{color:#FBBF24}
 .hstat-val.green{color:#34D399}
-.hstat-lbl{font-size:9.5px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:1px;margin-top:-1px}
+.hstat-lbl{font-size:12px;color:rgba(255,255,255,.78);text-transform:uppercase;letter-spacing:1px;margin-top:-1px}
 
 /* ── PROGRESS WRAP ── */
 .progress-wrap{background:var(--card);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:16px;box-shadow:var(--shadow)}
 .prog-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.prog-label{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:var(--navy)}
-.prog-count{font-family:'Sora',sans-serif;font-size:13px;font-weight:800;color:var(--orange)}
+.prog-label{font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--navy)}
+.prog-count{font-family:var(--font-display);font-size:13px;font-weight:800;color:var(--orange-ink)}
 .prog-track{height:8px;background:var(--border);border-radius:99px;overflow:hidden}
 .prog-fill{height:100%;background:linear-gradient(90deg,var(--orange) 0%,var(--orange2) 100%);border-radius:99px;transition:width .5s cubic-bezier(.34,1.56,.64,1);width:0%}
 .prog-fill.green{background:linear-gradient(90deg,#059669 0%,#10B981 100%)}
 
 /* ── SECTION TITLE ── */
-.section-title{font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;padding-left:2px;display:flex;align-items:center;justify-content:space-between}
+.section-title{font-family:var(--font-display);font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;padding-left:2px;display:flex;align-items:center;justify-content:space-between}
 
 /* ── EXERCISE CARD (V10) ── */
 .ex-card{background:var(--card);border-radius:var(--radius);border:2px solid transparent;box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden;transition:all .3s ease}
 .ex-card.done{border-color:var(--green);background:var(--green-bg);opacity:.75}
 .ex-card.done .ex-name{text-decoration:line-through;color:var(--muted)}
 .card-top{display:flex;align-items:flex-start;gap:12px;padding:14px 14px 10px}
-.badge{flex-shrink:0;width:30px;height:30px;background:var(--orange);color:#fff;border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:13px;font-weight:800}
+.badge{flex-shrink:0;width:30px;height:30px;background:var(--orange-ink);color:#fff;border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:13px;font-weight:800}
 .badge-done{flex-shrink:0;width:30px;height:30px;background:var(--green);color:#fff;border-radius:9px;display:none;align-items:center;justify-content:center;font-size:16px}
 .ex-card.done .badge{display:none}
 .ex-card.done .badge-done{display:flex}
 .card-info{flex:1;min-width:0}
-.ex-name{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:7px}
+.ex-name{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:7px}
 .tags{display:flex;flex-wrap:wrap;gap:5px}
-.tag{display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:7px;font-size:10px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+.tag{display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:7px;font-size:12px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
 .tag-m{background:rgba(109,40,217,.1);color:var(--purple)}
 .tag-e{background:rgba(29,78,216,.08);color:var(--blue)}
 .card-bottom{display:flex;align-items:center;justify-content:space-between;padding:4px 14px 12px}
 .sets-chips{display:flex;gap:6px;align-items:center}
-.chip{padding:5px 11px;border-radius:9px;font-family:'Sora',sans-serif;font-size:12px;font-weight:700}
+.chip{padding:5px 11px;border-radius:9px;font-family:var(--font-display);font-size:12px;font-weight:700}
 .chip-sets{background:rgba(15,31,69,.07);color:var(--navy)}
-.chip-reps{background:rgba(240,90,40,.1);color:var(--orange)}
-.done-btn{background:var(--orange);color:#fff;border:none;padding:9px 18px;border-radius:11px;font-family:'Sora',sans-serif;font-size:12px;font-weight:800;cursor:pointer;transition:all .2s;letter-spacing:.3px}
+.chip-reps{background:rgba(240,90,40,.1);color:var(--orange-ink)}
+.done-btn{background:var(--orange-ink);color:#fff;border:none;padding:0 22px;border-radius:11px;font-family:var(--font-display);font-size:13px;font-weight:800;cursor:pointer;transition:all .2s;letter-spacing:.3px}
 .done-btn:active{transform:scale(.94)}
 .ex-card.done .done-btn{background:var(--green)}
 /* ── WEIGHT TRACKING (ÚLTIMA CARGA) ── */
 .card-weight-row{display:flex;align-items:center;gap:8px;padding:0 14px 10px}
 .weight-pill{display:flex;align-items:center;gap:8px;background:rgba(15,31,69,.04);border:1.5px solid var(--border);border-radius:11px;padding:6px 12px;width:100%;transition:all .2s ease}
 .weight-pill:focus-within{border-color:var(--orange);background:#fff;box-shadow:0 0 0 3px rgba(240,90,40,.12)}
-.weight-lbl{font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--navy);white-space:nowrap;display:flex;align-items:center;gap:4px}
-.weight-input{flex:1;border:none;background:transparent;font-family:'Sora',sans-serif;font-size:12.5px;font-weight:800;color:var(--orange);outline:none;width:100%}
-.weight-input::placeholder{color:var(--muted);font-weight:500;font-size:11.5px}
-.weight-unit{border:1.5px solid var(--border);background:#fff;border-radius:8px;font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--navy);padding:4px 4px;outline:none;flex-shrink:0}
+.weight-lbl{font-family:var(--font-display);font-size:12px;font-weight:700;color:var(--navy);white-space:nowrap;display:flex;align-items:center;gap:4px}
+.weight-input{flex:1;border:none;background:transparent;font-family:var(--font-display);font-size:12.5px;font-weight:800;color:var(--orange-ink);outline:none;width:100%}
+.weight-input::placeholder{color:var(--muted);font-weight:500;font-size:12px}
+.weight-unit{border:1.5px solid var(--border);background:#fff;border-radius:8px;font-family:var(--font-display);font-size:12px;font-weight:700;color:var(--navy);padding:4px 4px;outline:none;flex-shrink:0}
 .weight-unit:focus{border-color:var(--orange)}
-.weight-date{padding:0 16px 10px;font-size:10.5px;font-weight:600;color:var(--muted)}
+.weight-date{padding:0 16px 10px;font-size:12px;font-weight:600;color:var(--muted)}
 /* ── MÁQUINA (CÓDIGO PARA LOCALIZAR NA ACADEMIA) ── */
 .mach-block{padding:0 0 2px}
 .mach-head{display:flex;align-items:center;gap:10px;margin:0 14px 10px;padding:9px 12px;background:rgba(15,31,69,.04);border:1.5px solid var(--border);border-radius:12px}
-.mach-code{flex-shrink:0;min-width:46px;text-align:center;background:var(--navy);color:#fff;font-family:'Sora',sans-serif;font-size:14px;font-weight:800;padding:6px 8px;border-radius:9px;letter-spacing:.3px}
+.mach-code{flex-shrink:0;min-width:46px;text-align:center;background:var(--navy);color:#fff;font-family:var(--font-display);font-size:14px;font-weight:800;padding:6px 8px;border-radius:9px;letter-spacing:.3px}
 .mach-code.classic{background:var(--muted);font-size:12px}
 .mach-info{min-width:0;flex:1}
-.mach-name{font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:var(--navy);line-height:1.3}
-.mach-type{font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-top:2px}
+.mach-name{font-family:var(--font-display);font-size:12px;font-weight:700;color:var(--navy);line-height:1.3}
+.mach-type{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-top:2px}
 .mach-toggle{display:flex;gap:6px;margin:0 14px 10px}
-.mach-opt{flex:1;min-width:0;border:1.5px solid var(--border);background:var(--card);color:var(--muted);border-radius:10px;padding:7px 8px;font-family:'Sora',sans-serif;font-size:10.5px;font-weight:700;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:all .2s}
-.mach-opt.active{background:var(--orange);border-color:var(--orange);color:#fff}
+.mach-opt{flex:1;min-width:0;border:1.5px solid var(--border);background:var(--card);color:var(--muted);border-radius:10px;padding:7px 8px;font-family:var(--font-display);font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:all .2s}
+.mach-opt.active{background:var(--orange-ink);border-color:var(--orange-ink);color:#fff}
 .mach-opt:focus-visible{outline:3px solid rgba(240,90,40,.35);outline-offset:1px}
 .mach-opt:active{transform:scale(.96)}
 
 /* EXPAND */
-.expand-toggle{width:100%;background:none;border:none;border-top:1.5px solid var(--border);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;color:var(--muted);font-family:'Nunito Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.3px}
-.expand-icon{font-size:11px;transition:transform .22s ease;display:inline-block}
+.expand-toggle{width:100%;background:none;border:none;border-top:1.5px solid var(--border);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;color:var(--muted);font-family:var(--font-body);font-size:12px;font-weight:700;letter-spacing:.3px}
+.expand-icon{font-size:12px;transition:transform .22s ease;display:inline-block}
 .expand-toggle.open .expand-icon{transform:rotate(180deg)}
 .expand-body{display:none;padding:4px 14px 14px;animation:fadeSlide .2s ease}
 .expand-body.open{display:block}
 @keyframes fadeSlide{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
 .eblock{margin-bottom:11px}
 .eblock:last-child{margin-bottom:0}
-.eblock-label{font-family:'Sora',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-bottom:5px}
+.eblock-label{font-family:var(--font-display);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-bottom:5px}
 .eblock-text{font-size:13px;line-height:1.65;color:var(--text)}
 .alt-box{background:rgba(29,78,216,.06);border-left:3px solid var(--blue);padding:9px 11px;border-radius:0 10px 10px 0;font-size:13px;color:var(--blue);font-weight:600;line-height:1.5}
 .warn-box{background:#FFFBEB;border-left:3px solid #F59E0B;padding:9px 11px;border-radius:0 10px 10px 0;font-size:12px;color:#92400E;line-height:1.5}
 
 /* ── CARDIO / HIIT ── */
 .proto-card{background:var(--card);border-radius:var(--radius);padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
-.proto-card-title{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--navy);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.proto-card-title{font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--navy);margin-bottom:12px;display:flex;align-items:center;gap:8px}
 .hiit-step{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:12px;margin-bottom:7px;background:var(--bg)}
 .hiit-step:last-child{margin-bottom:0}
-.hiit-step-badge{width:24px;height:24px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:11px;font-weight:800;flex-shrink:0;color:#fff}
+.hiit-step-badge{width:24px;height:24px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:12px;font-weight:800;flex-shrink:0;color:#fff}
 .hiit-step-badge.effort{background:#DC2626}
 .hiit-step-badge.rest{background:#059669}
 .hiit-step-badge.warm{background:#D97706}
 .hiit-step-text{font-size:13px;font-weight:600;color:var(--text);line-height:1.4}
-.hiit-step-time{font-family:'Sora',sans-serif;font-size:13px;font-weight:800;color:var(--muted);margin-left:auto;flex-shrink:0}
+.hiit-step-time{font-family:var(--font-display);font-size:13px;font-weight:800;color:var(--muted);margin-left:auto;flex-shrink:0}
 .zone2-meter{background:var(--bg);border-radius:12px;padding:12px 14px;margin-bottom:8px}
 .z2-label{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:8px}
 .z2-bar{height:20px;background:linear-gradient(90deg,#3B82F6 0%,#22C55E 40%,#F59E0B 70%,#EF4444 100%);border-radius:99px;position:relative;margin-bottom:4px}
 .z2-bar-marker{position:absolute;top:-4px;bottom:-4px;width:6px;border-radius:3px;background:var(--navy);border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)}
-.z2-range{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);font-weight:600}
+.z2-range{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);font-weight:600}
 
 /* ── REST / TIPS ── */
 .rest-tips-card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);margin-bottom:12px}
 .rest-tip-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border)}
 .rest-tip-item:last-child{border-bottom:none;padding-bottom:0}
 .rest-tip-icon{font-size:24px;flex-shrink:0;margin-top:1px}
-.rest-tip-content .rtc-title{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:3px}
+.rest-tip-content .rtc-title{font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--navy);margin-bottom:3px}
 .rest-tip-content .rtc-text{font-size:12.5px;color:var(--muted);line-height:1.55}
 
 /* ── DESAFIO 21 DIAS CARDS & CONTROLS ── */
 .video-storage-card{background:var(--card);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;box-shadow:var(--shadow);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px}
 .vsc-left{display:flex;align-items:center;gap:12px;min-width:0}
 .vsc-icon{width:42px;height:42px;border-radius:12px;background:rgba(240,90,40,.1);color:var(--orange);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.vsc-title{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px}
-.vsc-status{font-size:11.5px;font-weight:600;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vsc-title{font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px}
+.vsc-status{font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .vsc-status.ready{color:var(--green)}
 .vsc-status.warn{color:#D97706}
-.vsc-btn{background:var(--navy);color:#fff;border:none;padding:8px 14px;border-radius:10px;font-family:'Sora',sans-serif;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;flex-shrink:0}
+.vsc-btn{background:var(--navy);color:#fff;border:none;padding:8px 14px;border-radius:10px;font-family:var(--font-display);font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;flex-shrink:0}
 .vsc-btn:active{transform:scale(.95)}
 
 /* FILTER CHIPS */
 .filter-bar{display:flex;gap:6px;overflow-x:auto;padding-bottom:10px;margin-bottom:12px;scrollbar-width:none}
 .filter-bar::-webkit-scrollbar{display:none}
-.filter-chip{padding:6px 14px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);color:var(--muted);font-family:'Sora',sans-serif;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s}
+.filter-chip{padding:6px 14px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);color:var(--muted);font-family:var(--font-display);font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s}
 .filter-chip.active{background:var(--navy);border-color:var(--navy);color:#fff}
 .filter-chip:active{transform:scale(.95)}
 
@@ -217,8 +221,8 @@ html,body{height:100%;background:var(--bg);font-family:'Nunito Sans',sans-serif;
 .d21-card.done{border-color:var(--green);background:#F8FDFB}
 .d21-card-top{display:flex;align-items:flex-start;gap:12px;padding:15px 15px 10px}
 .d21-badge{flex-shrink:0;width:44px;height:44px;border-radius:13px;background:var(--navy);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:all .2s}
-.d21-badge .db-d{font-size:8px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.5)}
-.d21-badge .db-num{font-family:'Sora',sans-serif;font-size:18px;font-weight:800;line-height:1}
+.d21-badge .db-d{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.d21-badge .db-num{font-family:var(--font-display);font-size:18px;font-weight:800;line-height:1}
 .d21-card.phase-1 .d21-badge{background:linear-gradient(135deg,#3B82F6 0%,#1D4ED8 100%)}
 .d21-card.phase-2 .d21-badge{background:linear-gradient(135deg,#F59E0B 0%,#D97706 100%)}
 .d21-card.phase-3 .d21-badge{background:linear-gradient(135deg,#EF4444 0%,#B91C1C 100%)}
@@ -227,18 +231,18 @@ html,body{height:100%;background:var(--bg);font-family:'Nunito Sans',sans-serif;
 .d21-card.done .d21-badge .db-num{font-size:22px}
 
 .d21-info{flex:1;min-width:0}
-.d21-title{font-family:'Sora',sans-serif;font-size:14.5px;font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:5px}
+.d21-title{font-family:var(--font-display);font-size:14.5px;font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:5px}
 .d21-desc{font-size:12px;color:var(--muted);line-height:1.45;margin-bottom:8px}
 .d21-meta-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.d21-meta-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:7px;background:var(--bg);font-family:'Sora',sans-serif;font-size:10px;font-weight:700;color:var(--muted)}
-.d21-meta-chip.dur{color:var(--orange);background:rgba(240,90,40,.09)}
+.d21-meta-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:7px;background:var(--bg);font-family:var(--font-display);font-size:12px;font-weight:700;color:var(--muted)}
+.d21-meta-chip.dur{color:var(--orange-ink);background:rgba(240,90,40,.09)}
 .d21-meta-chip.phase{color:var(--purple);background:rgba(109,40,217,.08)}
 .d21-meta-chip.done-badge{color:var(--green);background:var(--green-bg);font-weight:800}
 
 .d21-actions{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 15px 14px;border-top:1px solid rgba(226,232,240,.6)}
-.btn-watch{flex:1;background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;border:none;padding:10px 14px;border-radius:12px;font-family:'Sora',sans-serif;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;transition:all .2s}
+.btn-watch{flex:1;background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;border:none;padding:10px 14px;border-radius:12px;font-family:var(--font-display);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;transition:all .2s}
 .btn-watch:active{transform:scale(.96)}
-.btn-toggle-done{background:var(--bg);border:1.5px solid var(--border);color:var(--muted);padding:10px 16px;border-radius:12px;font-family:'Sora',sans-serif;font-size:12px;font-weight:800;cursor:pointer;transition:all .2s;white-space:nowrap}
+.btn-toggle-done{background:var(--bg);border:1.5px solid var(--border);color:var(--muted);padding:10px 16px;border-radius:12px;font-family:var(--font-display);font-size:12px;font-weight:800;cursor:pointer;transition:all .2s;white-space:nowrap}
 .btn-toggle-done:active{transform:scale(.95)}
 .d21-card.done .btn-toggle-done{background:var(--green);border-color:var(--green);color:#fff}
 .btn-notes{background:none;border:none;color:var(--muted);padding:8px;font-size:16px;cursor:pointer;border-radius:8px}
@@ -246,7 +250,7 @@ html,body{height:100%;background:var(--bg);font-family:'Nunito Sans',sans-serif;
 /* NOTES CONTAINER */
 .d21-notes-wrap{padding:0 15px 14px;display:none;animation:fadeSlide .2s ease}
 .d21-notes-wrap.open{display:block}
-.d21-notes-input{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;font-family:'Nunito Sans',sans-serif;font-size:13px;color:var(--text);background:var(--bg);resize:vertical;min-height:54px;outline:none;transition:border-color .2s}
+.d21-notes-input{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;font-family:var(--font-body);font-size:13px;color:var(--text);background:var(--bg);resize:vertical;min-height:54px;outline:none;transition:border-color .2s}
 .d21-notes-input:focus{border-color:var(--navy);background:#fff}
 
 /* ── VIDEO PLAYER MODAL ── */
@@ -254,50 +258,50 @@ html,body{height:100%;background:var(--bg);font-family:'Nunito Sans',sans-serif;
 .v-modal.open{display:flex}
 .vm-card{background:#0B132B;border-radius:24px;width:100%;max-width:580px;overflow:hidden;box-shadow:0 12px 50px rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column}
 .vm-header{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.08)}
-.vm-title{font-family:'Sora',sans-serif;font-size:14px;font-weight:800;color:#fff}
-.vm-close{background:rgba(255,255,255,.12);border:none;color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:all .2s}
+.vm-title{font-family:var(--font-display);font-size:14px;font-weight:800;color:#fff}
+.vm-close{background:rgba(255,255,255,.12);border:none;color:#fff;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:all .2s}
 .vm-close:active{transform:scale(.9)}
 .vm-video-wrap{position:relative;background:#000;width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center}
 .vm-video{width:100%;height:100%;object-fit:contain;background:#000}
 .vm-error-alert{position:absolute;inset:0;background:rgba(15,23,42,.92);display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;gap:10px}
 .vm-error-alert.show{display:flex}
 .vm-error-text{font-size:13px;color:rgba(255,255,255,.8);line-height:1.5;max-width:320px}
-.vm-file-btn{background:var(--orange);color:#fff;border:none;padding:10px 18px;border-radius:12px;font-family:'Sora',sans-serif;font-size:12px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:6px}
+.vm-file-btn{background:var(--orange-ink);color:#fff;border:none;padding:10px 18px;border-radius:12px;font-family:var(--font-display);font-size:12px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:6px}
 .vm-controls-bar{padding:12px 16px;background:#0D1736;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
-.vm-speed-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;padding:6px 10px;border-radius:8px;font-family:'Sora',sans-serif;font-size:11px;font-weight:800;cursor:pointer}
+.vm-speed-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;padding:6px 10px;border-radius:8px;font-family:var(--font-display);font-size:12px;font-weight:800;cursor:pointer}
 .vm-skip-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;padding:6px 10px;border-radius:8px;font-size:12px;cursor:pointer}
-.vm-done-btn{background:var(--green);color:#fff;border:none;padding:10px 16px;border-radius:12px;font-family:'Sora',sans-serif;font-size:12px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;margin-left:auto}
+.vm-done-btn{background:var(--green);color:#fff;border:none;padding:10px 16px;border-radius:12px;font-family:var(--font-display);font-size:12px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;margin-left:auto}
 .vm-done-btn:active{transform:scale(.95)}
 
 /* ── FOLDER SETUP MODAL ── */
 .folder-sheet{background:#0F1F45;border-radius:24px 24px 0 0;padding:24px 22px 36px;width:100%;max-width:540px;color:#fff;max-height:85vh;overflow-y:auto;box-shadow:0 -10px 40px rgba(0,0,0,.5)}
-.fs-title{font-family:'Sora',sans-serif;font-size:17px;font-weight:800;margin-bottom:6px}
+.fs-title{font-family:var(--font-display);font-size:17px;font-weight:800;margin-bottom:6px}
 .fs-sub{font-size:12.5px;color:rgba(255,255,255,.65);line-height:1.5;margin-bottom:20px}
 .fs-box{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px;margin-bottom:14px}
-.fs-box-title{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:var(--orange);margin-bottom:4px}
+.fs-box-title{font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--orange);margin-bottom:4px}
 .fs-box-text{font-size:12px;color:rgba(255,255,255,.7);line-height:1.5;margin-bottom:12px}
-.fs-action-btn{width:100%;background:var(--orange);color:#fff;border:none;padding:12px;border-radius:12px;font-family:'Sora',sans-serif;font-size:13px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s}
+.fs-action-btn{width:100%;background:var(--orange-ink);color:#fff;border:none;padding:12px;border-radius:12px;font-family:var(--font-display);font-size:13px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s}
 .fs-action-btn:active{transform:scale(.96)}
 .fs-action-btn.secondary{background:rgba(255,255,255,.12);color:#fff}
 .fs-input-path{width:100%;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:10px 12px;color:#fff;font-family:monospace;font-size:12px;margin-bottom:10px;outline:none}
 .fs-list{max-height:150px;overflow-y:auto;border-radius:10px;background:rgba(0,0,0,.25);padding:8px 10px;margin-top:10px}
-.fs-item{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:11px}
+.fs-item{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:12px}
 .fs-item:last-child{border-bottom:none}
 .fs-item-ok{color:#34D399;font-weight:700}
-.fs-item-miss{color:rgba(255,255,255,.35)}
+.fs-item-miss{color:rgba(255,255,255,.7)}
 
 /* ── DIETA & PROTOCOLOS ── */
 .diet-hero-summary{background:var(--card);border-radius:var(--radius);padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
-.dhs-title{font-family:'Sora',sans-serif;font-size:14px;font-weight:800;color:var(--navy);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.dhs-title{font-family:var(--font-display);font-size:14px;font-weight:800;color:var(--navy);margin-bottom:8px;display:flex;align-items:center;gap:6px}
 .dhs-text{font-size:13px;color:var(--text);line-height:1.6}
 .meal-card{background:var(--card);border-radius:var(--radius);padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
 .meal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.meal-title{font-family:'Sora',sans-serif;font-size:15px;font-weight:800;color:var(--navy);display:flex;align-items:center;gap:8px}
-.meal-badge{padding:3px 8px;border-radius:6px;background:rgba(5,150,105,.1);color:var(--green);font-size:10px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
+.meal-title{font-family:var(--font-display);font-size:15px;font-weight:800;color:var(--navy);display:flex;align-items:center;gap:8px}
+.meal-badge{padding:3px 8px;border-radius:6px;background:rgba(5,150,105,.1);color:var(--green);font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
 .meal-section{margin-bottom:10px}
-.meal-section-title{font-family:'Sora',sans-serif;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:4px}
+.meal-section-title{font-family:var(--font-display);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:4px}
 .meal-main-box{background:var(--bg);border-radius:12px;padding:10px 12px;font-size:13px;line-height:1.55;color:var(--navy);font-weight:600}
-.sub-toggle{width:100%;background:none;border:none;border-top:1px dashed var(--border);padding:8px 0 0;margin-top:8px;display:flex;align-items:center;justify-content:space-between;font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--orange);cursor:pointer}
+.sub-toggle{width:100%;background:none;border:none;border-top:1px dashed var(--border);padding:8px 0 0;margin-top:8px;display:flex;align-items:center;justify-content:space-between;font-family:var(--font-display);font-size:12px;font-weight:700;color:var(--orange-ink);cursor:pointer}
 .sub-content{display:none;padding-top:8px;animation:fadeSlide .2s ease}
 .sub-content.open{display:block}
 .sub-item{font-size:12px;color:var(--muted);padding:4px 0;line-height:1.45;border-bottom:1px solid #F1F5F9}
@@ -307,10 +311,10 @@ html,body{height:100%;background:var(--bg);font-family:'Nunito Sans',sans-serif;
 .timer-fab{position:fixed;bottom:calc(24px + env(safe-area-inset-bottom));right:20px;width:62px;height:62px;background:var(--navy);border:3px solid var(--orange);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;z-index:200;transition:all .2s;box-shadow:0 4px 24px rgba(15,31,69,.45)}
 .timer-fab:active{transform:scale(.93)}
 .timer-fab .t-icon{font-size:18px;line-height:1}
-.timer-fab .t-lbl{font-family:'Sora',sans-serif;font-size:8px;font-weight:800;color:var(--orange);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.timer-fab .t-lbl{font-family:var(--font-display);font-size:10px;font-weight:800;color:var(--orange);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
 .timer-fab.running{border-color:#22C55E;animation:ring-pulse 1.4s infinite}
 .timer-fab.running .t-lbl{color:#22C55E}
-.timer-fab .t-countdown{font-family:'Sora',sans-serif;font-size:16px;font-weight:800;color:#22C55E;line-height:1}
+.timer-fab .t-countdown{font-family:var(--font-display);font-size:16px;font-weight:800;color:#22C55E;line-height:1}
 @keyframes ring-pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.45)}70%{box-shadow:0 0 0 14px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
 
 /* ── TIMER OVERLAY ── */
@@ -319,26 +323,26 @@ html,body{height:100%;background:var(--bg);font-family:'Nunito Sans',sans-serif;
 .timer-sheet{background:var(--navy);border-radius:28px 28px 0 0;padding:24px 28px 36px;width:100%;max-width:500px;animation:slideUp .3s cubic-bezier(.34,1.56,.64,1)}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 .sheet-pill{width:40px;height:4px;border-radius:2px;background:rgba(255,255,255,.15);margin:0 auto 24px}
-.timer-label{font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,.35);text-align:center;text-transform:uppercase;letter-spacing:2.5px;margin-bottom:24px}
+.timer-label{font-family:var(--font-display);font-size:12px;font-weight:700;color:rgba(255,255,255,.7);text-align:center;text-transform:uppercase;letter-spacing:2.5px;margin-bottom:24px}
 .t-circle{width:180px;height:180px;margin:0 auto 26px;position:relative}
 .t-svg{width:100%;height:100%;transform:rotate(-90deg)}
 .t-track{fill:none;stroke:rgba(255,255,255,.08);stroke-width:9}
 .t-prog{fill:none;stroke:var(--orange);stroke-width:9;stroke-linecap:round;stroke-dasharray:502.65;stroke-dashoffset:0;transition:stroke-dashoffset .9s linear,stroke .4s}
 .t-prog.low{stroke:#EF4444}
 .t-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.t-seconds{font-family:'Sora',sans-serif;font-size:54px;font-weight:800;color:#fff;line-height:1}
-.t-unit{font-size:11px;font-weight:700;color:rgba(255,255,255,.3);letter-spacing:2px;margin-top:2px}
+.t-seconds{font-family:var(--font-display);font-size:54px;font-weight:800;color:#fff;line-height:1}
+.t-unit{font-size:12px;font-weight:700;color:rgba(255,255,255,.7);letter-spacing:2px;margin-top:2px}
 .t-phrase{font-size:13px;font-weight:700;color:var(--orange);margin-top:6px;text-align:center;min-height:18px;transition:all .3s}
 .t-phrase.go{color:#22C55E;font-size:16px;animation:pulse-text .6s ease-in-out 2}
 @keyframes pulse-text{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 .t-btns{display:flex;gap:10px;margin-top:4px}
-.t-btn{flex:1;border:none;padding:13px;border-radius:14px;font-family:'Sora',sans-serif;font-size:14px;font-weight:800;cursor:pointer;transition:all .2s}
+.t-btn{flex:1;border:none;padding:13px;border-radius:14px;font-family:var(--font-display);font-size:14px;font-weight:800;cursor:pointer;transition:all .2s}
 .t-btn:active{transform:scale(.95)}
-.t-btn-start{background:var(--orange);color:#fff}
+.t-btn-start{background:var(--orange-ink);color:#fff}
 .t-btn-reset{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);flex:none;width:52px;display:flex;align-items:center;justify-content:center;font-size:18px}
 .t-btn-close{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);flex:none;width:52px;display:flex;align-items:center;justify-content:center;font-size:18px}
 .t-dur-row{display:flex;gap:8px;justify-content:center;margin-bottom:20px}
-.t-dur-btn{flex:1;max-width:100px;padding:9px 6px;border-radius:12px;border:2px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:rgba(255,255,255,.45);font-family:'Sora',sans-serif;font-size:14px;font-weight:800;cursor:pointer;transition:all .2s;letter-spacing:.3px}
+.t-dur-btn{flex:1;max-width:100px;padding:9px 6px;border-radius:12px;border:2px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:rgba(255,255,255,.78);font-family:var(--font-display);font-size:14px;font-weight:800;cursor:pointer;transition:all .2s;letter-spacing:.3px}
 .t-dur-btn.active{border-color:var(--orange);background:rgba(240,90,40,.18);color:var(--orange)}
 .t-dur-btn:active{transform:scale(.94)}
 
@@ -355,8 +359,99 @@ html,body{height:100%;background:var(--bg);font-family:'Nunito Sans',sans-serif;
 /* ── PWA INSTALL BANNER ── */
 .install-banner{background:linear-gradient(90deg,var(--navy) 0%,var(--navy2) 100%);padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:2px solid rgba(240,90,40,.3)}
 .install-banner-text{font-size:12px;color:rgba(255,255,255,.75);font-weight:600;flex:1}
-.install-banner-btn{background:var(--orange);color:#fff;border:none;padding:6px 14px;border-radius:8px;font-family:'Sora',sans-serif;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap}
-.install-banner-close{color:rgba(255,255,255,.4);background:none;border:none;font-size:18px;cursor:pointer;padding:0 2px}
+.install-banner-btn{background:var(--orange-ink);color:#fff;border:none;padding:6px 14px;border-radius:8px;font-family:var(--font-display);font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.install-banner-close{color:rgba(255,255,255,.7);background:none;border:none;font-size:18px;cursor:pointer;padding:0 2px}
+
+/* ── ACESSIBILIDADE GLOBAL ── */
+:focus-visible{outline:3px solid var(--orange-ink);outline-offset:2px}
+.weight-input:focus-visible{outline:none}
+button,select{min-height:44px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+
+/* ── IDENTIFICAÇÃO E LOCALIZAÇÃO ── */
+.mach-look{margin:-2px 14px 8px;padding:9px 12px;background:rgba(29,78,216,.06);border-left:3px solid var(--blue);border-radius:0 10px 10px 0;font-size:12.5px;line-height:1.55;color:var(--text)}
+.mach-look-lbl{display:block;font-family:var(--font-display);font-size:12px;font-weight:800;color:var(--blue);margin-bottom:2px}
+.mach-note{display:block;margin:0 14px 8px}
+.mach-note-lbl{display:block;font-family:var(--font-display);font-size:12px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.mach-note-input{width:100%;min-height:44px;border:1.5px dashed var(--border);border-radius:11px;background:rgba(15,31,69,.03);padding:0 12px;font-family:var(--font-body);font-size:13px;color:var(--text);outline:none}
+.mach-note-input:focus{border-style:solid;border-color:var(--orange);background:#fff;box-shadow:0 0 0 3px rgba(240,90,40,.12)}
+
+/* ── COMO AJUSTAR A MÁQUINA ── */
+.mach-setup{margin:-2px 14px 10px;padding:9px 12px;background:rgba(5,150,105,.07);border-left:3px solid var(--green);border-radius:0 10px 10px 0;font-size:12.5px;line-height:1.55;color:var(--text)}
+.mach-setup-lbl{display:block;font-family:var(--font-display);font-size:12px;font-weight:800;color:var(--green);margin-bottom:2px}
+
+/* ── CARGA: HISTÓRICO, REPS E PASSO ── */
+.load-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 14px 8px;font-size:12px;font-weight:600;color:var(--muted)}
+.load-meta strong{color:var(--navy);font-family:var(--font-display);font-weight:800}
+.spark{width:64px;height:22px;flex-shrink:0;color:var(--green)}
+.load-tools{display:flex;align-items:center;gap:8px;padding:0 14px 10px}
+.reps-field{display:flex;align-items:center;gap:8px;flex:1;font-family:var(--font-display);font-size:12px;font-weight:700;color:var(--navy)}
+.reps-input{width:100%;min-width:0;min-height:44px;border:1.5px solid var(--border);border-radius:11px;background:rgba(15,31,69,.04);padding:0 10px;font-family:var(--font-display);font-size:14px;font-weight:800;color:var(--orange-ink);text-align:center;outline:none}
+.reps-input:focus{border-color:var(--orange);background:#fff;box-shadow:0 0 0 3px rgba(240,90,40,.12)}
+.load-step{min-width:56px;border:1.5px solid var(--border);background:var(--card);color:var(--navy);border-radius:11px;font-family:var(--font-display);font-size:14px;font-weight:800;cursor:pointer;padding:0 12px;transition:transform .15s,background .15s}
+.load-step.plus{background:var(--navy);border-color:var(--navy);color:#fff}
+.load-step:active{transform:scale(.94)}
+
+/* ── SÉRIES ── */
+.sets-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 14px 10px}
+.sets-label{font-family:var(--font-display);font-size:12px;font-weight:700;color:var(--navy)}
+.sets-label small{color:var(--muted);font-weight:700;margin-left:4px}
+.set-chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.set-chip{width:44px;height:44px;border-radius:50%;border:2px solid var(--border);background:var(--card);color:var(--muted);font-family:var(--font-display);font-size:14px;font-weight:800;cursor:pointer;transition:transform .15s,background .2s,border-color .2s}
+.set-chip.on{background:var(--green);border-color:var(--green);color:#fff}
+.set-chip:active{transform:scale(.9)}
+
+/* ── MODO FOCO ── */
+.focus-toggle{border:1.5px solid var(--border);background:var(--card);color:var(--navy);border-radius:20px;padding:0 14px;font-family:var(--font-display);font-size:12px;font-weight:700;cursor:pointer;text-transform:none;letter-spacing:0}
+.focus-toggle[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.focus-nav{position:fixed;left:0;right:0;bottom:0;z-index:150;display:flex;align-items:center;gap:10px;padding:10px 96px calc(10px + env(safe-area-inset-bottom)) 16px;background:rgba(255,255,255,.96);border-top:1.5px solid var(--border);box-shadow:0 -4px 20px rgba(15,31,69,.08)}
+.focus-nav[hidden]{display:none}
+.fn-btn{flex:1;border:1.5px solid var(--border);background:var(--card);color:var(--navy);border-radius:12px;font-family:var(--font-display);font-size:13px;font-weight:800;cursor:pointer;transition:transform .15s}
+.fn-btn.primary{background:var(--orange-ink);border-color:var(--orange-ink);color:#fff}
+.fn-btn:disabled{opacity:.4;cursor:not-allowed}
+.fn-btn:active:not(:disabled){transform:scale(.95)}
+.fn-count{font-family:var(--font-display);font-size:13px;font-weight:800;color:var(--navy);min-width:40px;text-align:center}
+
+/* ── NOTA DE SOBRECARGA ── */
+.overload-note{background:rgba(240,90,40,.07);border:1.5px solid rgba(240,90,40,.2);border-radius:14px;padding:14px 16px;margin-top:4px}
+.overload-title{font-family:var(--font-display);font-size:12px;font-weight:800;color:var(--orange-ink);letter-spacing:.5px;margin-bottom:4px}
+.overload-text{font-size:12.5px;color:var(--muted);line-height:1.6}
+
+/* ── RESUMO DO TREINO ── */
+.summary-btn{width:100%;margin-bottom:16px;border:none;border-radius:14px;background:var(--green);color:#fff;font-family:var(--font-display);font-size:14px;font-weight:800;cursor:pointer}
+.summary-btn:active{transform:scale(.97)}
+.summary-card{background:var(--navy);border-radius:24px;width:100%;max-width:460px;max-height:88vh;overflow-y:auto;padding:24px;color:#fff;box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.1)}
+.sum-hero{font-size:42px;text-align:center}
+.sum-title{font-family:var(--font-display);font-size:20px;font-weight:800;text-align:center;margin:4px 0}
+.sum-sub{font-size:13px;color:rgba(255,255,255,.78);text-align:center;margin-bottom:16px;line-height:1.5}
+.sum-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.sum-row{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.07);border-radius:12px;padding:10px 12px}
+.mach-code.mini{min-width:40px;font-size:12px;padding:5px 6px;background:rgba(255,255,255,.14)}
+.sum-info{flex:1;min-width:0}
+.sum-name{font-family:var(--font-display);font-size:12px;font-weight:700;line-height:1.3}
+.sum-load{font-size:12px;color:rgba(255,255,255,.78);margin-top:2px}
+.sum-delta{font-family:var(--font-display);font-size:12px;font-weight:800;color:rgba(255,255,255,.78);white-space:nowrap}
+.sum-delta.up{color:#34D399}
+.sum-delta.down{color:#FCA5A5}
+
+/* ── ARSENAL ── */
+.arsenal-search{width:100%;min-height:48px;border:1.5px solid var(--border);border-radius:14px;background:var(--card);padding:0 16px;margin-bottom:12px;font-family:var(--font-body);font-size:15px;color:var(--text);outline:none}
+.arsenal-search:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(240,90,40,.12)}
+.ars-card{display:flex;align-items:flex-start;gap:12px;background:var(--card);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:10px;box-shadow:var(--shadow)}
+.ars-info{flex:1;min-width:0}
+.ars-line{font-size:12.5px;color:var(--text);line-height:1.5;margin-top:4px}
+.ars-line.muted{color:var(--muted)}
+.arsenal-empty{background:var(--card);border-radius:var(--radius-sm);padding:24px 16px;text-align:center;font-size:13px;color:var(--muted);line-height:1.5}
+
+/* ── TOASTS ── */
+.toast-host{position:fixed;top:calc(env(safe-area-inset-top) + 12px);left:16px;right:16px;z-index:500;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none}
+.toast{max-width:420px;width:100%;padding:12px 16px;border-radius:12px;background:var(--navy);color:#fff;font-size:13px;font-weight:700;line-height:1.4;box-shadow:var(--shadow-lg);animation:fadeIn .25s ease;border-left:4px solid var(--orange)}
+.toast.success{border-left-color:var(--green2)}
+.toast.error{background:#7F1D1D;border-left-color:#FCA5A5}
+.toast.out{opacity:0;transition:opacity .25s}
 </style>
 </head>
 <body>
@@ -384,17 +479,12 @@ html,body{height:100%;background:var(--bg);font-family:'Nunito Sans',sans-serif;
     </div>
 
     <!-- MODULE SWITCHER -->
-    <div class="module-nav">
-      <button class="mod-tab active" id="tabV10" onclick="switchModule('v10')">
-        <span>🏋️ Treino V10</span>
-      </button>
-      <button class="mod-tab" id="tabD21" onclick="switchModule('d21')">
-        <span>🔥 Desafio 21 Dias</span>
-      </button>
-      <button class="mod-tab" id="tabDiet" onclick="switchModule('diet')">
-        <span>🥗 Dieta & 40+</span>
-      </button>
-    </div>
+    <nav class="module-nav" aria-label="Módulos do app">
+      <button type="button" class="mod-tab active" id="tabV10" aria-pressed="true" onclick="switchModule('v10')"><span class="mt-ico" aria-hidden="true">🏋️</span><span class="mt-txt">Treino</span></button>
+      <button type="button" class="mod-tab" id="tabD21" aria-pressed="false" onclick="switchModule('d21')"><span class="mt-ico" aria-hidden="true">🔥</span><span class="mt-txt">Desafio 21</span></button>
+      <button type="button" class="mod-tab" id="tabDiet" aria-pressed="false" onclick="switchModule('diet')"><span class="mt-ico" aria-hidden="true">🥗</span><span class="mt-txt">Dieta 40+</span></button>
+      <button type="button" class="mod-tab" id="tabArsenal" aria-pressed="false" onclick="switchModule('arsenal')"><span class="mt-ico" aria-hidden="true">🧭</span><span class="mt-txt">Arsenal</span></button>
+    </nav>
 
     <!-- V10 DAY TABS -->
     <div class="day-tabs" id="dayTabs"></div>
@@ -499,9 +589,9 @@ html,body{height:100%;background:var(--bg);font-family:'Nunito Sans',sans-serif;
       <div class="fs-box-title">OPÇÃO 3: Caminho Relativo (Offline / Arquivo Local)</div>
       <div class="fs-box-text">Se você usa o HTML e os vídeos juntos na mesma pasta (ex: <code>\Treinos</code>):</div>
       <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap">
-        <button type="button" class="fs-action-btn secondary" style="padding:6px 10px;font-size:11px;flex:1" onclick="setBasePathPreset('./')">./ (Mesma pasta)</button>
-        <button type="button" class="fs-action-btn secondary" style="padding:6px 10px;font-size:11px;flex:1" onclick="setBasePathPreset('./videos/')">./videos/</button>
-        <button type="button" class="fs-action-btn secondary" style="padding:6px 10px;font-size:11px;flex:1" onclick="setBasePathPreset('../videos/')">../videos/</button>
+        <button type="button" class="fs-action-btn secondary" style="padding:6px 10px;font-size:12px;flex:1" onclick="setBasePathPreset('./')">./ (Mesma pasta)</button>
+        <button type="button" class="fs-action-btn secondary" style="padding:6px 10px;font-size:12px;flex:1" onclick="setBasePathPreset('./videos/')">./videos/</button>
+        <button type="button" class="fs-action-btn secondary" style="padding:6px 10px;font-size:12px;flex:1" onclick="setBasePathPreset('../videos/')">../videos/</button>
       </div>
       <input type="text" class="fs-input-path" id="cfgBasePath" value="../videos/" placeholder="../videos/">
       <button class="fs-action-btn secondary" style="padding:8px" onclick="saveBasePathConfig()">Salvar Caminho Relativo</button>
@@ -525,7 +615,7 @@ html,body{height:100%;background:var(--bg);font-family:'Nunito Sans',sans-serif;
 <div class="backup-modal" id="backupModal">
   <div class="backup-card">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-      <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:800">⚙️ Dados & Backup</div>
+      <div style="font-family:var(--font-display);font-size:16px;font-weight:800">⚙️ Dados & Backup</div>
       <button class="vm-close" onclick="closeBackupModal()">✕</button>
     </div>
     <div style="font-size:12.5px;color:rgba(255,255,255,.7);line-height:1.5;margin-bottom:18px">
@@ -542,10 +632,10 @@ html,body{height:100%;background:var(--bg);font-family:'Nunito Sans',sans-serif;
       <input type="file" id="importDataInput" accept=".json" style="display:none" onchange="importDataJson(this.files)">
       
       <div style="border-top:1px solid rgba(255,255,255,.12);padding-top:10px;margin-top:4px">
-        <div style="font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:var(--orange);margin-bottom:4px">
+        <div style="font-family:var(--font-display);font-size:12px;font-weight:700;color:var(--orange);margin-bottom:4px">
           🔄 Atualizar Arquivo Local
         </div>
-        <div style="font-size:11px;color:rgba(255,255,255,.6);line-height:1.4;margin-bottom:8px">
+        <div style="font-size:12px;color:rgba(255,255,255,.82);line-height:1.4;margin-bottom:8px">
           Baixe a versão mais recente direto do GitHub para atualizar seu arquivo local em 1 toque:
         </div>
         <button class="fs-action-btn secondary" onclick="downloadUpdatedAppHtml()">
@@ -557,6 +647,24 @@ html,body{height:100%;background:var(--bg);font-family:'Nunito Sans',sans-serif;
         🗑️ Redefinir Todos os Dados
       </button>
     </div>
+  </div>
+</div>
+
+<!-- ── MODO FOCO: NAVEGAÇÃO ── -->
+<nav class="focus-nav" id="focusNav" aria-label="Navegação entre exercícios" hidden>
+  <button type="button" class="fn-btn" id="fnPrev" onclick="focusStep(-1)">◀ Anterior</button>
+  <div class="fn-count" id="fnCount" aria-live="polite">1/7</div>
+  <button type="button" class="fn-btn primary" id="fnNext" onclick="focusStep(1)">Próximo ▶</button>
+</nav>
+
+<!-- ── TOASTS ── -->
+<div class="toast-host" id="toastHost" role="status" aria-live="polite"></div>
+
+<!-- ── RESUMO DO TREINO ── -->
+<div class="backup-modal" id="summaryModal" role="dialog" aria-modal="true" aria-labelledby="summaryTitle" onclick="if(event.target===this) closeSummary()">
+  <div class="summary-card">
+    <div id="summaryBody"></div>
+    <button type="button" class="fs-action-btn" id="summaryClose" onclick="closeSummary()">Fechar</button>
   </div>
 </div>
 
@@ -911,12 +1019,162 @@ const MACHINES = {
 };
 const WEIGHT_UNITS = ['kg','lbs','kg/lado','placas',''];
 const WEIGHT_UNIT_LABEL = {'':'—'};
+const LOAD_STEP = {'kg':1.25, 'kg/lado':1.25, 'lbs':5, 'placas':1, '':1.25};
+const MACHINE_GROUPS = {
+  'Costas': ['#01','#02','#03','#04','#05','#06','#07','#28'],
+  'Peito':  ['#08','#09','#11','#29','#30'],
+  'Ombros': ['#10','#12','#18','#19','#20'],
+  'Braços': ['#22','#23','#24','#25','#26','#27'],
+  'Pernas': ['#13','#14','#15','#16','#17','#21']
+};
+// Como se posicionar e regular cada máquina (exibido sob o nome da máquina)
+const MACHINE_SETUP = {
+  '#01': 'Regule o apoio peitoral para as manoplas ficarem na altura do peito com os braços estendidos. Inicie com as manoplas giratórias alongadas e rotacione durante a puxada.',
+  '#02': 'Ajuste o banco para o peito encostar no apoio, braços cruzados no topo. Pés firmes no chão; puxe abrindo em arco, cotovelos para baixo.',
+  '#03': 'Regule o assento para as alças ficarem na linha do esterno. Peito colado no apoio, braços estendidos no início; puxe os cotovelos rente ao corpo.',
+  '#04': 'Ajuste o assento para as coxas ficarem presas sob o apoio. Pegada aberta; incline levemente o tronco e puxe a barra à altura do peito.',
+  '#05': 'Ajuste assento e apoio de coxas para ficar firme sem levantar. Puxe os cotovelos fechados à frente do corpo, sem balançar o tronco.',
+  '#06': 'Regule o assento para as alças ficarem na altura do peito/ombros. Peito no apoio; puxe os cotovelos para trás e para baixo, sem encolher os ombros.',
+  '#07': 'Ajuste o assento para as alças ficarem na altura da cintura. Peito no apoio, cotovelos rente ao tronco; puxe deprimindo as escápulas.',
+  '#08': 'Ajuste o assento para as alças ficarem na altura do esterno. Costas coladas, escápulas retraídas e pés firmes; empurre sem travar os cotovelos.',
+  '#09': 'Posicione o banco para a barra descer à altura do peito (reto ou inclinado). Escápulas retraídas; destrave a trava e use os trilhos independentes.',
+  '#10': 'Regule o assento para as alças ficarem na altura dos ombros. Costas apoiadas no encosto inclinado; empurre sem encolher e sem travar os cotovelos.',
+  '#11': 'Ajuste o assento para as alças ficarem na linha do peito inferior. Costas coladas, escápulas retraídas; empurre em arco descendente.',
+  '#12': 'Em pé: cotovelos nas almofadas e eleve até a linha dos ombros. Inclinado (posterior): peito no apoio frontal e abra os braços para trás.',
+  '#13': 'Ajuste o encosto para os joelhos ficarem a ~90° na saída. Pés na largura dos ombros (baixos = quadríceps, altos = glúteos); não trave os joelhos.',
+  '#14': 'Regule o encosto para o joelho alinhar ao eixo da máquina e o rolo ficar na canela, acima do tornozelo. Estenda até ~90% sem travar.',
+  '#15': 'Ajuste encosto e rolo para o eixo alinhar ao joelho, com a coxa firme no apoio. Rolo logo acima do calcanhar; flexione com controle.',
+  '#16': 'Deite com o joelho alinhado ao eixo e o rolo logo acima do calcanhar. Quadril colado ao banco; flexione sem levantá-lo.',
+  '#17': 'Ajuste o ângulo de partida das almofadas e sente com a coluna encostada. Movimento controlado, sem impulso do tronco.',
+  '#18': 'Ajuste o assento para as alças ficarem na linha dos ombros. Peito no apoio, braços quase estendidos; abra para trás unindo as escápulas.',
+  '#19': 'Regule o assento para as alças ficarem na altura dos ombros. Costas coladas; empurre sem encolher os ombros e sem travar os cotovelos.',
+  '#20': 'Ajuste o assento para as alças ficarem na altura dos ombros, tronco a ~90°. Costas no encosto; empurre acima da cabeça sem arquear a lombar.',
+  '#21': 'Ajuste o apoio para o quadril ficar livre acima da almofada, com tornozelos presos. Desça com a coluna neutra e suba até alinhar o corpo, sem hiperestender.',
+  '#22': 'Regule o assento para a axila encostar no topo do apoio, cotovelos totalmente apoiados. Alongue quase até estender e suba sem tirar o cotovelo.',
+  '#23': 'Regule o assento para a axila encostar no apoio e os cotovelos ficarem alinhados ao eixo. Cotovelos fixos; suba e desça sem balançar.',
+  '#24': 'Ajuste o assento para os cotovelos ficarem sobre as almofadas laterais, costas encostadas. Suba sem tirar o cotovelo do apoio.',
+  '#25': 'Ajuste assento e encosto para os cotovelos apontarem para cima, alinhados ao eixo. Costas apoiadas; desça atrás da cabeça sem pressionar o pescoço.',
+  '#26': 'Regule o assento para os cotovelos ficarem sobre a almofada, alinhados ao eixo. Estenda até o fim e retorne sem deixar o peso bater.',
+  '#27': 'Ajuste o assento para as alças ficarem na altura da cintura. Costas coladas e ombros baixos; empurre para baixo até estender os cotovelos.',
+  '#28': 'Ajuste o assento para as alças ficarem na linha média do tórax. Peito no apoio, pegada neutra ou pronada; puxe os cotovelos para trás.',
+  '#29': 'Ajuste o assento para as alças ficarem na altura da parte alta do peito. Costas coladas, escápulas retraídas; empurre em direção ao queixo.',
+  '#30': 'Ajuste o assento para as alças ficarem na altura do peito. Costas coladas, cotovelos levemente flexionados; feche os braços sem encolher os ombros.'
+};
+const CLASSIC_SETUP = {
+  'Colchonete / Área de Funcional': 'Cotovelos abaixo dos ombros, corpo em linha reta da cabeça aos calcanhares. Contraia glúteos e abdômen; não deixe o quadril cair.',
+  'Crossover (Polia Alta cruzada)': 'Polias na posição alta, um passo à frente e leve inclinação do tronco. Cotovelos levemente flexionados; feche as mãos à frente do peito.',
+  'Polia Alta c/ corda': 'Fixe a corda na polia alta, cotovelos rente ao corpo, tronco levemente inclinado. Abra a corda no final e retorne com controle.',
+  'Polia Baixa c/ corda': 'Polia na posição mais baixa, em pé com cotovelos fixos ao lado do corpo. Pegada neutra (polegar para cima); suba sem balançar.',
+  'Crunch Machine': 'Ajuste o assento para o eixo alinhar ao quadril e apoie pés e braços. Curve o tronco, não o pescoço; expire na contração.',
+  'Polia Alta c/ corda (atrás da cabeça)': 'Polia alta, de costas para a máquina, cotovelos apontando para cima e fixos. Estenda os braços sem arquear a lombar.',
+  'Polia Alta (ajoelhado)': 'Ajoelhe-se de frente para a polia alta com a corda junto à cabeça. Flexione o tronco levando os cotovelos aos joelhos, sem puxar com os braços.',
+  'Polia Baixa (cabo)': 'Polia na posição mais baixa, em pé, cabo cruzando o corpo. Eleve o braço até a linha do ombro com cotovelo levemente flexionado.',
+  'Barra W (EZ) no Banco Scott': 'Ajuste o banco para a axila encostar no topo do apoio. Cotovelos totalmente apoiados; desça até quase estender sem soltar o peso.',
+  'Polia Alta c/ barra reta ou V-Bar': 'Barra na polia alta, cotovelos fixos ao lado do corpo, tronco levemente inclinado. Estenda até o fim e retorne até a linha do peito.',
+  "Captain's Chair / Paralelas": 'Antebraços nos apoios, costas coladas no encosto e ombros baixos. Suba as pernas com controle, sem balanço, mantendo a lombar apoiada.',
+  'Banco Declinado (abdominal infra)': 'Ajuste a inclinação e prenda os pés no apoio, mãos segurando a parte de trás do banco. Suba os joelhos enrolando o quadril, sem impulso.'
+};
+// Como identificar fisicamente cada máquina (formato, posição do praticante, pegadores)
+const LOAD_LOOK = {
+  'Anilhas': 'Tem pinos nas laterais para encaixar anilhas.',
+  'Selectorizada': 'Tem coluna de placas empilhadas com pino seletor.',
+  'Peso corporal / Anilha': 'Usa o peso do corpo (anilha opcional).'
+};
+const MACHINE_LOOK = {
+  '#01': 'Sentado de frente para um apoio peitoral ajustável, com duas manoplas giratórias; a puxada é na diagonal.',
+  '#02': 'Sentado, com os braços cruzados no topo que abrem em arco circular na descida; pegadas pronada aberta e neutra fechada.',
+  '#03': 'Remada sentada com apoio no peito; alças horizontais à frente, movimento reto para trás.',
+  '#04': 'Puxada vertical com pegada aberta: alavanca de cima para baixo e assento com apoio de coxas.',
+  '#05': 'Puxada vertical com o pivô à frente; os cotovelos descem fechados à frente do corpo.',
+  '#06': 'Sentado com apoio no peito; alças em posição alta, puxando de cima para baixo e para trás.',
+  '#07': 'Apoio no peito com alças em posição baixa; o movimento sobe da altura do assento até a cintura.',
+  '#08': 'Supino sentado: alças na altura do peito, empurrando à frente na horizontal.',
+  '#09': 'Duas torres com trilhos guiados independentes (tipo Smith) e banco regulável no meio; as alças sobem na vertical.',
+  '#10': 'Banco levemente reclinado, alças acima dos ombros e pivô vindo da frente/baixo.',
+  '#11': 'Supino sentado com empurrada em arco descendente (peito inferior), sem ficar de cabeça para baixo.',
+  '#12': 'Máquina 2 em 1: alavancas para elevação lateral em pé e apoio frontal inferior para o crucifixo inverso curvado.',
+  '#13': 'Leg press horizontal sentado: encosto, plataforma de pés à frente e coluna de placas.',
+  '#14': 'Cadeira extensora: sentado, com rolo de apoio na frente das canelas.',
+  '#15': 'Cadeira flexora sentada: quadril fletido a 90° e rolo de apoio acima do calcanhar.',
+  '#16': 'Mesa flexora: você deita de bruços, com o rolo atrás dos tornozelos.',
+  '#17': 'Conjugada: sentado, com almofadas nas pernas que abrem (abdução) ou fecham (adução).',
+  '#18': 'Sentado de frente para o encosto, com apoio peitoral; as alças ficam atrás, na linha dos ombros (crucifixo inverso).',
+  '#19': 'Desenvolvimento sentado com alças longas acima da cabeça e coluna de placas.',
+  '#20': 'Tronco a ~90° com o pivô atrás do encosto; desenvolvimento vertical puro.',
+  '#21': 'Banco romano a 45°: banco inclinado com almofada para o quadril e rolo para prender os tornozelos.',
+  '#22': 'Banco Scott: almofada inclinada à frente para apoiar os cotovelos e alças de rosca.',
+  '#23': 'Rosca estilo Scott sentado, com almofada de apoio à frente e alavanca articulada.',
+  '#24': 'Sentado com as costas no encosto e os cotovelos em almofadas laterais (rosca com apoio lateral).',
+  '#25': 'Tríceps francês sentado com apoio nas costas; as alças ficam acima da cabeça.',
+  '#26': 'Almofada frontal estilo Scott para apoiar os cotovelos; extensão de tríceps.',
+  '#27': 'Mergulho sentado: alças ao lado do tronco que empurram para baixo.',
+  '#28': 'Remada sentada articulada com apoio peitoral e pegadas multi-ângulo (neutra/pronada) na linha média do tórax.',
+  '#29': 'Supino inclinado sentado: as alças sobem em diagonal, em movimento convergente.',
+  '#30': 'Voador (peck deck): sentado, com os braços abrindo e fechando à frente do peito.'
+};
+const CLASSIC_LOOK = {
+  'Colchonete / Área de Funcional': 'Colchonetes na área livre de funcional.',
+  'Crossover (Polia Alta cruzada)': 'Estrutura com duas polias ajustáveis (polias duplas), com cabos nas laterais.',
+  'Polia Alta c/ corda': 'Polia alta com cabo; troque o acessório pela corda.',
+  'Polia Baixa c/ corda': 'Polia ao nível do chão com cabo; acessório de corda.',
+  'Crunch Machine': 'Máquina de abdominal sentada, com apoios para pés/braços. Não consta no levantamento: confirme se a academia tem.',
+  'Polia Alta c/ corda (atrás da cabeça)': 'Polia alta com cabo; troque o acessório pela corda.',
+  'Polia Alta (ajoelhado)': 'Polia alta com corda; use um colchonete para ajoelhar.',
+  'Polia Baixa (cabo)': 'Polia baixa do crossover com alça simples.',
+  'Barra W (EZ) no Banco Scott': 'Barra W (curva) e banco Scott com almofada inclinada.',
+  'Polia Alta c/ barra reta ou V-Bar': 'Polia alta com barra reta ou V-Bar acoplada.',
+  "Captain's Chair / Paralelas": "Estrutura com apoios de antebraço, encosto vertical e paralelas (Captain's Chair).",
+  'Banco Declinado (abdominal infra)': 'Banco inclinado para baixo, com apoio para prender os pés.'
+};
+let machineNotes = JSON.parse(localStorage.getItem('v10_machine_notes') || '{}');
+function noteKey(m){ return m.classic ? m.name : m.code; }
+function escAttr(v){
+  return String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+}
+function saveMachineNote(exId, value){
+  const ex = findExercise(exId);
+  if(!ex) return;
+  const key = noteKey(activeMachine(ex));
+  if(value.trim()) machineNotes[key] = value.trim();
+  else delete machineNotes[key];
+  persist('v10_machine_notes', machineNotes);
+}
+const SETUP_FALLBACK = 'Regule assento e apoios para a articulação ficar alinhada ao eixo da máquina, com a coluna neutra. Comece leve e confirme a amplitude antes de carregar.';
+
+let setsState = JSON.parse(localStorage.getItem('v10_sets') || '{}');
+
+// ── Utilitários de persistência e formatação ──
+function persist(key, obj){
+  try {
+    localStorage.setItem(key, JSON.stringify(obj));
+    return true;
+  } catch(err){
+    console.error('Falha ao salvar ' + key + ':', err);
+    showToast('Não foi possível salvar. Verifique o espaço de armazenamento do navegador.', 'error');
+    return false;
+  }
+}
+function todayISO(){
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function fmtDateBR(iso){
+  const [, m, d] = iso.split('-');
+  return `${d}/${m}`;
+}
+function parseLoad(v){
+  const n = parseFloat(String(v).replace(',', '.'));
+  return Number.isFinite(n) ? n : null;
+}
+function fmtNum(n){
+  return String(Math.round(n * 100) / 100).replace('.', ',');
+}
 
 // Referência (string do catálogo, ex.: '#07') ou texto livre para equipamento clássico sem código
 function resolveMachine(ref){
   const m = MACHINES[ref];
-  if(m) return {code:ref, model:m.model, name:m.name, type:m.type, ref:m.ref || '', classic:false};
-  return {code:'—', model:'', name:ref, type:'Equipamento clássico (sem código)', ref:'', classic:true};
+  if(m) return {code:ref, model:m.model, name:m.name, type:m.type, ref:m.ref || '', setup:MACHINE_SETUP[ref] || SETUP_FALLBACK, look:((LOAD_LOOK[m.type] || '') + ' ' + (MACHINE_LOOK[ref] || '')).trim(), classic:false};
+  return {code:'—', model:'', name:ref, type:'Equipamento clássico (sem código)', ref:'', setup:CLASSIC_SETUP[ref] || SETUP_FALLBACK, look:CLASSIC_LOOK[ref] || '', classic:true};
 }
 function activeWhich(ex){
   return (ex.backup && machineChoice[ex.id] === 'backup') ? 'backup' : 'main';
@@ -932,9 +1190,9 @@ function getWeightEntry(ex){
   let e = weightState[weightKey(ex, m)];
   // Retrocompatibilidade: valor legado (texto livre por exercício) pertence à máquina titular
   if(!e && activeWhich(ex) === 'main' && typeof weightState[ex.id] === 'string' && weightState[ex.id]){
-    e = {v: weightState[ex.id], u: '', d: ''};
+    e = {v: weightState[ex.id], u: '', r: '', d: ''};
   }
-  return e || {v:'', u:'kg', d:''};
+  return e || {v:'', u:'kg', r:'', d:''};
 }
 function findExercise(exId){
   for(const k of Object.keys(workoutData)){
@@ -943,11 +1201,45 @@ function findExercise(exId){
   }
   return null;
 }
-function fmtWeightDate(iso){
-  if(!iso) return 'Sem registro nesta máquina';
-  const [y,m,d] = iso.split('-');
-  return `Último registro: ${d}/${m}/${y}`;
+function findDayKey(exId){
+  return Object.keys(workoutData).find(k => (workoutData[k].exercises || []).some(e => e.id === exId)) || null;
 }
+
+// ── Histórico de cargas por máquina ──
+function getHistory(ex){
+  const e = weightState[weightKey(ex, activeMachine(ex))];
+  if(!e || typeof e !== 'object') return [];
+  if(Array.isArray(e.h) && e.h.length) return e.h;
+  return (e.v && e.d) ? [{d:e.d, v:e.v, u:e.u, r:e.r || ''}] : [];
+}
+function prevSession(ex){
+  const iso = todayISO();
+  const prior = getHistory(ex).filter(x => x.d && x.d < iso);
+  return prior.length ? prior[prior.length - 1] : null;
+}
+function fmtLoad(x){
+  return `${x.v}${x.u ? ' ' + x.u : ''}${x.r ? ' × ' + x.r : ''}`;
+}
+function sparkSVG(hist, unit){
+  const pts = hist.filter(x => x.u === unit).map(x => parseLoad(x.v)).filter(n => n !== null).slice(-6);
+  if(pts.length < 2) return '';
+  const w = 64, h = 22, pad = 3;
+  const min = Math.min(...pts), max = Math.max(...pts), span = (max - min) || 1;
+  const xy = pts.map((n, i) => [pad + i * (w - 2 * pad) / (pts.length - 1), h - pad - ((n - min) / span) * (h - 2 * pad)]);
+  const line = xy.map(p => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ');
+  const last = xy[xy.length - 1];
+  const label = `Evolução das últimas ${pts.length} cargas: de ${fmtNum(pts[0])} para ${fmtNum(pts[pts.length - 1])}`;
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" role="img" aria-label="${label}"><polyline points="${line}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="2.6" fill="currentColor"/></svg>`;
+}
+function loadMetaHTML(ex){
+  const e = getWeightEntry(ex);
+  const prev = prevSession(ex);
+  const txt = prev
+    ? `Treino anterior: <strong>${fmtLoad(prev)}</strong> · ${fmtDateBR(prev.d)}`
+    : 'Sem treino anterior nesta máquina';
+  return `<span class="load-prev-txt">${txt}</span>${sparkSVG(getHistory(ex), e.u)}`;
+}
+
 function machineBlockHTML(ex){
   const which = activeWhich(ex);
   const m = activeMachine(ex);
@@ -955,6 +1247,7 @@ function machineBlockHTML(ex){
   const mainM = resolveMachine(ex.machine);
   const label = x => x.classic ? x.name : x.code;
   const title = (m.model ? m.model + ' · ' : '') + m.name;
+  const step = LOAD_STEP[e.u] !== undefined ? LOAD_STEP[e.u] : 1.25;
   const toggle = ex.backup ? `
     <div class="mach-toggle" role="group" aria-label="Escolher máquina do exercício">
       <button type="button" class="mach-opt${which === 'main' ? ' active' : ''}" aria-pressed="${which === 'main'}" onclick="setMachine('${ex.id}','main')">Titular · ${label(mainM)}</button>
@@ -970,26 +1263,41 @@ function machineBlockHTML(ex){
           <div class="mach-type">${m.type}</div>
         </div>
       </div>
+      ${m.look ? `<p class="mach-look"><span class="mach-look-lbl">👁️ Como identificar</span>${m.look}</p>` : ''}
+      <label class="mach-note">
+        <span class="mach-note-lbl">📍 Onde fica (sua anotação)</span>
+        <input type="text" class="mach-note-input" id="note_${ex.id}" maxlength="80" placeholder="Ex.: perto do espelho, fundo à esquerda" value="${escAttr(machineNotes[noteKey(m)] || '')}" oninput="saveMachineNote('${ex.id}', this.value)">
+      </label>
+      <p class="mach-setup"><span class="mach-setup-lbl">🔧 Como ajustar</span>${m.setup}</p>
       ${toggle}
+      <div class="load-meta" id="lmeta_${ex.id}">${loadMetaHTML(ex)}</div>
       <div class="card-weight-row">
         <div class="weight-pill">
-          <span class="weight-lbl">⚖️ Última Carga:</span>
-          <input type="text" inputmode="decimal" class="weight-input" id="weight_${ex.id}" aria-label="Última carga utilizada em ${ex.name}" placeholder="${m.ref ? 'Ref.: ' + m.ref : 'Ex: 65'}" value="${e.v}" oninput="saveWeight('${ex.id}')" onchange="saveWeight('${ex.id}')">
+          <span class="weight-lbl">⚖️ Carga</span>
+          <input type="text" inputmode="decimal" class="weight-input" id="weight_${ex.id}" aria-label="Carga utilizada em ${ex.name}" placeholder="${m.ref ? 'Ref.: ' + m.ref : 'Ex: 65'}" value="${e.v}" oninput="saveWeight('${ex.id}')" onchange="saveWeight('${ex.id}')">
           <select class="weight-unit" id="unit_${ex.id}" aria-label="Unidade da carga" onchange="saveWeight('${ex.id}')">${unitOpts}</select>
         </div>
       </div>
-      <div class="weight-date" id="wdate_${ex.id}">${fmtWeightDate(e.d)}</div>
+      <div class="load-tools">
+        <label class="reps-field">Reps
+          <input type="text" inputmode="numeric" class="reps-input" id="reps_${ex.id}" aria-label="Repetições feitas em ${ex.name}" placeholder="—" value="${e.r || ''}" oninput="saveWeight('${ex.id}')">
+        </label>
+        <button type="button" class="load-step" aria-label="Diminuir carga" onclick="stepLoad('${ex.id}',-1)">−</button>
+        <button type="button" class="load-step plus" id="plus_${ex.id}" aria-label="Aumentar carga" onclick="stepLoad('${ex.id}',1)">+${fmtNum(step)}</button>
+      </div>
     </div>`;
 }
 function setMachine(exId, which){
   machineChoice[exId] = which;
-  localStorage.setItem('v10_machine', JSON.stringify(machineChoice));
+  persist('v10_machine', machineChoice);
   const ex = findExercise(exId);
   const block = document.getElementById('mach_' + exId);
   if(!ex || !block) return;
   block.outerHTML = machineBlockHTML(ex);
   const tag = document.getElementById('mtag_' + exId);
   if(tag) tag.textContent = machineTagText(ex);
+  const btn = document.querySelector(`#mach_${exId} .mach-opt.active`);
+  if(btn) btn.focus();
 }
 function machineTagText(ex){
   const m = activeMachine(ex);
@@ -999,20 +1307,37 @@ function saveWeight(exId){
   const ex = findExercise(exId);
   const input = document.getElementById('weight_' + exId);
   const unit = document.getElementById('unit_' + exId);
+  const reps = document.getElementById('reps_' + exId);
   if(!ex || !input || !unit) return;
-  const m = activeMachine(ex);
-  const d = new Date();
-  const iso = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-  weightState[weightKey(ex, m)] = {v: input.value.trim(), u: unit.value, d: iso};
-  try {
-    localStorage.setItem('v10_weights', JSON.stringify(weightState));
-  } catch(err){
-    console.error('Falha ao salvar carga:', err);
-    alert('Não foi possível salvar a carga. Verifique o espaço de armazenamento do navegador.');
-    return;
-  }
-  const lbl = document.getElementById('wdate_' + exId);
-  if(lbl) lbl.textContent = fmtWeightDate(iso);
+  const iso = todayISO();
+  const v = input.value.trim(), u = unit.value, r = reps ? reps.value.trim() : '';
+  const hist = getHistory(ex).filter(x => x.d !== iso);
+  if(v) hist.push({d:iso, v, u, r});
+  weightState[weightKey(ex, activeMachine(ex))] = {v, u, r, d:iso, h:hist.slice(-6)};
+  if(!persist('v10_weights', weightState)) return;
+  const meta = document.getElementById('lmeta_' + exId);
+  if(meta) meta.innerHTML = loadMetaHTML(ex);
+  const plus = document.getElementById('plus_' + exId);
+  if(plus) plus.textContent = '+' + fmtNum(LOAD_STEP[u] !== undefined ? LOAD_STEP[u] : 1.25);
+}
+function stepLoad(exId, dir){
+  const input = document.getElementById('weight_' + exId);
+  const unit = document.getElementById('unit_' + exId);
+  if(!input || !unit) return;
+  const step = LOAD_STEP[unit.value] !== undefined ? LOAD_STEP[unit.value] : 1.25;
+  const cur = parseLoad(input.value);
+  input.value = fmtNum(Math.max(0, (cur === null ? 0 : cur) + dir * step));
+  saveWeight(exId);
+}
+
+// ── Séries concluídas (por dia; zera sozinho no dia seguinte) ──
+function getSetsDone(exId){
+  const s = setsState[exId];
+  return (s && s.d === todayISO()) ? s.n : 0;
+}
+function putSetsDone(exId, n){
+  setsState[exId] = {n, d: todayISO()};
+  persist('v10_sets', setsState);
 }
 
 // Video object URLs cache (in-memory)
@@ -1027,12 +1352,16 @@ let currentSpeedIndex = 0;
 function switchModule(mod){
   currentModule = mod;
   localStorage.setItem('v10_active_module', mod);
-  
-  document.getElementById('tabV10').classList.toggle('active', mod === 'v10');
-  document.getElementById('tabD21').classList.toggle('active', mod === 'd21');
-  document.getElementById('tabDiet').classList.toggle('active', mod === 'diet');
+
+  const tabs = {v10:'tabV10', d21:'tabD21', diet:'tabDiet', arsenal:'tabArsenal'};
+  Object.keys(tabs).forEach(k => {
+    const el = document.getElementById(tabs[k]);
+    el.classList.toggle('active', mod === k);
+    el.setAttribute('aria-pressed', String(mod === k));
+  });
 
   const dayTabsEl = document.getElementById('dayTabs');
+  if(mod !== 'v10') updateFocusNav(false);
   if(mod === 'v10'){
     dayTabsEl.style.display = 'flex';
     document.getElementById('todayLabel').textContent = activeDay === todayKey ? '🟢 Hoje' : workoutData[activeDay].day;
@@ -1046,6 +1375,10 @@ function switchModule(mod){
     dayTabsEl.style.display = 'none';
     document.getElementById('todayLabel').textContent = 'Método 40+';
     renderDiet();
+  } else if(mod === 'arsenal'){
+    dayTabsEl.style.display = 'none';
+    document.getElementById('todayLabel').textContent = `${Object.keys(MACHINES).length} máquinas`;
+    renderArsenal();
   }
   window.scrollTo({top:0, behavior:'smooth'});
 }
@@ -1073,6 +1406,7 @@ function switchDay(key){
 }
 
 function renderDay(){
+  updateFocusNav(false);
   const d = workoutData[activeDay];
   const cont = document.getElementById('mainContent');
   cont.innerHTML = '';
@@ -1086,119 +1420,378 @@ function renderDay(){
   else if(d.type === 'rest') renderRest(d, cont);
 }
 
+let focusMode = localStorage.getItem('v10_focus') === '1';
+let focusIdx = 0;
+
+function setsTrackerHTML(ex){
+  const total = parseInt(ex.sets, 10) || 1;
+  const n = getSetsDone(ex.id);
+  const chips = Array.from({length: total}, (_, i) => {
+    const k = i + 1, on = k <= n;
+    return `<button type="button" class="set-chip${on ? ' on' : ''}" data-k="${k}" aria-pressed="${on}" aria-label="Série ${k} de ${total}${on ? ' concluída' : ''}" onclick="toggleSet('${ex.id}',${k})">${on ? '✓' : k}</button>`;
+  }).join('');
+  return `<div class="sets-row" id="sets_${ex.id}"><span class="sets-label">Séries <small>${n}/${total}</small></span><div class="set-chips">${chips}</div></div>`;
+}
+function refreshSets(ex, focusK){
+  const el = document.getElementById('sets_' + ex.id);
+  if(!el) return;
+  el.outerHTML = setsTrackerHTML(ex);
+  if(focusK){
+    const chip = document.querySelector(`#sets_${ex.id} .set-chip[data-k="${focusK}"]`);
+    if(chip) chip.focus();
+  }
+}
+
+function exerciseCardHTML(ex){
+  const isDone = !!doneState[ex.id];
+  return `
+  <div class="ex-card${isDone ? ' done' : ''}" id="card_${ex.id}">
+    <div class="card-top">
+      <div class="badge">${ex.num}</div>
+      <div class="badge-done">✓</div>
+      <div class="card-info">
+        <div class="ex-name">${ex.name}</div>
+        <div class="tags">
+          <span class="tag tag-m">🎯 ${ex.muscle}</span>
+          <span class="tag tag-e">📍 <span id="mtag_${ex.id}">${machineTagText(ex)}</span></span>
+        </div>
+      </div>
+    </div>
+    ${machineBlockHTML(ex)}
+    ${setsTrackerHTML(ex)}
+    <div class="card-bottom">
+      <div class="sets-chips">
+        <span class="chip chip-sets">${ex.sets} séries</span>
+        <span class="chip chip-reps">${ex.reps} reps</span>
+      </div>
+      <button type="button" class="done-btn" aria-pressed="${isDone}" onclick="toggleDone('${ex.id}')">${isDone ? '✓ Feito' : 'Feito ✓'}</button>
+    </div>
+    <button type="button" class="expand-toggle" aria-expanded="false" onclick="toggleExpand(this)">
+      <span>Ver detalhes — técnica &amp; alternativas</span>
+      <span class="expand-icon">▼</span>
+    </button>
+    <div class="expand-body">
+      ${ex.alt ? `
+      <div class="eblock">
+        <div class="eblock-label">🔄 Alternativa Livre (hotel / condomínio)</div>
+        <div class="alt-box">${ex.alt}</div>
+      </div>` : ''}
+      <div class="eblock">
+        <div class="eblock-label">💡 Por que hoje?</div>
+        <div class="eblock-text">${ex.why}</div>
+      </div>
+      <div class="eblock">
+        <div class="eblock-label">📝 Como executar</div>
+        <div class="eblock-text">${ex.how}</div>
+      </div>
+      ${ex.warn ? `<div class="warn-box">⚠️ Atenção Lombar: mantenha core ativado e evite compensações posturais.</div>` : ''}
+    </div>
+  </div>`;
+}
+
+function summaryBtnHTML(d){
+  const allDone = d.exercises.every(e => doneState[e.id]);
+  return allDone ? `<button type="button" class="summary-btn" onclick="showWorkoutSummary('${activeDay}')">📊 Ver resumo do treino</button>` : '';
+}
+
 function renderWorkout(d, cont){
   const done = d.exercises.filter(e => doneState[e.id]).length;
   const total = d.exercises.length;
   const pct = Math.round((done/total)*100);
+  if(focusIdx >= total) focusIdx = total - 1;
+  if(focusIdx < 0) focusIdx = 0;
 
   cont.innerHTML += `
   <div class="day-hero hero-workout">
     <div class="hero-blob hero-blob-1"></div><div class="hero-blob hero-blob-2"></div>
     <span class="hero-emoji">${d.emoji}</span>
     <div class="hero-tag">${d.label}</div>
-    <div class="hero-title">${d.title}</div>
+    <h1 class="hero-title">${d.title}</h1>
     <div class="hero-sub">${d.sub}</div>
     <div class="hero-stats">
       <div class="hstat"><div class="hstat-val">${total}</div><div class="hstat-lbl">Exercícios</div></div>
       <div class="hstat"><div class="hstat-val">60s</div><div class="hstat-lbl">Descanso</div></div>
       <div class="hstat"><div class="hstat-val">≥80%</div><div class="hstat-lbl">1RM</div></div>
     </div>
-  </div>`;
-
-  cont.innerHTML += `
+  </div>
   <div class="progress-wrap">
     <div class="prog-row">
       <div class="prog-label">Progresso do Treino</div>
       <div class="prog-count" id="progCount">${done}/${total}</div>
     </div>
     <div class="prog-track"><div class="prog-fill" id="progFill" style="width:${pct}%"></div></div>
+  </div>
+  <div id="summaryBtnWrap">${summaryBtnHTML(d)}</div>
+  <div class="section-title">
+    <span>Exercícios</span>
+    <button type="button" class="focus-toggle" aria-pressed="${focusMode}" onclick="toggleFocusMode()">🎯 Modo foco</button>
   </div>`;
 
-  cont.innerHTML += `<div class="section-title">Exercícios</div>`;
-
-  d.exercises.forEach(ex => {
-    const isDone = !!doneState[ex.id];
-    const card = document.createElement('div');
-    card.className = 'ex-card' + (isDone ? ' done' : '');
-    card.id = 'card_' + ex.id;
-    card.innerHTML = `
-      <div class="card-top">
-        <div class="badge">${ex.num}</div>
-        <div class="badge-done">✓</div>
-        <div class="card-info">
-          <div class="ex-name">${ex.name}</div>
-          <div class="tags">
-            <span class="tag tag-m">🎯 ${ex.muscle}</span>
-            <span class="tag tag-e">📍 <span id="mtag_${ex.id}">${machineTagText(ex)}</span></span>
-          </div>
-        </div>
-      </div>
-      ${machineBlockHTML(ex)}
-      <div class="card-bottom">
-        <div class="sets-chips">
-          <span class="chip chip-sets">${ex.sets} séries</span>
-          <span class="chip chip-reps">${ex.reps} reps</span>
-        </div>
-        <button class="done-btn" onclick="toggleDone('${ex.id}','${d.exercises.indexOf(ex)}','${activeDay}')">${isDone ? '✓ Feito' : 'Feito ✓'}</button>
-      </div>
-      <button class="expand-toggle" onclick="toggleExpand(this)">
-        <span>Ver detalhes — técnica & alternativas</span>
-        <span class="expand-icon">▼</span>
-      </button>
-      <div class="expand-body">
-        ${ex.alt ? `
-        <div class="eblock">
-          <div class="eblock-label">🔄 Alternativa Livre (hotel / condomínio)</div>
-          <div class="alt-box">${ex.alt}</div>
-        </div>` : ''}
-        <div class="eblock">
-          <div class="eblock-label">💡 Por que hoje?</div>
-          <div class="eblock-text">${ex.why}</div>
-        </div>
-        <div class="eblock">
-          <div class="eblock-label">📝 Como executar</div>
-          <div class="eblock-text">${ex.how}</div>
-        </div>
-        ${ex.warn ? `<div class="warn-box">⚠️ Atenção Lombar: mantenha core ativado e evite compensações posturais.</div>` : ''}
-      </div>
-    `;
-    cont.appendChild(card);
-  });
+  const list = focusMode ? [d.exercises[focusIdx]] : d.exercises;
+  cont.innerHTML += list.map(exerciseCardHTML).join('');
 
   cont.innerHTML += `
-  <div style="background:rgba(240,90,40,.07);border:1.5px solid rgba(240,90,40,.2);border-radius:14px;padding:14px 16px;margin-top:4px">
-    <div style="font-family:'Sora',sans-serif;font-size:12px;font-weight:800;color:var(--orange);letter-spacing:.5px;margin-bottom:4px">📈 SOBRECARGA PROGRESSIVA</div>
-    <div style="font-size:12px;color:var(--muted);line-height:1.6">Antes de sair da academia, anote a carga e reps de hoje. Na próxima semana: aumente 1 rep OU +1,25kg. Não troque o exercício — evolua nele.</div>
+  <div class="overload-note">
+    <div class="overload-title">📈 SOBRECARGA PROGRESSIVA</div>
+    <div class="overload-text">Use <strong>+${fmtNum(1.25)}</strong> para subir a carga e compare com o “Treino anterior”. Na próxima semana: aumente 1 rep OU +1,25kg. Não troque o exercício — evolua nele.</div>
   </div>`;
+
+  if(focusMode) updateFocusNav(true, focusIdx, total);
 }
 
-function toggleDone(id, idx, dayKey){
-  doneState[id] = !doneState[id];
-  localStorage.setItem('v10_done', JSON.stringify(doneState));
+// ── Modo foco (1 exercício por tela) ──
+function toggleFocusMode(){
+  focusMode = !focusMode;
+  localStorage.setItem('v10_focus', focusMode ? '1' : '0');
+  if(focusMode){
+    const d = workoutData[activeDay];
+    const idx = d.exercises.findIndex(e => !doneState[e.id]);
+    focusIdx = idx === -1 ? 0 : idx;
+  }
+  renderDay();
+}
+function focusStep(dir){
+  const d = workoutData[activeDay];
+  if(!d || !d.exercises) return;
+  focusIdx = Math.min(Math.max(focusIdx + dir, 0), d.exercises.length - 1);
+  renderDay();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function updateFocusNav(show, idx, total){
+  const nav = document.getElementById('focusNav');
+  if(!nav) return;
+  nav.hidden = !show;
+  if(!show) return;
+  document.getElementById('fnCount').textContent = `${idx + 1}/${total}`;
+  document.getElementById('fnPrev').disabled = idx === 0;
+  document.getElementById('fnNext').disabled = idx === total - 1;
+}
+(function bindSwipe(){
+  let sx = 0, sy = 0;
+  document.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, {passive:true});
+  document.addEventListener('touchend', e => {
+    const nav = document.getElementById('focusNav');
+    if(!nav || nav.hidden) return;
+    if(e.target.closest('input, select, textarea, button, .overlay, .backup-modal')) return;
+    const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if(Math.abs(dx) > 70 && Math.abs(dy) < 50) focusStep(dx < 0 ? 1 : -1);
+  }, {passive:true});
+})();
+
+// ── Conclusão de exercício / séries ──
+function applyDone(id, value, fromSets){
+  const ex = findExercise(id);
+  const dayKey = findDayKey(id);
+  if(!ex || !dayKey) return;
+  const total = parseInt(ex.sets, 10) || 1;
+  doneState[id] = value;
+  persist('v10_done', doneState);
+  if(!fromSets){
+    putSetsDone(id, value ? total : 0);
+    refreshSets(ex);
+  }
   const card = document.getElementById('card_' + id);
-  if(doneState[id]){
-    card.classList.add('done');
-    card.querySelector('.done-btn').textContent = '✓ Feito';
-    if(navigator.vibrate) navigator.vibrate([80, 50, 80]);
-    startTimerAuto();
-  } else {
-    card.classList.remove('done');
-    card.querySelector('.done-btn').textContent = 'Feito ✓';
+  if(card){
+    card.classList.toggle('done', value);
+    const btn = card.querySelector('.done-btn');
+    btn.textContent = value ? '✓ Feito' : 'Feito ✓';
+    btn.setAttribute('aria-pressed', String(value));
   }
   const d = workoutData[dayKey];
   const done = d.exercises.filter(e => doneState[e.id]).length;
-  const total = d.exercises.length;
-  const pct = Math.round((done/total)*100);
   const pf = document.getElementById('progFill');
   const pc = document.getElementById('progCount');
-  if(pf) pf.style.width = pct + '%';
-  if(pc) pc.textContent = done + '/' + total;
+  if(pf) pf.style.width = Math.round((done / d.exercises.length) * 100) + '%';
+  if(pc) pc.textContent = done + '/' + d.exercises.length;
+  const wrap = document.getElementById('summaryBtnWrap');
+  if(wrap) wrap.innerHTML = summaryBtnHTML(d);
+  if(value){
+    if(navigator.vibrate) navigator.vibrate([80, 50, 80]);
+    if(!fromSets) startTimerAuto();
+    if(done === d.exercises.length){
+      showToast('Treino concluído! Confira o resumo.', 'success');
+      setTimeout(() => showWorkoutSummary(dayKey), 700);
+    }
+  }
+}
+function toggleDone(id){
+  applyDone(id, !doneState[id], false);
+}
+function toggleSet(id, k){
+  const ex = findExercise(id);
+  if(!ex) return;
+  const total = parseInt(ex.sets, 10) || 1;
+  const cur = getSetsDone(id);
+  const next = k > cur ? k : k - 1;
+  putSetsDone(id, next);
+  refreshSets(ex, k);
+  if(next === total && !doneState[id]) applyDone(id, true, true);
+  else if(next < total && doneState[id]) applyDone(id, false, true);
+  if(next > cur){
+    if(navigator.vibrate) navigator.vibrate(30);
+    startTimerAuto();
+  }
 }
 
 function toggleExpand(btn){
   btn.classList.toggle('open');
-  const body = btn.nextElementSibling;
-  body.classList.toggle('open');
+  const open = btn.classList.contains('open');
+  btn.setAttribute('aria-expanded', String(open));
+  btn.nextElementSibling.classList.toggle('open', open);
+}
+
+// ── Resumo do treino ──
+function showWorkoutSummary(dayKey){
+  const d = workoutData[dayKey];
+  if(!d || !d.exercises) return;
+  const iso = todayISO();
+  let beaten = 0;
+  const rows = d.exercises.map(ex => {
+    const m = activeMachine(ex);
+    const cur = getHistory(ex).find(x => x.d === iso);
+    const prev = prevSession(ex);
+    let delta = '—', cls = '';
+    if(cur && !prev){ delta = 'novo'; }
+    else if(cur && prev && cur.u === prev.u){
+      const a = parseLoad(cur.v), b = parseLoad(prev.v);
+      if(a !== null && b !== null){
+        if(a > b){ delta = '▲ +' + fmtNum(a - b); cls = 'up'; beaten++; }
+        else if(a < b){ delta = '▼ ' + fmtNum(a - b); cls = 'down'; }
+        else { delta = '= igual'; }
+      }
+    }
+    return `<li class="sum-row">
+      <span class="mach-code mini${m.classic ? ' classic' : ''}">${m.code}</span>
+      <div class="sum-info"><div class="sum-name">${ex.name}</div><div class="sum-load">${cur ? fmtLoad(cur) : 'sem carga registrada'}</div></div>
+      <span class="sum-delta ${cls}">${delta}</span>
+    </li>`;
+  }).join('');
+  const doneCount = d.exercises.filter(e => doneState[e.id]).length;
+  document.getElementById('summaryBody').innerHTML = `
+    <div class="sum-hero">🏆</div>
+    <h2 class="sum-title" id="summaryTitle">${doneCount === d.exercises.length ? 'Treino concluído!' : 'Resumo parcial'}</h2>
+    <div class="sum-sub">${d.label} · ${doneCount}/${d.exercises.length} exercícios · <strong>${beaten}</strong> ${beaten === 1 ? 'carga superada' : 'cargas superadas'}</div>
+    <ul class="sum-list">${rows}</ul>`;
+  document.getElementById('summaryModal').classList.add('open');
+  document.getElementById('summaryClose').focus();
+}
+function closeSummary(){
+  document.getElementById('summaryModal').classList.remove('open');
+}
+
+// ── Toasts (substituem alert() informativos) ──
+function showToast(msg, type){
+  const host = document.getElementById('toastHost');
+  if(!host) return;
+  const t = document.createElement('div');
+  t.className = 'toast ' + (type || 'info');
+  t.textContent = msg;
+  host.appendChild(t);
+  setTimeout(() => { t.classList.add('out'); setTimeout(() => t.remove(), 250); }, 3600);
+}
+
+// ── Arsenal (catálogo de máquinas) ──
+let arsenalFilter = 'Todos';
+let arsenalQuery = '';
+function normalizeText(s){
+  return String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+function machineGroup(code){
+  return Object.keys(MACHINE_GROUPS).find(g => MACHINE_GROUPS[g].includes(code)) || '';
+}
+function machineUsage(code){
+  const out = [];
+  Object.keys(workoutData).forEach(k => {
+    (workoutData[k].exercises || []).forEach(ex => {
+      if(ex.machine === code) out.push({day:workoutData[k].day, ex, role:'Titular'});
+      else if(ex.backup === code) out.push({day:workoutData[k].day, ex, role:'Reserva'});
+    });
+  });
+  return out;
+}
+function machineLastLoads(code){
+  const out = [];
+  Object.keys(weightState).forEach(key => {
+    const [exId, c] = key.split(':');
+    const e = weightState[key];
+    if(c === code && e && typeof e === 'object' && e.v){
+      const ex = findExercise(exId);
+      out.push({txt:`${e.v}${e.u ? ' ' + e.u : ''}${e.r ? ' × ' + e.r : ''}`, d:e.d, ex});
+    }
+  });
+  return out.sort((a, b) => (b.d || '').localeCompare(a.d || ''));
+}
+function renderArsenal(){
+  const cont = document.getElementById('mainContent');
+  cont.innerHTML = '';
+  cont.className = 'main fade-in';
+  const groups = ['Todos', ...Object.keys(MACHINE_GROUPS)];
+  cont.innerHTML = `
+  <div class="day-hero hero-workout">
+    <div class="hero-blob hero-blob-1"></div>
+    <span class="hero-emoji">🧭</span>
+    <div class="hero-tag">ARSENAL</div>
+    <h1 class="hero-title">Máquinas da Academia</h1>
+    <div class="hero-sub">${Object.keys(MACHINES).length} máquinas RealLeader mapeadas. Procure por código, nome ou grupo muscular.</div>
+  </div>
+  <label class="sr-only" for="arsenalSearch">Buscar máquina</label>
+  <input type="search" class="arsenal-search" id="arsenalSearch" placeholder="Buscar: #07, Low Row, remada…" value="${arsenalQuery}" oninput="setArsenalQuery(this.value)">
+  <div class="filter-bar" id="arsenalFilters" role="group" aria-label="Filtrar por grupo muscular">
+    ${groups.map(g => `<button type="button" class="filter-chip${g === arsenalFilter ? ' active' : ''}" aria-pressed="${g === arsenalFilter}" onclick="setArsenalFilter('${g}')">${g}</button>`).join('')}
+  </div>
+  <div id="arsenalList" aria-live="polite"></div>`;
+  renderArsenalList();
+}
+function setArsenalFilter(g){
+  arsenalFilter = g;
+  document.querySelectorAll('#arsenalFilters .filter-chip').forEach(b => {
+    const on = b.textContent === g;
+    b.classList.toggle('active', on);
+    b.setAttribute('aria-pressed', String(on));
+  });
+  renderArsenalList();
+}
+function setArsenalQuery(q){
+  arsenalQuery = q;
+  renderArsenalList();
+}
+function renderArsenalList(){
+  const list = document.getElementById('arsenalList');
+  if(!list) return;
+  const q = normalizeText(arsenalQuery.trim());
+  const items = Object.keys(MACHINES).filter(code => {
+    const m = MACHINES[code], g = machineGroup(code);
+    if(arsenalFilter !== 'Todos' && g !== arsenalFilter) return false;
+    if(!q) return true;
+    return normalizeText(`${code} ${m.model} ${m.name} ${m.type} ${g}`).includes(q);
+  });
+  if(!items.length){
+    list.innerHTML = '<div class="arsenal-empty">Nenhuma máquina encontrada. Tente outro termo ou limpe o filtro.</div>';
+    return;
+  }
+  list.innerHTML = items.map(code => {
+    const m = MACHINES[code];
+    const usage = machineUsage(code);
+    const loads = machineLastLoads(code);
+    const lastLoad = loads.length
+      ? `<div class="ars-line">⚖️ Última carga: <strong>${loads[0].txt}</strong>${loads[0].d ? ' · ' + fmtDateBR(loads[0].d) : ''}${loads[0].ex ? ' (' + loads[0].ex.name + ')' : ''}</div>`
+      : (m.ref ? `<div class="ars-line">⚖️ Referência: <strong>${m.ref}</strong></div>` : '<div class="ars-line muted">⚖️ Sem carga registrada</div>');
+    const used = usage.length
+      ? `<div class="ars-line">📅 ${usage.map(u => `${u.day} · ${u.role}`).join(' | ')}</div>`
+      : '<div class="ars-line muted">📅 Fora da ficha atual (disponível como variação)</div>';
+    return `
+    <div class="ars-card">
+      <span class="mach-code">${code}</span>
+      <div class="ars-info">
+        <div class="mach-name">${m.model ? m.model + ' · ' : ''}${m.name}</div>
+        <div class="mach-type">${m.type} · ${machineGroup(code)}</div>
+        <div class="ars-line">👁️ ${((LOAD_LOOK[m.type] || '') + ' ' + (MACHINE_LOOK[code] || '')).trim()}</div>
+        ${machineNotes[code] ? `<div class="ars-line">📍 <strong>${escAttr(machineNotes[code])}</strong></div>` : ''}
+        ${lastLoad}
+        ${used}
+      </div>
+    </div>`;
+  }).join('');
 }
 
 function renderCardio(d, cont){
@@ -1403,7 +1996,7 @@ function renderDesafio(){
     cont.innerHTML += `
     <div style="text-align:center;padding:40px 20px;background:var(--card);border-radius:var(--radius);color:var(--muted)">
       <div style="font-size:32px;margin-bottom:8px">🎉</div>
-      <div style="font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--navy)">Nenhuma aula nesta categoria!</div>
+      <div style="font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--navy)">Nenhuma aula nesta categoria!</div>
     </div>`;
     return;
   }
@@ -1584,13 +2177,13 @@ async function reconnectSavedFolder(){
       let perm = await savedDirHandle.requestPermission({ mode: 'read' });
       if(perm === 'granted'){
         const count = await loadVideosFromHandle(savedDirHandle);
-        alert(`Sucesso! ${count} vídeos reconectados da pasta "${savedDirHandle.name}".`);
+        showToast(`Sucesso! ${count} vídeos reconectados da pasta "${savedDirHandle.name}".`, 'success');
         renderDesafio();
       } else {
-        alert('Permissão de leitura não foi concedida pelo navegador.');
+        showToast('Permissão de leitura não foi concedida pelo navegador.', 'error');
       }
     } catch(e){
-      alert('Erro ao reativar pasta: ' + e.message);
+      showToast('Erro ao reativar pasta: ' + e.message, 'error');
     }
   } else {
     triggerFolderSelect();
@@ -1721,7 +2314,7 @@ function saveBasePathConfig(){
   if(!p.endsWith('/') && !p.endsWith('\\')) p += '/';
   d21Config.basePath = p;
   localStorage.setItem('v10_d21_config', JSON.stringify(d21Config));
-  alert(`Caminho base atualizado para: ${d21Config.basePath}`);
+  showToast(`Caminho base atualizado para: ${d21Config.basePath}`, 'success');
   updateLinkedVideosList();
   renderDesafio();
 }
@@ -1732,7 +2325,7 @@ async function triggerFolderSelect(){
       const dirHandle = await window.showDirectoryPicker();
       await saveDirHandle(dirHandle);
       const matched = await loadVideosFromHandle(dirHandle);
-      alert(`Sucesso! ${matched} vídeos vinculados da pasta "${dirHandle.name}". O acesso foi gravado no navegador.`);
+      showToast(`Sucesso! ${matched} vídeos vinculados da pasta "${dirHandle.name}". O acesso foi gravado no navegador.`, 'success');
       updateLinkedVideosList();
       renderDesafio();
       return;
@@ -1769,7 +2362,7 @@ function indexFileList(files){
       }
     }
   }
-  alert(`Concluído! ${matched} vídeos vinculados.`);
+  showToast(`Concluído! ${matched} vídeos vinculados.`, 'success');
   updateLinkedVideosList();
   renderDesafio();
 }
@@ -1799,9 +2392,9 @@ async function downloadUpdatedAppHtml(){
     a.download = 'APP_TREINO_V11.html';
     a.click();
     URL.revokeObjectURL(url);
-    alert('Download concluído! Mova o arquivo baixado para a pasta /Treinos do seu celular.');
+    showToast('Download concluído! Mova o arquivo baixado para a pasta /Treinos do seu celular.', 'success');
   } catch(err){
-    alert('Erro ao atualizar: ' + err.message);
+    showToast('Erro ao atualizar: ' + err.message, 'error');
   }
 }
 
@@ -1964,6 +2557,7 @@ function exportDataJson(){
     v10_done: doneState,
     v10_weights: weightState,
     v10_machine: machineChoice,
+    v10_machine_notes: machineNotes,
     v10_d21_state: d21State,
     v10_d21_config: d21Config,
     exportedAt: new Date().toISOString()
@@ -1997,6 +2591,10 @@ function importDataJson(files){
         machineChoice = data.v10_machine;
         localStorage.setItem('v10_machine', JSON.stringify(machineChoice));
       }
+      if(data.v10_machine_notes){
+        machineNotes = data.v10_machine_notes;
+        localStorage.setItem('v10_machine_notes', JSON.stringify(machineNotes));
+      }
       if(data.v10_d21_state){
         d21State = data.v10_d21_state;
         localStorage.setItem('v10_d21_state', JSON.stringify(d21State));
@@ -2005,13 +2603,13 @@ function importDataJson(files){
         d21Config = data.v10_d21_config;
         localStorage.setItem('v10_d21_config', JSON.stringify(d21Config));
       }
-      alert('Backup restaurado com sucesso!');
+      showToast('Backup restaurado com sucesso!', 'success');
       closeBackupModal();
       if(currentModule === 'v10') renderDay();
       else if(currentModule === 'd21') renderDesafio();
       else renderDiet();
     } catch(err){
-      alert('Erro ao ler arquivo de backup: ' + err.message);
+      showToast('Erro ao ler arquivo de backup: ' + err.message, 'error');
     }
   };
   reader.readAsText(file);
@@ -2022,12 +2620,16 @@ function confirmResetAll(){
     localStorage.removeItem('v10_done');
     localStorage.removeItem('v10_weights');
     localStorage.removeItem('v10_machine');
+    localStorage.removeItem('v10_sets');
+    localStorage.removeItem('v10_machine_notes');
+    machineNotes = {};
+    setsState = {};
     machineChoice = {};
     localStorage.removeItem('v10_d21_state');
     doneState = {};
     weightState = {};
     d21State = {};
-    alert('Dados redefinidos!');
+    showToast('Dados redefinidos!', 'success');
     closeBackupModal();
     if(currentModule === 'v10') renderDay();
     else if(currentModule === 'd21') renderDesafio();
@@ -2138,7 +2740,7 @@ function timerDone(){
 
   const fab = document.getElementById('timerFab');
   fab.style.borderColor = '#22C55E';
-  fab.innerHTML = '<div class="t-icon">✅</div><div style="font-family:Sora,sans-serif;font-size:8px;font-weight:800;color:#22C55E;text-transform:uppercase;letter-spacing:.5px;margin-top:2px">GO!</div>';
+  fab.innerHTML = '<div class="t-icon">✅</div><div style="font-family:var(--font-display);font-size:10px;font-weight:800;color:#22C55E;text-transform:uppercase;letter-spacing:.5px;margin-top:2px">GO!</div>';
   setTimeout(() => {
     fab.style.borderColor = '';
     fab.innerHTML = `<div class="t-icon" id="fabIcon">⏱</div><div class="t-lbl" id="fabLabel">${TOTAL}s</div>`;
@@ -2164,7 +2766,7 @@ function updateTimerDisplay(){
   }
   if(timerRunning){
     const fabEl = document.getElementById('timerFab');
-    fabEl.innerHTML = `<div class="t-countdown">${timerSeconds}</div><div class="t-lbl" style="color:#22C55E;font-family:Sora,sans-serif;font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.5px">seg</div>`;
+    fabEl.innerHTML = `<div class="t-countdown">${timerSeconds}</div><div class="t-lbl" style="color:#22C55E;font-family:var(--font-display);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px">seg</div>`;
   }
 }
 
@@ -2190,6 +2792,14 @@ document.getElementById('installBtn').onclick = async () => {
 // ══════════════════════════════════════════
 //  STARTUP
 // ══════════════════════════════════════════
+document.addEventListener('keydown', e => {
+  if(e.key !== 'Escape') return;
+  closeSummary();
+  closeBackupModal();
+  closeTimer();
+  closeFolderModal();
+});
+
 buildTabs();
 switchModule(currentModule);
 checkSavedDirectoryHandle();

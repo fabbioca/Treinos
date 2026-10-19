@@ -96,6 +96,13 @@ Se você não quer precisar dar nem 1 toque para ativar a pasta dos vídeos:
 - **Última Carga por Máquina:** campo `⚖️ Última Carga` + unidade (`kg`, `lbs`, `kg/lado`, `placas`) + data do registro. Cada máquina lembra a própria carga (chave `exercício:máquina` em `v10_weights`); o placeholder mostra a carga de referência quando conhecida (ex.: `#01` 160 lbs, `#02` 40 kg/lado).
 - **Retrocompatibilidade:** valores antigos (texto livre por exercício) são lidos como carga da máquina titular.
 - **Persistência Total:** gravado no `localStorage` no exato momento da digitação e incluído no backup JSON (`v10_weights`, `v10_machine`).
+- **Como Ajustar a Máquina:** abaixo do nome da máquina, texto curto de posicionamento e regulagem (assento, apoios, pegada) específico da máquina ativa (titular ou reserva). Catálogo em `MACHINE_SETUP` / `CLASSIC_SETUP` no app.
+- **Séries e Descanso:** círculos por série; cada série marcada inicia o cronômetro e, ao completar todas, o exercício é concluído. A contagem zera no dia seguinte (`v10_sets`).
+- **Histórico de Carga:** mostra o "Treino anterior" da máquina, mini-gráfico das últimas cargas, campo de reps e botões `−` / `+` (passo por unidade: 1,25 kg, 5 lbs, 1 placa).
+- **Modo Foco:** um exercício por tela, com navegação Anterior/Próximo e gesto de deslizar.
+- **Arsenal:** aba com as 30 máquinas, busca por código/nome e filtro por grupo muscular, mostrando última carga e onde cada máquina é usada na ficha.
+- **Resumo do Treino:** ao concluir todos os exercícios, exibe cargas do dia e comparação com o treino anterior.
+
 
 
 ### 5.2. Gestão do Desafio 21 Dias
